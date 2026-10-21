@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mode 4 | Energi Potensial Pegas - HookeLab</title>
+<style>
+:root{--navy:#17324d;--teal:#159b82;--teal-dark:#087f68;--bg:#f3f6fa;--line:#dce5ed;--muted:#64748b;--text:#24364b;--white:#fff;--orange:#f59e0b;--red:#c2413b;--green:#087f68}
+*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--text);background:var(--bg)}a{color:inherit;text-decoration:none}.topbar{background:#fff;padding:16px 5%;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:42px;height:42px;border-radius:12px;background:#e1f5ef;color:var(--teal-dark);display:grid;place-items:center;font-weight:800;font-size:19px}.brand h1{font-size:18px;color:var(--navy);margin:0}.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}.mode-label{background:#e5f6f1;color:var(--teal-dark);font-size:12px;font-weight:700;padding:8px 12px;border-radius:999px}.container{max-width:1200px;margin:0 auto;padding:26px 22px 36px}.page-heading{margin-bottom:20px}.eyebrow{text-transform:uppercase;letter-spacing:1.2px;color:var(--teal-dark);font-size:11px;font-weight:800}.page-heading h2{margin:7px 0 6px;color:var(--navy);font-size:clamp(24px,3vw,32px)}.page-heading p{margin:0;color:var(--muted);line-height:1.6;max-width:760px}.layout{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:20px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 18px rgba(23,50,77,.04)}.panel h3{font-size:17px;color:var(--navy);margin:0 0 6px}.subtext{font-size:13px;line-height:1.5;color:var(--muted);margin:0 0 18px}.field{margin:16px 0}.field label{display:flex;justify-content:space-between;gap:8px;font-weight:700;font-size:13px;margin-bottom:8px}.field label span{color:var(--teal-dark);font-weight:800}.field select,.field input[type=number]{width:100%;padding:11px 12px;border:1px solid #cbd8e3;border-radius:9px;font:inherit;color:var(--text);background:white}.field input[type=range]{width:100%;accent-color:var(--teal)}.range-ends{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:3px}.hint{background:#f0f8f6;border:1px solid #d4eee6;border-radius:10px;padding:11px 12px;color:#315d55;font-size:12px;line-height:1.55}.button{border:0;border-radius:10px;padding:12px 14px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .12s,background .12s}.button:active{transform:scale(.99)}.button-primary{background:var(--teal);color:white}.button-primary:hover{background:var(--teal-dark)}.button-secondary{background:#edf2f7;color:var(--navy)}.button-row{display:flex;gap:9px;margin-top:18px}.button-row button{flex:1}.stage{min-height:390px}.stage-head{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap}.stage-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.stage-badge{font-size:11px;font-weight:800;color:#52677b;background:#f0f4f8;padding:7px 10px;border-radius:999px}.visual-area{margin-top:18px;min-height:270px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(#fbfdff,#f5f9fc);display:flex;justify-content:center;align-items:center;padding:20px;overflow:hidden}.spring-visual{width:100%;max-width:620px;height:250px}.visual-note{margin:12px 0 0;text-align:center;font-size:12px;color:var(--muted)}.prediction-panel{margin-top:20px}.prediction-panel .subtext{margin-bottom:12px}.prediction-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end}.prediction-form .field{margin:0}.prediction-form input{width:100%;padding:12px;border:1px solid #cbd8e3;border-radius:9px;font:inherit}.unit{font-size:12px;color:var(--muted);margin-top:6px}.result{display:none;margin-top:18px;border:1px solid #cde8df;background:#f2fbf7;border-radius:12px;padding:16px}.result.show{display:block}.result-top{display:flex;align-items:start;justify-content:space-between;gap:10px;flex-wrap:wrap}.result h4{margin:0 0 5px;color:var(--navy);font-size:15px}.result p{margin:5px 0;font-size:13px;line-height:1.55}.status{display:inline-block;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800;background:#dcfce7;color:#166534}.status.off{background:#fff1d6;color:#92400e}.result-value{font-size:28px;color:var(--teal-dark);font-weight:800;margin:7px 0}.formula{font-family:Consolas,monospace;background:#fff;border:1px solid #d9e8e2;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:13px;overflow-wrap:anywhere}.concept{margin-top:20px}.formula-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.formula-card{background:#f7fafc;border:1px solid var(--line);border-radius:10px;padding:13px}.formula-card strong{display:block;color:var(--navy);font-size:13px;margin-bottom:7px}.formula-card .math{font-family:Consolas,monospace;font-size:18px;font-weight:800;color:var(--teal-dark)}.formula-card p{font-size:12px;color:var(--muted);line-height:1.5;margin:7px 0 0}.nav-modes{margin-top:24px;background:white;border:1px solid var(--line);border-radius:14px;padding:17px}.nav-modes h3{margin:0 0 12px;color:var(--navy);font-size:14px}.mode-links{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}.mode-link{border:1px solid var(--line);border-radius:10px;padding:11px 9px;font-size:12px;color:#52677b;line-height:1.4}.mode-link strong{display:block;color:var(--navy);margin-bottom:4px}.mode-link.current{border-color:#79cdb9;background:#effaf6}.mode-link.current strong{color:var(--teal-dark)}.footer{margin-top:20px;border-top:1px solid var(--line);padding:14px 4px 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:11px;line-height:1.5}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.mode-links{grid-template-columns:repeat(2,minmax(0,1fr))}.mode-link:last-child{grid-column:span 2}.stage{min-height:0}}
+@media(max-width:520px){.container{padding:20px 13px 28px}.panel{padding:16px}.prediction-form{grid-template-columns:1fr}.formula-grid{grid-template-columns:1fr}.visual-area{padding:8px;min-height:230px}.spring-visual{height:220px}.button-row{flex-direction:column}.mode-links{grid-template-columns:1fr 1fr}.mode-link:last-child{grid-column:auto}}
+
+/* Perbaikan posisi tombol prediksi */
+.prediction-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+}
+
+.prediction-form .field {
+  margin: 0;
+}
+
+.prediction-form .button-primary {
+  align-self: start;
+  margin-top: 0;
+  height: 44px;
+  padding: 0 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .prediction-form {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .prediction-form .button-primary {
+    width: auto;
+    height: 44px;
+    margin-top: 0;
+  }
+}
+
+/* Navigasi eksperimen mengikuti Mode 1 dan Mode 2 */
+.experiment-navigation {
+  margin-top: 22px;
+  padding: 18px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
+.experiment-navigation h2 {
+  margin: 0 0 12px;
+  color: var(--navy);
+  font-size: 16px;
+}
+
+.navigation-description {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.experiment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.experiment-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 66px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: white;
+  color: var(--navy);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+a.experiment-row:hover {
+  border-color: var(--teal);
+  background: #f8fcfb;
+}
+
+.experiment-number {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: #e8f1f7;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.experiment-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.experiment-info strong {
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.experiment-info span {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.experiment-arrow {
+  color: var(--teal-dark);
+  font-size: 16px;
+}
+
+.experiment-row.current {
+  border-color: #79cdb9;
+  background: #effaf6;
+}
+
+.experiment-status {
+  color: var(--teal-dark);
+  font-size: 10px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.navigation-back {
+  margin-top: 16px;
+}
+
+.navigation-back a {
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+@media (max-width: 520px) {
+  .experiment-row {
+    padding: 12px;
+    gap: 9px;
+  }
+
+  .experiment-status {
+    white-space: normal;
+    text-align: right;
+  }
+}
+#energyChart,
+#elasticChart {
+  display: block;
+  width: 100%;
+  height: 320px;
+}
+
+#springAnimation {
+  width: 100%;
+  height: 280px;
+}
+
+/* Tata letak dua grafik */
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+  align-items: stretch;
+}
+
+.chart-panel {
+  min-width: 0;
+  padding: 20px 16px;
+}
+
+.chart-panel h3 {
+  min-height: 44px;
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-panel .subtext {
+  min-height: 38px;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.chart-canvas {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.chart-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.chart-panel .visual-note {
+  min-height: 36px;
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-panel h3,
+  .chart-panel .subtext {
+    min-height: 0;
+  }
+
+  .chart-canvas {
+    height: 300px;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="breadcrumb">
+    <a href="index.html">HookeLab</a>
+    &nbsp;/&nbsp;
+    <a href="modul.html">Modul Eksperimen</a>
+    &nbsp;/&nbsp;
+    <strong>Mode 4 · Energi Potensial Pegas</strong>
+  </div>
+</header>
+<main class="container">
+<section class="page-heading"><div class="eyebrow">Mode 4</div><h2>Energi Potensial Pegas</h2><p>Amati perubahan energi pada sistem pegas dan beban. Pelajari pengaruh redaman terhadap gerak sistem serta hubungan energi potensial elastis dengan pertambahan panjang pegas.</p></section>
+
+<div class="layout">
+  <aside class="panel">
+    <h3>Pengaturan Simulasi</h3>
+    <p class="subtext">
+      Atur parameter sistem untuk mengamati perubahan gerak dan energi.
+    </p>
+
+    <div class="field">
+      <label for="mass">
+        Massa beban <span id="massLabel">0,5 kg</span>
+      </label>
+      <input id="mass" type="range" min="0.1" max="2" step="0.1" value="0.5">
+      <div class="range-ends">
+        <span>0,1 kg</span><span>2 kg</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="springK">
+        Konstanta pegas <span id="springKLabel">20 N/m</span>
+      </label>
+      <input id="springK" type="range" min="5" max="100" step="5" value="20">
+      <div class="range-ends">
+        <span>5 N/m</span><span>100 N/m</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="amplitude">
+        Pertambahan panjang awal
+        <span id="amplitudeLabel">0,10 m</span>
+      </label>
+      <input id="amplitude" type="range" min="0.02" max="0.2" step="0.01" value="0.1">
+      <div class="range-ends">
+        <span>0,02 m</span><span>0,20 m</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="damping">Redaman</label>
+      <select id="damping">
+        <option value="0">None — tanpa redaman</option>
+        <option value="0.5">Sedikit</option>
+        <option value="1.5" selected>Sedang</option>
+        <option value="3">Banyak</option>
+        <option value="5">Lots — sangat besar</option>
+      </select>
+    </div>
+
+    <div class="hint">
+      Energi dan gerak sistem akan dihitung dari massa, konstanta pegas,
+      kondisi awal, dan redaman yang dipilih.
+    </div>
+
+    <div class="button-row">
+      <button class="button button-primary" id="startButton" type="button">
+        Mulai Simulasi
+      </button>
+      <button class="button button-secondary" id="resetButton" type="button">
+        Atur Ulang
+      </button>
+    </div>
+  </aside>
+
+  <section>
+    <div class="panel stage">
+      <div class="stage-head">
+        <div>
+          <h3>Animasi Sistem Pegas</h3>
+          <p>Amati gerak beban dan perubahan pertambahan panjang.</p>
+        </div>
+        <span class="stage-badge" id="simulationStatus">SIAP</span>
+      </div>
+
+      <div class="visual-area">
+        <svg id="springAnimation" class="spring-visual"
+             viewBox="0 0 600 300" role="img"
+             aria-label="Animasi sistem pegas dan beban">
+          <rect x="190" y="20" width="220" height="10"
+                rx="3" fill="#17324d"/>
+          <line x1="210" y1="30" x2="390" y2="30"
+                stroke="#64748b" stroke-width="2"/>
+          <path id="animatedSpring" d=""
+                fill="none" stroke="#159b82" stroke-width="5"
+                stroke-linejoin="round"/>
+          <rect id="animatedMass" x="260" y="180"
+                width="80" height="45" rx="7"
+                fill="#dff5ef" stroke="#159b82" stroke-width="2"/>
+          <text id="massText" x="300" y="207"
+                text-anchor="middle" font-size="13"
+                font-weight="700" fill="#087f68">0,5 kg</text>
+          <line x1="145" y1="180" x2="455" y2="180"
+                stroke="#94a3b8" stroke-dasharray="5 5"/>
+          <text x="450" y="169" text-anchor="end"
+                font-size="11" fill="#64748b">Posisi acuan</text>
+          <text id="extensionText" x="300" y="265"
+                text-anchor="middle" font-size="13"
+                fill="#17324d">Pertambahan panjang: 0,10 m</text>
+        </svg>
+      </div>
+
+      <div class="formula-grid">
+        <div class="formula-card">
+          <strong>Energi Potensial Elastis</strong>
+          <div class="math">Eₚ = ½ k(Δx)²</div>
+          <p>Energi yang tersimpan akibat perubahan panjang pegas.</p>
+        </div>
+        <div class="formula-card">
+          <strong>Energi Kinetik</strong>
+          <div class="math">Eₖ = ½ mv²</div>
+          <p>Energi yang dimiliki beban karena gerakannya.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<section class="chart-grid">
+  <div class="panel chart-panel">
+    <h3>Grafik Energi Sistem</h3>
+    <p class="subtext">
+      Perbandingan energi pada kondisi simulasi saat ini.
+    </p>
+    <div class="chart-canvas">
+      <canvas id="energyChart"></canvas>
+    </div>
+    <p class="visual-note" id="energySummary" aria-live="polite">
+      Mulai simulasi untuk melihat nilai energi.
+    </p>
+  </div>
+
+  <div class="panel chart-panel">
+    <h3>Hubungan Energi Potensial Elastis dan Pertambahan Panjang</h3>
+    <p class="subtext">
+      Pengaruh pertambahan panjang terhadap energi potensial elastis.
+    </p>
+    <div class="chart-canvas">
+      <canvas id="elasticChart"></canvas>
+    </div>
+    <div class="formula">
+      Eₚ = ½ k(Δx)²
+    </div>
+  </div>
+</section>
+
+
+<section class="panel concept"><h3>Konsep Dasar</h3><p class="subtext" style="margin-bottom:0">Konstanta pegas efektif menggambarkan kekakuan gabungan beberapa pegas yang disusun bersama.</p><div class="formula-grid"><div class="formula-card"><strong>Susunan Seri</strong><div class="math">1/k<sub>ef</sub> = 1/k₁ + 1/k₂</div><p>Untuk dua pegas: k<sub>ef</sub> = (k₁ × k₂) / (k₁ + k₂).</p></div><div class="formula-card"><strong>Susunan Paralel</strong><div class="math">k<sub>ef</sub> = k₁ + k₂</div><p>Konstanta efektif merupakan jumlah konstanta kedua pegas.</p></div></div></section>
+<section class="experiment-navigation">
+  <h2>Eksperimen Lainnya</h2>
+
+  <p class="navigation-description">
+    Pilih eksperimen lain untuk mempelajari konsep pegas
+    dari sudut pandang berbeda.
+  </p>
+
+  <div class="experiment-list">
+    <a class="experiment-row" href="mode1.html">
+      <span class="experiment-number">01</span>
+      <span class="experiment-info">
+        <strong>Praktikum Gantung Beban</strong>
+        <span>Hubungan gaya berat dan pertambahan panjang</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+
+    <a class="experiment-row" href="mode2.html">
+      <span class="experiment-number">02</span>
+      <span class="experiment-info">
+        <strong>Tarik Gaya Langsung</strong>
+        <span>Pengaruh gaya terhadap pertambahan panjang</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+
+    <a class="experiment-row" href="mode3.html">
+      <span class="experiment-number">03</span>
+      <span class="experiment-info">
+        <strong>Susunan Pegas</strong>
+        <span>Eksplorasi susunan seri dan paralel</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+
+    <div class="experiment-row current" href="mode4.html">
+      <span class="experiment-number">04</span>
+      <span class="experiment-info">
+        <strong>Energi Potensial Pegas</strong>
+        <span>Hubungan energi elastis dan pertambahan panjang</span>
+      </span>
+      <span class="experiment-status">Sedang dibuka</span> 
+    </div>
+
+    <a class="experiment-row" href="mode5.html">
+      <span class="experiment-number">05</span>
+      <span class="experiment-info">
+        <strong>Tantangan Pegas Misteri</strong>
+        <span>Menggunakan konsep Hukum Hooke untuk memecahkan masalah</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+  </div>
+
+  <div class="navigation-back">
+    <a href="modul.html">
+      ← Kembali ke seluruh modul eksperimen
+    </a>
+  </div>
+</section>
+<footer class="footer"><span>HookeLab · Laboratorium Virtual Fisika</span></footer>
+</main>
+<script>
+
+const massInput = document.getElementById("mass");
+const springKInput = document.getElementById("springK");
+const amplitudeInput = document.getElementById("amplitude");
+const dampingInput = document.getElementById("damping");
+
+const massLabel = document.getElementById("massLabel");
+const springKLabel = document.getElementById("springKLabel");
+const amplitudeLabel = document.getElementById("amplitudeLabel");
+
+const spring = document.getElementById("animatedSpring");
+const movingMass = document.getElementById("animatedMass");
+const massText = document.getElementById("massText");
+const extensionText = document.getElementById("extensionText");
+const statusLabel = document.getElementById("simulationStatus");
+const energySummary = document.getElementById("energySummary");
+
+const energyCanvas = document.getElementById("energyChart");
+const elasticCanvas = document.getElementById("elasticChart");
+
+let running = false;
+let animationFrame = null;
+let startTime = 0;
+let lastTime = 0;
+let elapsed = 0;
+let thermalEnergy = 0;
+let lastMechanicalEnergy = 0;
+
+const g = 9.8;
+const naturalY = 45;
+const scale = 450;
+const colors = ["#2563eb", "#f59e0b", "#159b82", "#c2413b", "#64748b"];
+
+function parameters() {
+  return {
+    m: Number(massInput.value),
+    k: Number(springKInput.value),
+    A: Number(amplitudeInput.value),
+    c: Number(dampingInput.value)
+  };
+}
+
+function formatNumber(value, digits = 2) {
+  return value.toLocaleString("id-ID", {
+    maximumFractionDigits: digits
+  });
+}
+
+function updateLabels() {
+  const p = parameters();
+  massLabel.textContent = formatNumber(p.m, 1) + " kg";
+  springKLabel.textContent = formatNumber(p.k, 0) + " N/m";
+  amplitudeLabel.textContent = formatNumber(p.A, 2) + " m";
+  massText.textContent = formatNumber(p.m, 1) + " kg";
+}
+
+function motion(t, p) {
+  const omega0 = Math.sqrt(p.k / p.m);
+  const beta = p.c / (2 * p.m);
+  const omega = Math.sqrt(Math.max(0, omega0 * omega0 - beta * beta));
+
+  if (omega < 0.0001) {
+    return {
+      x: p.A * Math.exp(-beta * t),
+      v: -beta * p.A * Math.exp(-beta * t)
+    };
+  }
+
+  const decay = Math.exp(-beta * t);
+  const x = p.A * decay * Math.cos(omega * t);
+  const v = p.A * decay *
+    (-beta * Math.cos(omega * t) - omega * Math.sin(omega * t));
+
+  return { x, v };
+}
+
+function energyAt(t, p) {
+  const s = motion(t, p);
+
+  // x adalah simpangan dari posisi setimbang.
+  // Energi elastis memakai pertambahan panjang total pegas.
+  const equilibriumExtension = p.m * g / p.k;
+  const totalExtension = Math.max(0, equilibriumExtension + s.x);
+
+  const kinetic = 0.5 * p.m * s.v * s.v;
+  const elastic = 0.5 * p.k * totalExtension * totalExtension;
+
+  // Energi gravitasi dihitung relatif terhadap posisi setimbang.
+  const gravitational = -p.m * g * s.x;
+
+  // Energi termal adalah energi mekanik yang terdisipasi oleh redaman.
+  const mechanical = kinetic + 0.5 * p.k * s.x * s.x;
+  const initialMechanical = 0.5 * p.k * p.A * p.A;
+  const dissipated = Math.max(0, initialMechanical - mechanical);
+
+  // Total energi ditampilkan sebagai energi mekanik + energi terdisipasi.
+  const total = mechanical + dissipated;
+
+  return {
+    kinetic,
+    gravitational,
+    elastic,
+    thermal: dissipated,
+    total,
+    extension: totalExtension,
+    x: s.x,
+    v: s.v
+  };
+}
+
+function drawSpring(x) {
+  const displacementPixels = x * scale;
+  const top = naturalY;
+  const bottom = Math.max(top + 35, 165 + displacementPixels);
+  const center = 300;
+  const coils = 12;
+  const dx = (bottom - top) / (coils * 2);
+
+  let path = `M ${center} ${top}`;
+
+  for (let i = 1; i < coils * 2; i++) {
+    const side = i % 2 === 0 ? -17 : 17;
+    path += ` L ${center + side} ${top + i * dx}`;
+  }
+
+  path += ` L ${center} ${bottom}`;
+  spring.setAttribute("d", path);
+
+  const massY = bottom;
+  movingMass.setAttribute("y", massY);
+  massText.setAttribute("y", massY + 27);
+
+  extensionText.textContent =
+    "Pertambahan panjang: " + formatNumber(Math.max(0, parameters().m * g / parameters().k + x), 3) + " m";
+}
+
+function drawBarChart(canvas, labels, values, title, unit, barColors) {
+  const ctx = canvas.getContext("2d");
+  const rect = canvas.getBoundingClientRect();
+  const width = Math.max(320, rect.width);
+  const height = Math.max(260, rect.height);
+  const dpr = window.devicePixelRatio || 1;
+
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+
+  const left = 76;
+  const right = 12;
+  const top = 35;
+  const bottom = 88;
+  const chartWidth = width - left - right;
+  const chartHeight = height - top - bottom;
+
+  const maxValue = Math.max(0.01, ...values.map(v => Math.abs(v))) * 1.2;
+
+  ctx.fillStyle = "#17324d";
+  ctx.font = "bold 13px Segoe UI, Arial";
+  ctx.textAlign = "center";
+  ctx.fillText(title, width / 2, 19);
+  ctx.textAlign = "start";
+
+  ctx.strokeStyle = "#dce5ed";
+  ctx.fillStyle = "#64748b";
+  ctx.font = "10px Segoe UI, Arial";
+
+  for (let i = 0; i <= 4; i++) {
+    const y = top + chartHeight * i / 4;
+    const value = maxValue * (1 - i / 4);
+
+    ctx.beginPath();
+    ctx.moveTo(left, y);
+    ctx.lineTo(width - right, y);
+    ctx.stroke();
+
+    ctx.fillText(formatNumber(value, 2), 4, y + 4);
+  }
+
+  const slot = chartWidth / labels.length;
+  const barWidth = Math.min(42, slot * 0.56);
+
+  values.forEach((value, i) => {
+    const barHeight = Math.abs(value) / maxValue * chartHeight;
+    const x = left + slot * i + (slot - barWidth) / 2;
+    const y = top + chartHeight - barHeight;
+
+    ctx.fillStyle = barColors[i % barColors.length];
+    ctx.fillRect(x, y, barWidth, barHeight);
+
+    ctx.fillStyle = "#24364b";
+    ctx.font = "10px Segoe UI, Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(formatNumber(value, 3), x + barWidth / 2, Math.max(top + 11, y - 5));
+
+    const words = labels[i].split(" ");
+    words.forEach((word, j) => {
+      ctx.fillText(word, x + barWidth / 2, top + chartHeight + 16 + j * 12);
+    });
+  });
+
+  ctx.save();
+  ctx.translate(8, top + chartHeight / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "#52677b";
+  ctx.font = "11px Segoe UI, Arial";
+  ctx.fillText("Energi (" + unit + ")", 0, 0);
+  ctx.restore();
+
+  ctx.textAlign = "start";
+  ctx.textBaseline = "alphabetic";
+}
+
+function drawElasticChart() {
+  const ctx = elasticCanvas.getContext("2d");
+  const rect = elasticCanvas.getBoundingClientRect();
+  const width = Math.max(320, rect.width);
+  const height = Math.max(260, rect.height);
+  const dpr = window.devicePixelRatio || 1;
+
+  elasticCanvas.width = width * dpr;
+  elasticCanvas.height = height * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+
+  const p = parameters();
+  const left = 76, right = 16, top = 38, bottom = 72;
+  const chartWidth = width - left - right;
+  const chartHeight = height - top - bottom;
+  const xmax = Math.max(0.2, p.A * 1.5);
+  const ymax = 0.5 * p.k * xmax * xmax;
+
+  ctx.fillStyle = "#17324d";
+  ctx.font = "bold 13px Segoe UI, Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("Energi Potensial Elastis terhadap Δx", width / 2, 20);
+  ctx.textAlign = "start";
+
+  ctx.strokeStyle = "#dce5ed";
+  ctx.fillStyle = "#64748b";
+  ctx.font = "10px Segoe UI, Arial";
+
+  for (let i = 0; i <= 4; i++) {
+    const y = top + chartHeight * i / 4;
+    const val = ymax * (1 - i / 4);
+    ctx.beginPath();
+    ctx.moveTo(left, y);
+    ctx.lineTo(width - right, y);
+    ctx.stroke();
+    ctx.fillText(formatNumber(val, 3), 4, y + 4);
+  }
+
+  for (let i = 0; i <= 4; i++) {
+    const x = left + chartWidth * i / 4;
+    ctx.beginPath();
+    ctx.moveTo(x, top);
+    ctx.lineTo(x, top + chartHeight);
+    ctx.stroke();
+    ctx.fillText(formatNumber(xmax * i / 4, 2), x - 10, height - 25);
+  }
+
+  ctx.beginPath();
+  for (let i = 0; i <= 100; i++) {
+    const x = xmax * i / 100;
+    const y = 0.5 * p.k * x * x;
+    const px = left + x / xmax * chartWidth;
+    const py = top + chartHeight - y / ymax * chartHeight;
+
+    if (i === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  }
+
+  ctx.strokeStyle = "#159b82";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  ctx.fillStyle = "#17324d";
+  ctx.textAlign = "center";
+
+ctx.fillStyle = "#52677b";
+ctx.font = "11px Segoe UI, Arial";
+ctx.textAlign = "center";
+ctx.fillText(
+  "Pertambahan panjang Δx (m)",
+  left + chartWidth / 2,
+  height - 8
+);
+
+ctx.save();
+ctx.translate(8, top + chartHeight / 2);
+ctx.rotate(-Math.PI / 2);
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+ctx.fillText("Energi potensial (J)", 0, 0);
+ctx.restore();
+
+ctx.textAlign = "start";
+ctx.textBaseline = "alphabetic";
+
+  ctx.fillStyle = "#087f68";
+  ctx.font = "bold 12px Segoe UI, Arial";
+  ctx.fillText("Ep = ½k(Δx)²", width - 135, top + 18);
+}
+
+function updateDisplay(t) {
+  const p = parameters();
+  const e = energyAt(t, p);
+
+  drawSpring(e.x);
+  drawBarChart(
+    energyCanvas,
+    ["Kinetik", "Gravitasi", "Elastis", "Termal", "Total"],
+    [e.kinetic, Math.abs(e.gravitational), e.elastic, e.thermal, e.total],
+    "Energi Sistem",
+    "J",
+    colors
+  );
+  drawElasticChart();
+
+  energySummary.textContent =
+    `Energi kinetik: ${formatNumber(e.kinetic, 3)} J | ` +
+    `Energi elastis: ${formatNumber(e.elastic, 3)} J | ` +
+    `Energi termal: ${formatNumber(e.thermal, 3)} J`;
+}
+
+function animate(timestamp) {
+  if (!running) return;
+
+  if (!startTime) startTime = timestamp;
+  elapsed = (timestamp - startTime) / 1000;
+
+  updateDisplay(elapsed);
+  lastTime = timestamp;
+
+  animationFrame = requestAnimationFrame(animate);
+}
+
+function startSimulation() {
+  if (running) return;
+  running = true;
+  startTime = 0;
+  statusLabel.textContent = "BERJALAN";
+  animationFrame = requestAnimationFrame(animate);
+}
+
+function stopSimulation() {
+  running = false;
+  if (animationFrame) cancelAnimationFrame(animationFrame);
+  animationFrame = null;
+  statusLabel.textContent = "DIJEDA";
+}
+
+function resetSimulation() {
+  stopSimulation();
+  elapsed = 0;
+  thermalEnergy = 0;
+  startTime = 0;
+  updateLabels();
+  updateDisplay(0);
+  statusLabel.textContent = "SIAP";
+}
+
+[massInput, springKInput, amplitudeInput, dampingInput].forEach(input => {
+  input.addEventListener("input", () => {
+    updateLabels();
+    updateDisplay(running ? elapsed : 0);
+  });
+});
+
+document.getElementById("startButton").addEventListener("click", startSimulation);
+document.getElementById("resetButton").addEventListener("click", resetSimulation);
+
+window.addEventListener("resize", () => updateDisplay(running ? elapsed : 0));
+
+updateLabels();
+updateDisplay(0);
+
+
+</script>
+</body>
+</html>

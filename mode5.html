@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mode 5 | Tantangan Pegas Misteri - HookeLab</title>
+
+<style>
+:root{--navy:#17324d;--teal:#159b82;--teal-dark:#087f68;--bg:#f3f6fa;--line:#dce5ed;--muted:#64748b;--text:#24364b;--white:#fff;--orange:#f59e0b;--red:#c2413b;--green:#087f68}
+*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--text);background:var(--bg)}a{color:inherit;text-decoration:none}.topbar{background:#fff;padding:16px 5%;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:42px;height:42px;border-radius:12px;background:#e1f5ef;color:var(--teal-dark);display:grid;place-items:center;font-weight:800;font-size:19px}.brand h1{font-size:18px;color:var(--navy);margin:0}.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}.mode-label{background:#e5f6f1;color:var(--teal-dark);font-size:12px;font-weight:700;padding:8px 12px;border-radius:999px}.container{max-width:1200px;margin:0 auto;padding:26px 22px 36px}.page-heading{margin-bottom:20px}.eyebrow{text-transform:uppercase;letter-spacing:1.2px;color:var(--teal-dark);font-size:11px;font-weight:800}.page-heading h2{margin:7px 0 6px;color:var(--navy);font-size:clamp(24px,3vw,32px)}.page-heading p{margin:0;color:var(--muted);line-height:1.6;max-width:760px}.
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+.challenge-layout > .challenge-intro,
+.challenge-layout > .challenge-card {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  gap: 0;
+  padding: 20px;
+}
+.challenge-layout > .challenge-summary {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0;
+}
+.challenge-layout > .challenge-summary {
+    grid-column: auto;
+}
+@media (max-width: 760px) {
+  .layout.challenge-layout {
+    grid-template-columns: 1fr;
+  }
+}
+@media(max-width:520px){.container{padding:20px 13px 28px}.panel{padding:16px}.prediction-form{grid-template-columns:1fr}.formula-grid{grid-template-columns:1fr}.visual-area{padding:8px;min-height:230px}.spring-visual{height:220px}.button-row{flex-direction:column}.mode-links{grid-template-columns:1fr 1fr}.mode-link:last-child{grid-column:auto}}
+
+/* Perbaikan posisi tombol prediksi */
+.prediction-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+}
+
+.prediction-form .field {
+  margin: 0;
+}
+
+.prediction-form .button-primary {
+  align-self: start;
+  margin-top: 0;
+  height: 44px;
+  padding: 0 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .prediction-form {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .prediction-form .button-primary {
+    width: auto;
+    height: 44px;
+    margin-top: 0;
+  }
+}
+
+/* Navigasi eksperimen mengikuti Mode 1 dan Mode 2 */
+.experiment-navigation {
+  margin-top: 22px;
+  padding: 18px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
+.experiment-navigation h2 {
+  margin: 0 0 12px;
+  color: var(--navy);
+  font-size: 16px;
+}
+
+.navigation-description {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.experiment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.experiment-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 66px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: white;
+  color: var(--navy);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+a.experiment-row:hover {
+  border-color: var(--teal);
+  background: #f8fcfb;
+}
+
+.experiment-number {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: #e8f1f7;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.experiment-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.experiment-info strong {
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.experiment-info span {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.experiment-arrow {
+  color: var(--teal-dark);
+  font-size: 16px;
+}
+
+.experiment-row.current {
+  border-color: #79cdb9;
+  background: #effaf6;
+}
+
+.experiment-status {
+  color: var(--teal-dark);
+  font-size: 10px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.navigation-back {
+  margin-top: 16px;
+}
+
+.navigation-back a {
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+@media (max-width: 520px) {
+  .experiment-row {
+    padding: 12px;
+    gap: 9px;
+  }
+
+  .experiment-status {
+    white-space: normal;
+    text-align: right;
+  }
+}
+#energyChart,
+#elasticChart {
+  display: block;
+  width: 100%;
+  height: 320px;
+}
+
+#springAnimation {
+  width: 100%;
+  height: 280px;
+}
+
+/* Tata letak dua grafik */
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+  align-items: stretch;
+}
+
+.chart-panel {
+  min-width: 0;
+  padding: 20px 16px;
+}
+
+.chart-panel h3 {
+  min-height: 44px;
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-panel .subtext {
+  min-height: 38px;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.chart-canvas {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.chart-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.chart-panel .visual-note {
+  min-height: 36px;
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-panel h3,
+  .chart-panel .subtext {
+    min-height: 0;
+  }
+
+  .chart-canvas {
+    height: 300px;
+  }
+}
+/* Tata letak kartu tantangan */
+.challenge-intro,
+.challenge-card,
+.challenge-summary {
+  padding: 24px;
+}
+
+.challenge-card h3 {
+  margin: 12px 0 8px;
+}
+
+.challenge-card > p {
+  line-height: 1.7;
+  margin: 8px 0 16px;
+}
+
+.mystery-diagram {
+  min-height: 180px;
+  margin: 18px 0;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f3f8fb;
+}
+
+.data-list > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5edf1;
+}
+
+.data-list > div span {
+  color: #64748b;
+}
+
+.data-list > div strong {
+  text-align: right;
+  white-space: nowrap;
+}
+/* Teks label: Massa beban, Pertambahan panjang, dll. */
+.data-list > div span {
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  color: #64748b;
+}
+
+/* Nilai: 0,50 kg, 0,10 m, 9,8 m/s², dll. */
+.data-list > div strong {
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  color: #153e5c;
+}
+
+/* LABEL JUDUL SETIAP TANTANGAN */
+.challenge-card > p:first-of-type {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 12px;
+  padding: 10px 14px;
+
+  background: #e8f4f8;
+  border-left: 4px solid #1683a5;
+  border-radius: 8px;
+
+  color: #15546d;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+
+.answer-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.answer-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid #cbd8e3;
+  border-radius: 9px;
+  font: inherit;
+}
+
+.answer-row button {
+  flex-shrink: 0;
+}
+
+.feedback {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: #f0f4f8;
+  line-height: 1.5;
+}
+
+@media (max-width: 520px) {
+  .challenge-intro,
+  .challenge-card,
+  .challenge-summary {
+    padding: 16px;
+  }
+
+  .answer-row {
+    flex-direction: column;
+  }
+}
+
+/* FONT LABEL TEBAKAN KONSTANTA PEGAS */
+.challenge-card label {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: Arial, sans-serif;
+  color: #153e5c;
+}
+
+/* TATA LETAK MODE 5: DUA KOLOM, REFLEKSI DI BAWAH */
+.layout.challenge-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Semua kartu memiliki ukuran dan tampilan konsisten */
+.layout.challenge-layout > .challenge-card,
+.layout.challenge-layout > .challenge-summary {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  padding: 24px;
+  border: 1px solid #e1e8f0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 22px rgba(25, 42, 67, 0.06);
+}
+
+/* Urutan kartu: 01 dan 02 di atas, 03 dan 04 di bawah */
+.challenge-card[data-challenge="1"] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.challenge-card[data-challenge="2"] {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.challenge-card[data-challenge="3"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.challenge-card[data-challenge="4"] {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* Refleksi memenuhi lebar dua kolom */
+.layout.challenge-layout > .challenge-summary {
+  grid-column: 1 / -1;
+  grid-row: 3;
+}
+
+/* Judul kartu */
+.challenge-card h3,
+.challenge-summary h3 {
+  color: #153e5c;
+  line-height: 1.4;
+}
+
+.challenge-card > p {
+  line-height: 1.7;
+}
+
+/* Area ilustrasi */
+.mystery-diagram {
+  flex: 1;
+  min-height: 180px;
+  margin: 18px 0;
+  padding: 20px;
+  border: 1px solid #e0eaf0;
+  border-radius: 12px;
+  background: #f3f8fb;
+}
+
+/* Data pengamatan */
+.data-list {
+  margin: 8px 0 12px;
+}
+
+.data-list > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e5edf1;
+}
+
+.data-list > div span {
+  color: #64748b;
+}
+
+.data-list > div strong {
+  text-align: right;
+}
+
+/* Kolom jawaban */
+.answer-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin-top: 8px;
+
+}
+
+.answer-row input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  font-size: 12px;
+  border: 1px solid #cbd9e1;
+  border-radius: 9px;
+}
+
+.feedback {
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 9px;
+  background: #f0f4f8;
+  line-height: 1.6;
+}
+
+/* Tampilan tablet dan ponsel */
+@media (max-width: 760px) {
+  .layout.challenge-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .layout.challenge-layout > .challenge-card,
+  .layout.challenge-layout > .challenge-summary {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .layout.challenge-layout > .challenge-card,
+  .layout.challenge-layout > .challenge-summary {
+    padding: 16px;
+  }
+
+  .answer-row {
+    flex-direction: column;
+  }
+}
+
+/* MERAPATKAN ISI KARTU TANTANGAN */
+.layout.challenge-layout > .challenge-card {
+  padding: 18px;
+}
+
+.challenge-card h3 {
+  margin: 0 0 8px;
+  line-height: 1.35;
+}
+
+.challenge-card > p:not(:first-of-type) {
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.challenge-card .mystery-diagram {
+  margin: 10px 0;
+  padding: 12px 16px;
+  min-height: 0;
+}
+
+.challenge-card 
+.data-list {
+  margin: 8px 0;
+}
+
+.challenge-card .data-list > div {
+  padding: 7px 0;
+}
+
+/* NOMOR TANTANGAN */
+.challenge-number {
+  display: block;
+  width: fit-content;
+  margin: 0 0 10px;
+  padding: 7px 12px;
+  border-radius: 7px;
+  background: #e5f3f8;
+  border-left: 4px solid #1683a5;
+  color: #15546d;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+
+/* SUBJUDUL TANPA KOTAK */
+.challenge-card .challenge-subtitle {
+  margin: 0 0 12px;
+  padding: 0;
+  color: #153e5c;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* KOTAK PERTANYAAN DAN DESKRIPSI */
+.challenge-question {
+  margin: 0 0 3px;
+  padding: 10px 10px;
+  border: 1px solid #d8e5ed;
+  border-radius: 10px;
+  background: #f5f9fc;
+}
+
+.challenge-question h3 {
+  margin: 0 0 6px;
+  color: #153e5c;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.challenge-question p {
+  margin: 0;
+  color: #334e68;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+
+.challenge-card .feedback.correct,
+.challenge-card .feedback.incorrect {
+  background: #f5f9fc;
+  border: 1px solid #d8e5ed;
+  color: #334e68;
+}
+
+/* PERBAIKAN FINAL KOTAK UMPAN BALIK MODE 5 */
+.layout.challenge-layout .challenge-card .feedback {
+  display: block !important;
+  box-sizing: border-box !important;
+  margin: 8px 0 0 !important;
+  padding: 10px 10px !important;
+
+  background: #f5f9fc !important;
+  border: 1px solid #d8e5ed !important;
+  border-left: 1px solid #d8e5ed !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+
+  color: #334e68 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
+}
+
+.layout.challenge-layout .challenge-card .feedback.correct,
+.layout.challenge-layout .challenge-card .feedback.incorrect {
+  background: #f5f9fc !important;
+  border: 1px solid #d8e5ed !important;
+  color: #334e68 !important;
+}
+
+/* =========================================
+   STANDAR TAMPILAN TANTANGAN 01–04
+   ========================================= */
+
+/* Ukuran dan jarak dalam kartu */
+.layout.challenge-layout > .challenge-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #e1e8f0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 22px rgba(25, 42, 67, 0.06);
+}
+
+/* Kotak nomor tantangan */
+.challenge-card .challenge-number {
+  display: block;
+  align-self: flex-start;
+  width: fit-content;
+  margin: 0 0 10px;
+  padding: 7px 12px;
+  border: 0;
+  border-left: 4px solid #1683a5;
+  border-radius: 7px;
+  background: #e5f3f8;
+  color: #15546d;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.6px;
+}
+
+/* Subjudul tanpa kotak */
+.challenge-card .challenge-subtitle {
+  margin: 0 0 12px;
+  padding: 0;
+  color: #153e5c;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Kotak pertanyaan dan deskripsi */
+.challenge-card .challenge-question {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border: 1px solid #d8e5ed;
+  border-radius: 10px;
+  background: #f5f9fc;
+}
+
+/* Judul pertanyaan */
+.challenge-card .challenge-question h3 {
+  margin: 0 0 6px;
+  padding: 0;
+  color: #153e5c;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Deskripsi pertanyaan */
+.challenge-card .challenge-question p {
+  margin: 0;
+  padding: 0;
+  color: #334e68;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Ilustrasi */
+.challenge-card .mystery-diagram {
+  flex: none;
+  min-height: 180px;
+  margin: 8px 0 12px;
+  padding: 12px 16px;
+  border: 1px solid #e0eaf0;
+  border-radius: 12px;
+  background: #f3f8fb;
+}
+
+/* Data pengamatan */
+.challenge-card .data-list {
+  margin: 0 0 12px;
+}
+
+.challenge-card .data-list > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e5edf1;
+}
+
+.challenge-card .data-list > div span {
+  color: #64748b;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.challenge-card .data-list > div strong {
+  color: #153e5c;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Label prediksi */
+.challenge-card label {
+  display: block;
+  margin: 0 0 8px;
+  color: #153e5c;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* Kolom input dan tombol */
+.challenge-card .answer-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin: 0;
+}
+
+.challenge-card .answer-row input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid #cbd9e1;
+  border-radius: 9px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+.challenge-card .answer-row button {
+  flex-shrink: 0;
+}
+
+/* Kotak umpan balik */
+.challenge-card .feedback,
+.challenge-card .feedback.correct,
+.challenge-card .feedback.incorrect {
+  margin: 8px 0 0;
+  padding: 10px;
+  border: 1px solid #d8e5ed;
+  border-radius: 10px;
+  background: #f5f9fc;
+  color: #334e68;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  box-shadow: none;
+}
+
+/* Tampilan ponsel */
+@media (max-width: 520px) {
+  .layout.challenge-layout > .challenge-card {
+    padding: 16px;
+  }
+
+  .challenge-card .answer-row {
+    flex-direction: column;
+  }
+
+  .challenge-card .answer-row button {
+    width: 100%;
+  }
+}
+.footer{margin-top:20px;border-top:1px solid var(--line);padding:14px 4px 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:11px;line-height:1.5}
+
+
+/* ===================================
+   KARTU REFLEKSI
+   =================================== */
+
+.layout.challenge-layout > .challenge-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  grid-column: 1 / -1;
+  grid-row: 3;
+  padding: 20px;
+  border: 1px solid #dce7ef;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 22px rgba(25, 42, 67, 0.06);
+}
+
+/* JUDUL REFLEKSI DALAM KOTAK */
+.reflection-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid #d8e5ed;
+  border-left: 4px solid #1683a5;
+  border-radius: 10px;
+  background: #f5f9fc;
+}
+
+.reflection-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: #e2f2f7;
+  color: #1683a5;
+  font-size: 20px;
+}
+
+.reflection-heading h3 {
+  margin: 0;
+  color: #153e5c;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.reflection-heading p {
+  margin: 3px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* KARTU SKOR */
+.score-card {
+  padding: 16px;
+  border: 1px solid #d8e5ed;
+  border-radius: 12px;
+  background: #f5f9fc;
+}
+
+.score-label {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.score-info h3 {
+  margin: 4px 0;
+  color: #087f68;
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+.score-info p {
+  margin: 0;
+  color: #52677b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.score-progress {
+  height: 7px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #dce8ee;
+}
+
+.score-progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: #159b82;
+  transition: width 0.25s ease;
+}
+
+/* PETUNJUK REFLEKSI */
+.reflection-instruction {
+  padding: 12px 14px;
+  border: 1px solid #e1e8f0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.reflection-instruction h4 {
+  margin: 0 0 5px;
+  color: #153e5c;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.reflection-instruction p {
+  margin: 0;
+  color: #52677b;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* AREA KESIMPULAN */
+.reflection-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reflection-input-group label {
+  margin: 0;
+  color: #153e5c;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.reflection-input-group textarea {
+  display: block;
+  width: 100%;
+  min-height: 110px;
+  padding: 12px 14px;
+  border: 1px solid #cbd9e1;
+  border-radius: 10px;
+  outline: none;
+  background: #fbfdff;
+  color: #24364b;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.reflection-input-group textarea:focus {
+  border-color: #159b82;
+  box-shadow: 0 0 0 3px rgba(21, 155, 130, 0.12);
+}
+
+.reflection-input-group textarea::placeholder {
+  color: #94a3b8;
+}
+
+.reflection-hint {
+  margin: 0;
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* TOMBOL REFLEKSI */
+.challenge-summary > #resetChallenges {
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+@media (max-width: 520px) {
+  .layout.challenge-layout > .challenge-summary {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .reflection-heading {
+    padding: 12px;
+  }
+
+  .score-card {
+    padding: 13px;
+  }
+}
+
+/* ILUSTRASI PEGAS LABORATORIUM - TANTANGAN 01 */
+.spring-lab-visual {
+  position: relative;
+  min-height: 300px !important;
+  padding: 18px !important;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f7fbfe, #edf5fa) !important;
+  border: 1px solid #d8e5ed;
+  border-radius: 12px;
+}
+
+.spring-lab-visual .diagram-label {
+  position: relative;
+  z-index: 2;
+  color: #153e5c;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.spring-lab {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  height: 210px;
+  margin: 8px auto 0;
+}
+
+.spring-support {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 130px;
+  height: 12px;
+  transform: translateX(-50%);
+  border: 1px solid #647b8d;
+  border-radius: 4px;
+  background: linear-gradient(#dce5ed, #9eafbd);
+  box-shadow: 0 2px 3px rgba(23, 50, 77, 0.12);
+}
+
+.spring-support::before,
+.spring-support::after {
+  position: absolute;
+  top: 10px;
+  width: 5px;
+  height: 13px;
+  content: "";
+  background: #647b8d;
+}
+
+.spring-support::before {
+  left: 12px;
+}
+
+.spring-support::after {
+  right: 12px;
+}
+
+.spring-coil {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 28px;
+  height: 105px;
+  transform: translateX(-50%);
+  border-left: 4px solid #69869a;
+  border-right: 4px solid #69869a;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 5px,
+    #91aabd 5px,
+    #91aabd 8px,
+    transparent 8px,
+    transparent 12px
+  );
+  clip-path: polygon(
+    50% 0%, 100% 5%, 0% 10%, 100% 15%,
+    0% 20%, 100% 25%, 0% 30%, 100% 35%,
+    0% 40%, 100% 45%, 0% 50%, 100% 55%,
+    0% 60%, 100% 65%, 0% 70%, 100% 75%,
+    0% 80%, 100% 85%, 0% 90%, 100% 95%,
+    50% 100%
+  );
+}
+
+.spring-hook {
+  position: absolute;
+  top: 122px;
+  left: 50%;
+  width: 16px;
+  height: 14px;
+  transform: translateX(-50%);
+  border: 3px solid #69869a;
+  border-top: 0;
+  border-radius: 0 0 9px 9px;
+}
+
+.spring-weight {
+  position: absolute;
+  top: 137px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 48px;
+  transform: translateX(-50%);
+  border: 1px solid #2677a0;
+  border-radius: 7px;
+  background: linear-gradient(145deg, #56b5d5, #247ca8);
+  box-shadow: 0 4px 8px rgba(23, 50, 77, 0.18);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.extension-marker {
+  position: absolute;
+  top: 48px;
+  left: calc(50% + 48px);
+  display: flex;
+  align-items: center;
+  height: 82px;
+  padding-left: 12px;
+  border-left: 2px dashed #159b82;
+  color: #087f68;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.extension-marker::before,
+.extension-marker::after {
+  position: absolute;
+  left: -5px;
+  width: 8px;
+  height: 2px;
+  content: "";
+  background: #159b82;
+}
+
+.extension-marker::before {
+  top: 0;
+}
+
+.extension-marker::after {
+  bottom: 0;
+}
+
+.spring-caption {
+  margin-top: 0;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .spring-lab-visual {
+    min-height: 280px !important;
+  }
+
+  .spring-lab {
+    transform: scale(0.92);
+    transform-origin: top center;
+    margin-bottom: -12px;
+  }
+
+  .extension-marker {
+    left: calc(50% + 42px);
+  }
+}
+
+.spring-lab-visual {
+  min-height: 0 !important;
+  padding: 8px 12px !important;
+  background: #f3f8fb !important;
+  border: 1px solid #d8e5ed;
+  border-radius: 12px;
+}
+
+.real-spring {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  max-height: 280px;
+  margin: 6px auto;
+  overflow: visible;
+}
+
+.spring-caption {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.vertical-spring-challenge4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0 !important;
+  padding: 8px  12px !important;
+  background: #f3f8fb !important;
+  border: 1px solid #d8e5ed;
+  border-radius: 12px;
+}
+
+.spring4-constant {
+  align-self: flex-start;
+  padding: 5px 10px;
+  margin-bottom: 4px;
+  border: 1.5px solid #69aee9;
+  border-radius: 9px;
+  background: #e5f2ff;
+  color: #205da5;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.spring4-svg {
+  display: block;
+  width: 85%;
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.spring4-caption {
+  margin-top: 3px;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.horizontal-spring-visual {
+  min-height: 0 !important;
+  padding: 8px 12px !important;
+  background: #f3f8fb !important;
+  border: 1px solid #d8e5ed;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.horizontal-spring-label {
+  margin-bottom: 4px;
+  color: #344f9a;
+  font-size: 16px;
+  font-weight: 750;
+  text-align: center;
+}
+
+.horizontal-spring-svg {
+  display: block;
+  width: 85%;
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.horizontal-spring-visual .spring-caption {
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="breadcrumb">
+    <a href="index.html">HookeLab</a>
+    &nbsp;/&nbsp;
+    <a href="modul.html">Modul Eksperimen</a>
+    &nbsp;/&nbsp;
+    <strong>Mode 5 · Tantangan Pegas Misteri</strong>
+  </div>
+</header>
+<main class="container">
+
+<section class="page-heading">
+  <div class="eyebrow">Mode 5</div>
+  <h2>Tantangan Pegas Misteri</h2>
+  <p>
+  Empat tantangan berikut menyembunyikan nilai konstanta pegas, massa beban, atau pertambahan panjang. Gunakan data pengamatan dan konsep Hukum Hooke untuk menemukan jawabanmu.
+  </p>
+</section>
+<div class="layout challenge-layout">
+
+  <section class="panel challenge-card" data-challenge="1">
+      <div class="challenge-number">TANTANGAN 01</div>
+
+  <h3 class="challenge-subtitle">Cari konstanta pegas</h3>
+
+  <div class="challenge-question">
+    <h3>Berapa nilai k?</h3>
+    <p>
+      Sebuah beban digantung pada pegas hingga mencapai
+      keadaan setimbang.
+    </p>
+  </div>
+
+<div class="mystery-diagram spring-lab-visual">
+  <div class="diagram-label">k = ?</div>
+
+  <svg class="real-spring" viewBox="0 0 300 260"
+       role="img" aria-label="Pegas vertikal dengan beban 500 gram dan pertambahan panjang 10 sentimeter">
+
+    <defs>
+      <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#526b7b"/>
+        <stop offset="22%" stop-color="#dce5eb"/>
+        <stop offset="48%" stop-color="#8298a7"/>
+        <stop offset="72%" stop-color="#f1f5f8"/>
+        <stop offset="100%" stop-color="#526b7b"/>
+      </linearGradient>
+      <linearGradient id="weightMetal" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#496579"/>
+        <stop offset="45%" stop-color="#aebfca"/>
+        <stop offset="100%" stop-color="#385468"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Penyangga -->
+    <rect x="75" y="12" width="150" height="12" rx="3"
+          fill="url(#metal)" stroke="#718797"/>
+    <path d="M88 24 V31 M212 24 V31"
+          stroke="#718797" stroke-width="3"/>
+
+    <!-- Pengait atas -->
+    <path d="M150 24 V35 C150 42 141 42 141 49
+             C141 56 159 56 159 49 C159 44 150 42 150 35"
+          fill="none" stroke="url(#metal)" stroke-width="5"
+          stroke-linecap="round"/>
+
+    <!-- Kawat pegas heliks -->
+    <path d="
+      M150 50
+      C119 50 119 59 150 63
+      C181 67 181 76 150 80
+      C119 84 119 93 150 97
+      C181 101 181 110 150 114
+      C119 118 119 127 150 131
+      C181 135 181 144 150 148
+      C119 152 119 161 150 165
+      C181 169 181 178 150 182
+      C119 186 119 195 150 199"
+      fill="none" stroke="#506979" stroke-width="9"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="
+      M150 50
+      C119 50 119 59 150 63
+      C181 67 181 76 150 80
+      C119 84 119 93 150 97
+      C181 101 181 110 150 114
+      C119 118 119 127 150 131
+      C181 135 181 144 150 148
+      C119 152 119 161 150 165
+      C181 169 181 178 150 182
+      C119 186 119 195 150 199"
+      fill="none" stroke="url(#metal)" stroke-width="5"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Pengait dan beban -->
+    <path d="M150 199 V211 C150 218 140 218 140 225
+             C140 232 160 232 160 225 C160 219 150 218 150 211"
+          fill="none" stroke="url(#metal)" stroke-width="5"
+          stroke-linecap="round"/>
+
+    <path d="M140 226 V235 M160 226 V235"
+          stroke="#506979" stroke-width="4"/>
+
+    <path d="M118 236 Q118 231 125 231 H175
+             Q182 231 182 236 V249
+             Q150 259 118 249 Z"
+          fill="url(#weightMetal)" stroke="#526b7b" stroke-width="1.5"/>
+
+    <text x="150" y="247" text-anchor="middle"
+          fill="#ffffff" font-size="11" font-weight="700">500 g</text>
+
+    <!-- Penanda pertambahan panjang -->
+    <path d="M207 63 V199"
+          stroke="#159b82" stroke-width="2"
+          stroke-dasharray="5 4"/>
+    <path d="M201 70 L207 61 L213 70
+             M201 192 L207 201 L213 192"
+          fill="none" stroke="#159b82" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="218" y="126" fill="#087f68"
+          font-size="12" font-weight="700">Δx</text>
+    <text x="218" y="142" fill="#087f68"
+          font-size="12" font-weight="700">10 cm</text>
+  </svg>
+
+  <div class="spring-caption">
+    Pegas vertikal dengan beban dalam keadaan setimbang
+  </div>
+</div>
+
+
+    <div class="data-list">
+      <div><span>Massa beban</span><strong>0,50 kg</strong></div>
+      <div><span>Pertambahan panjang</span><strong>0,10 m</strong></div>
+      <div><span>Percepatan gravitasi</span><strong>9,8 m/s²</strong></div>
+    </div>
+
+    <label for="answer1">Tebakan konstanta pegas (N/m)</label>
+    <div class="answer-row">
+      <input id="answer1" type="number" min="0" step="any" placeholder="Masukkan nilai k">
+      <button type="button" class="btn-praktikum check-answer" data-target="1">Periksa</button>
+    </div>
+    <p class="feedback" id="feedback1" aria-live="polite">Hitung gaya berat beban terlebih dahulu.</p>
+  </section>
+
+  <section class="panel challenge-card" data-challenge="2">
+    <div class="challenge-number">TANTANGAN 02</div>
+    <h3 class="challenge-subtitle">Cari massa beban</h3>
+    <div class="challenge-question">
+      <h3>Berapa nilai massanya?</h3>
+      <p>
+        Pegas dengan konstanta yang diketahui mengalami
+        pertambahan panjang saat diberi beban.
+      </p>
+    </div>
+
+  
+<div class="mystery-diagram spring-lab-visual">
+  <div class="diagram-label">k = 40 N/m</div>
+
+  <svg class="real-spring" viewBox="0 0 300 260"
+       role="img"
+       aria-label="Pegas vertikal dengan konstanta 40 newton per meter, beban bermassa tidak diketahui, dan pertambahan panjang 10 sentimeter">
+
+    <defs>
+      <linearGradient id="metal2" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#526b7b"/>
+        <stop offset="22%" stop-color="#dce5eb"/>
+        <stop offset="48%" stop-color="#8298a7"/>
+        <stop offset="72%" stop-color="#f1f5f8"/>
+        <stop offset="100%" stop-color="#526b7b"/>
+      </linearGradient>
+
+      <linearGradient id="weightMetal2" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#496579"/>
+        <stop offset="45%" stop-color="#aebfca"/>
+        <stop offset="100%" stop-color="#385468"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Penyangga atas -->
+    <rect x="75" y="12" width="150" height="12" rx="3"
+          fill="url(#metal2)" stroke="#718797"/>
+
+    <!-- Pengait -->
+    <path d="M150 24 V35 C150 42 141 42 141 49
+             C141 56 159 56 159 49 C159 44 150 42 150 35"
+          fill="none" stroke="url(#metal2)" stroke-width="5"
+          stroke-linecap="round"/>
+
+    <!-- Pegas logam -->
+    <path d="
+      M150 50
+      C119 50 119 59 150 63
+      C181 67 181 76 150 80
+      C119 84 119 93 150 97
+      C181 101 181 110 150 114
+      C119 118 119 127 150 131
+      C181 135 181 144 150 148
+      C119 152 119 161 150 165
+      C181 169 181 178 150 182
+      C119 186 119 195 150 199"
+      fill="none" stroke="#506979" stroke-width="9"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="
+      M150 50
+      C119 50 119 59 150 63
+      C181 67 181 76 150 80
+      C119 84 119 93 150 97
+      C181 101 181 110 150 114
+      C119 118 119 127 150 131
+      C181 135 181 144 150 148
+      C119 152 119 161 150 165
+      C181 169 181 178 150 182
+      C119 186 119 195 150 199"
+      fill="none" stroke="url(#metal2)" stroke-width="5"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Pengait dan beban -->
+    <path d="M150 199 V211 C150 218 140 218 140 225
+             C140 232 160 232 160 225 C160 219 150 218 150 211"
+          fill="none" stroke="url(#metal2)" stroke-width="5"
+          stroke-linecap="round"/>
+
+    <path d="M140 226 V235 M160 226 V235"
+          stroke="#506979" stroke-width="4"/>
+
+    <path d="M118 236 Q118 231 125 231 H175
+             Q182 231 182 236 V249
+             Q150 259 118 249 Z"
+          fill="url(#weightMetal2)" stroke="#526b7b"
+          stroke-width="1.5"/>
+
+    <text x="150" y="247" text-anchor="middle"
+          fill="#ffffff" font-size="12" font-weight="700">m = ?</text>
+
+    <!-- Penanda pertambahan panjang -->
+    <path d="M207 63 V199"
+          stroke="#159b82" stroke-width="2"
+          stroke-dasharray="5 4"/>
+
+    <path d="M201 70 L207 61 L213 70
+             M201 192 L207 201 L213 192"
+          fill="none" stroke="#159b82" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="218" y="126" fill="#087f68"
+          font-size="12" font-weight="700">Δx</text>
+    <text x="218" y="142" fill="#087f68"
+          font-size="12" font-weight="700">10 cm</text>
+  </svg>
+
+  <div class="spring-caption">
+    Pegas diberi beban hingga mencapai keadaan setimbang
+  </div>
+</div>
+
+
+    <div class="data-list">
+      <div><span>Konstanta pegas</span><strong>49 N/m</strong></div>
+      <div><span>Pertambahan panjang</span><strong>0,10 m</strong></div>
+      <div><span>Percepatan gravitasi</span><strong>9,8 m/s²</strong></div>
+    </div>
+
+    <label for="answer2">Tebakan massa beban (kg)</label>
+    <div class="answer-row">
+      <input id="answer2" type="number" min="0" step="any" placeholder="Masukkan nilai massa">
+      <button type="button" class="btn-praktikum check-answer" data-target="2">Periksa</button>
+    </div>
+    <p class="feedback" id="feedback2" aria-live="polite">Hubungkan gaya pegas dengan gaya berat beban.</p>
+  </section>
+
+  <section class="panel challenge-card" data-challenge="3">
+    <div class="challenge-number">TANTANGAN 03</div>
+    <h3 class="challenge-subtitle">Analisis gaya</h3>
+    <div class="challenge-question">
+      <h3>Temukan pegas yang tepat</h3>
+      <p>
+        Sebuah pegas ditarik dengan gaya horizontal.
+        Abaikan gesekan dan anggap pegas mengikuti
+        Hukum Hooke.
+      </p>
+    </div>
+
+
+<div class="mystery-diagram horizontal-spring-visual">
+  <div class="horizontal-spring-label">k = ?</div>
+
+  <svg class="horizontal-spring-svg"
+       viewBox="0 0 420 220"
+       role="img"
+       aria-label="Pegas horizontal ditarik dengan gaya 6 newton dan bertambah panjang 15 sentimeter">
+
+    <defs>
+      <linearGradient id="wall3" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#718797"/>
+        <stop offset="50%" stop-color="#d8e2e9"/>
+        <stop offset="100%" stop-color="#718797"/>
+      </linearGradient>
+
+      <linearGradient id="springMetal3" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#eef4f7"/>
+        <stop offset="30%" stop-color="#8296a3"/>
+        <stop offset="55%" stop-color="#f8fbfd"/>
+        <stop offset="80%" stop-color="#637986"/>
+        <stop offset="100%" stop-color="#dce5eb"/>
+      </linearGradient>
+
+      <linearGradient id="handle3" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#67b8ff"/>
+        <stop offset="50%" stop-color="#2878cf"/>
+        <stop offset="100%" stop-color="#1955a0"/>
+      </linearGradient>
+
+      <marker id="forceArrow3" markerWidth="8" markerHeight="8"
+              refX="6" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#2878cf"/>
+      </marker>
+
+      <marker id="measureArrow3" markerWidth="7" markerHeight="7"
+              refX="3.5" refY="3.5" orient="auto-start-reverse">
+        <path d="M0,0 L7,3.5 L0,7 Z" fill="#159b82"/>
+      </marker>
+    </defs>
+
+    <!-- Garis dasar -->
+    <line x1="18" y1="151" x2="400" y2="151"
+          stroke="#d5e1e9" stroke-width="2"/>
+
+    <!-- Dinding penyangga -->
+    <rect x="20" y="48" width="30" height="105" rx="3"
+          fill="url(#wall3)" stroke="#718797" stroke-width="1.5"/>
+    <path d="M23 60 L46 50 M23 80 L46 70 M23 100 L46 90
+             M23 120 L46 110 M23 140 L46 130"
+          stroke="#8da0ad" stroke-width="1.5"/>
+
+    <!-- Dudukan pegas -->
+    <rect x="48" y="88" width="17" height="27" rx="3"
+          fill="#718797" stroke="#526b7b"/>
+    <rect x="61" y="94" width="10" height="15" rx="2"
+          fill="#b9c8d1" stroke="#526b7b"/>
+
+    <!-- Pegas horizontal -->
+    <path d="
+      M70 101
+      C76 75 82 75 88 101
+      C94 127 100 127 106 101
+      C112 75 118 75 124 101
+      C130 127 136 127 142 101
+      C148 75 154 75 160 101
+      C166 127 172 127 178 101
+      C184 75 190 75 196 101
+      C202 127 208 127 214 101
+      C220 75 226 75 232 101
+      C238 127 244 127 250 101
+      C256 75 262 75 268 101
+      C274 127 280 127 286 101
+      C292 75 298 75 304 101
+      C310 127 316 127 322 101"
+      fill="none" stroke="#506979" stroke-width="8"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="
+      M70 101
+      C76 75 82 75 88 101
+      C94 127 100 127 106 101
+      C112 75 118 75 124 101
+      C130 127 136 127 142 101
+      C148 75 154 75 160 101
+      C166 127 172 127 178 101
+      C184 75 190 75 196 101
+      C202 127 208 127 214 101
+      C220 75 226 75 232 101
+      C238 127 244 127 250 101
+      C256 75 262 75 268 101
+      C274 127 280 127 286 101
+      C292 75 298 75 304 101
+      C310 127 316 127 322 101"
+      fill="none" stroke="url(#springMetal3)" stroke-width="4.5"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Pengait dan pegangan penarik -->
+    <path d="M322 101 C331 101 329 88 338 88"
+          fill="none" stroke="#637986" stroke-width="6"
+          stroke-linecap="round"/>
+    <rect x="337" y="79" width="31" height="44" rx="7"
+          fill="url(#handle3)" stroke="#1e5ea5" stroke-width="1.5"/>
+
+    <!-- Panah gaya -->
+    <line x1="369" y1="101" x2="405" y2="101"
+          stroke="#2878cf" stroke-width="4"
+          stroke-linecap="round" marker-end="url(#forceArrow3)"/>
+
+    <rect x="288" y="23" width="112" height="32" rx="8"
+          fill="#e5f2ff" stroke="#69aee9" stroke-width="1.5"/>
+    <text x="344" y="44" text-anchor="middle"
+          fill="#205da5" font-size="14" font-weight="700">F = 6 N</text>
+
+    <!-- Penanda pertambahan panjang -->
+    <line x1="70" y1="145" x2="70" y2="178"
+          stroke="#159b82" stroke-width="1.8" stroke-dasharray="4 4"/>
+    <line x1="322" y1="132" x2="322" y2="178"
+          stroke="#159b82" stroke-width="1.8" stroke-dasharray="4 4"/>
+    <line x1="76" y1="166" x2="316" y2="166"
+          stroke="#159b82" stroke-width="2"
+          stroke-dasharray="5 4"
+          marker-start="url(#measureArrow3)"
+          marker-end="url(#measureArrow3)"/>
+
+    <rect x="147" y="181" width="105" height="29" rx="8"
+          fill="#e1f7f0" stroke="#35b89e" stroke-width="1.5"/>
+    <text x="199.5" y="200" text-anchor="middle"
+          fill="#087f68" font-size="13" font-weight="700">Δx = 15 cm</text>
+  </svg>
+
+  <div class="spring-caption">
+    Pegas ditarik secara horizontal oleh gaya luar
+  </div>
+</div>
+
+
+    <div class="data-list">
+      <div><span>Gaya tarik</span><strong>6 N</strong></div>
+      <div><span>Pertambahan panjang</span><strong>0,15 m</strong></div>
+    </div>
+
+    <label for="answer3">Tebakan konstanta pegas (N/m)</label>
+    <div class="answer-row">
+      <input id="answer3" type="number" min="0" step="any" placeholder="Masukkan nilai k">
+      <button type="button" class="btn-praktikum check-answer" data-target="3">Periksa</button>
+    </div>
+    <p class="feedback" id="feedback3" aria-live="polite">Gunakan perbandingan antara gaya tarik dan pertambahan panjang.</p>
+  </section>
+
+<section class="panel challenge-card" data-challenge="4">
+  
+<div class="challenge-number">TANTANGAN 04</div>
+<h3 class="challenge-subtitle">Prediksi pertambahan panjang</h3>
+<div class="challenge-question">
+  <h3>Seberapa jauh pegas bertambah panjang?</h3>
+  <p>
+    Sebuah pegas memiliki konstanta 49 N/m. Massa beban
+    ditingkatkan menjadi dua kali massa awal. Tentukan
+    pertambahan panjang pegas yang baru saat setimbang.
+  </p>
+</div>
+
+  
+<div class="mystery-diagram vertical-spring-challenge4">
+  <div class="spring4-constant">k = 49 N/m</div>
+
+  <svg class="spring4-svg" viewBox="0 0 320 300"
+       role="img"
+       aria-label="Pegas vertikal dengan konstanta 49 newton per meter dan beban 1 kilogram">
+
+    <defs>
+      <linearGradient id="spring4-metal" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#526b7b"/>
+        <stop offset="22%" stop-color="#dce5eb"/>
+        <stop offset="48%" stop-color="#8298a7"/>
+        <stop offset="72%" stop-color="#f1f5f8"/>
+        <stop offset="100%" stop-color="#526b7b"/>
+      </linearGradient>
+
+      <linearGradient id="spring4-weight" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#496579"/>
+        <stop offset="45%" stop-color="#aebfca"/>
+        <stop offset="100%" stop-color="#385468"/>
+      </linearGradient>
+
+      <marker id="spring4-arrow" markerWidth="7" markerHeight="7"
+              refX="3.5" refY="3.5" orient="auto-start-reverse">
+        <path d="M0 0 L7 3.5 L0 7 Z" fill="#159b82"/>
+      </marker>
+    </defs>
+
+    <!-- Penyangga atas -->
+    <rect x="76" y="16" width="168" height="15" rx="3"
+          fill="url(#spring4-metal)" stroke="#718797"
+          stroke-width="1.5"/>
+    <path d="M91 31 V39 M229 31 V39"
+          stroke="#718797" stroke-width="4"/>
+
+    <!-- Pengait atas -->
+    <path d="M160 31 V43 C160 49 149 49 149 56
+             C149 63 171 63 171 56 C171 50 160 49 160 43"
+          fill="none" stroke="url(#spring4-metal)"
+          stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Pegas logam vertikal -->
+    <path d="
+      M160 58
+      C128 58 128 67 160 72
+      C192 77 192 86 160 91
+      C128 96 128 105 160 110
+      C192 115 192 124 160 129
+      C128 134 128 143 160 148
+      C192 153 192 162 160 167
+      C128 172 128 181 160 186
+      C192 191 192 200 160 205
+      C128 210 128 219 160 224"
+      fill="none" stroke="#506979" stroke-width="10"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="
+      M160 58
+      C128 58 128 67 160 72
+      C192 77 192 86 160 91
+      C128 96 128 105 160 110
+      C192 115 192 124 160 129
+      C128 134 128 143 160 148
+      C192 153 192 162 160 167
+      C128 172 128 181 160 186
+      C192 191 192 200 160 205
+      C128 210 128 219 160 224"
+      fill="none" stroke="url(#spring4-metal)" stroke-width="5"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Pengait bawah -->
+    <path d="M160 224 V234 C160 241 149 241 149 248
+             C149 255 171 255 171 248 C171 242 160 241 160 234"
+          fill="none" stroke="url(#spring4-metal)"
+          stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Beban 1 kg -->
+    <path d="M125 257 Q125 251 133 251 H187
+             Q195 251 195 257 V282
+             Q160 294 125 282 Z"
+          fill="url(#spring4-weight)"
+          stroke="#526b7b" stroke-width="1.5"/>
+
+    <path d="M133 255 H187"
+          stroke="#dce5eb" stroke-width="2" opacity="0.8"/>
+
+    <text x="160" y="275" text-anchor="middle"
+          fill="#ffffff" font-size="15" font-weight="700">1 kg</text>
+
+    <!-- Penanda pertambahan panjang -->
+    <path d="M211 72 H246 M211 224 H246"
+          fill="none" stroke="#159b82" stroke-width="2"
+          stroke-dasharray="5 4"/>
+
+    <line x1="232" y1="79" x2="232" y2="217"
+          stroke="#159b82" stroke-width="2"
+          stroke-dasharray="5 4"
+          marker-start="url(#spring4-arrow)"
+          marker-end="url(#spring4-arrow)"/>
+
+    <rect x="239" y="130" width="75" height="37" rx="8"
+          fill="#e1f7f0" stroke="#35b89e" stroke-width="1.5"/>
+
+    <text x="276.5" y="154" text-anchor="middle"
+          fill="#087f68" font-size="15" font-weight="700">Δx = ?</text>
+  </svg>
+
+  <div class="spring4-caption">
+    Pegas vertikal dengan beban pada keadaan setimbang
+  </div>
+</div>
+
+
+  <div class="data-list">
+    <div><span>Massa awal</span><strong>0,50 kg</strong></div>
+    <div><span>Massa baru</span><strong>1,00 kg</strong></div>
+    <div><span>Konstanta pegas</span><strong>49 N/m</strong></div>
+    <div><span>Gravitasi</span><strong>9,8 m/s²</strong></div>
+  </div>
+
+  <label for="answer4">Pertambahan panjang baru (m)</label>
+  <div class="answer-row">
+    <input id="answer4" type="number" min="0" step="any"
+      placeholder="Masukkan nilai Δx">
+    <button type="button" class="btn-praktikum check-answer"
+      data-target="4">Periksa</button>
+  </div>
+  <p class="feedback" id="feedback4" aria-live="polite">
+    Gunakan F = mg dan F = kΔx untuk menentukan pertambahan panjang.
+  </p>
+</section>
+
+
+<section class="panel challenge-summary">
+
+  <div class="reflection-heading">
+    <span class="reflection-icon">✦</span>
+    <div>
+      <h3>Refleksi Hasil Eksperimen</h3>
+      <p>Evaluasi hasil dan pahami konsep yang telah dipelajari.</p>
+    </div>
+  </div>
+
+  <div class="score-card">
+    <div class="score-info">
+      <span class="score-label">SKOR TANTANGAN</span>
+      <h3 id="scoreDisplay">0 / 4</h3>
+      <p id="scoreMessage">
+        Selesaikan tantangan untuk melihat hasilmu.
+      </p>
+    </div>
+
+    <div class="score-progress">
+      <div class="score-progress-fill" id="scoreProgress"></div>
+    </div>
+  </div>
+
+  <div class="reflection-instruction">
+    <h4>Yuk, refleksikan pemahamanmu!</h4>
+    <p>
+      Perhatikan hubungan gaya, massa, konstanta pegas,
+      dan pertambahan panjang. Jelaskan bagaimana data
+      yang tersedia dapat digunakan untuk menentukan
+      besaran yang belum diketahui.
+    </p>
+  </div>
+
+  <div class="reflection-input-group">
+    <label for="reflection">Kesimpulan dan pemahamanmu</label>
+    <textarea
+      id="reflection"
+      rows="4"
+      placeholder="Tuliskan kesimpulanmu tentang hubungan gaya, massa, konstanta pegas, dan pertambahan panjang..."
+    ></textarea>
+  </div>
+
+  <button type="button" class="btn-praktikum" id="resetChallenges">
+    Ulangi Tantangan
+  </button>
+</section>
+
+</div>
+
+<section class="experiment-navigation">
+  <h2>Eksperimen Lainnya</h2>
+
+  <p class="navigation-description">
+    Pilih eksperimen lain untuk mempelajari konsep pegas dari sudut pandang berbeda.
+  </p>
+
+  <div class="experiment-list">
+    <a class="experiment-row" href="mode1.html">
+      <span class="experiment-number">01</span>
+      <span class="experiment-info">
+        <strong>Praktikum Gantung Beban</strong>
+        <span>Hubungan gaya berat dan pertambahan panjang</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+
+    <a class="experiment-row" href="mode2.html">
+      <span class="experiment-number">02</span>
+      <span class="experiment-info">
+        <strong>Tarik Gaya Langsung</strong>
+        <span>Pengaruh gaya terhadap pertambahan panjang</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+
+    <a class="experiment-row" href="mode3.html">
+      <span class="experiment-number">03</span>
+      <span class="experiment-info">
+        <strong>Susunan Pegas</strong>
+        <span>Eksplorasi susunan seri dan paralel</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+
+    <a class="experiment-row" href="mode4.html">
+    <span class="experiment-number">04</span>
+    <span class="experiment-info">
+      <strong>Energi Potensial Pegas</strong>
+      <span>Hubungan energi elastis dan pertambahan panjang</span>
+    </span>
+    <span class="experiment-arrow">⟶</span>
+    </a>
+
+    <a class="experiment-row current" href="mode5.html">
+      <span class="experiment-number">05</span>
+      <span class="experiment-info">
+        <strong>Tantangan Pegas Misteri</strong>
+        <span>Menggunakan konsep Hukum Hooke untuk memecahkan masalah</span>
+      </span>
+      <span class="experiment-status">Sedang dibuka</span>
+    </a>
+  </div>
+
+  <div class="navigation-back">
+    <a href="modul.html">
+      ← Kembali ke seluruh modul eksperimen
+    </a>
+  </div>
+</section>
+<footer class="footer"><span>HookeLab · Laboratorium Virtual Fisika</span></footer>
+</main>
+<script>
+
+const answers = {
+  1: {
+    value: 49,
+    tolerance: 1,
+    explanation: "k = mg/Δx = (0,50 × 9,8)/0,10 = 49 N/m."
+  },
+  2: {
+    value: 0.5,
+    tolerance: 0.02,
+    explanation: "m = kΔx/g = (49 × 0,10)/9,8 = 0,50 kg."
+  },
+  3: {
+    value: 40,
+    tolerance: 1,
+    explanation: "k = F/Δx = 6/0,15 = 40 N/m."
+  },
+  4: {
+    value: 0.2,
+    tolerance: 0.01,
+    explanation: "Δx = mg/k = (1,00 × 9,8)/49 = 0,20 m."
+  }
+};
+
+const solved = new Set();
+
+function updateScore() {
+  const score = solved.size;
+
+  document.getElementById("scoreDisplay").textContent =
+    `${score} / 4`;
+
+  document.getElementById("scoreProgress").style.width =
+    `${score / 4 * 100}%`;
+
+  const messages = [
+    "Ayo mulai tantangannya dan uji pemahamanmu.",
+    "Satu tantangan berhasil! Lanjutkan.",
+    "Dua tantangan berhasil! Teruskan.",
+    "Tiga tantangan berhasil! Satu lagi.",
+    "Hebat! Semua tantangan berhasil diselesaikan."
+  ];
+
+  document.getElementById("scoreMessage").textContent =
+    messages[score];
+}
+
+document.querySelectorAll(".check-answer").forEach(button => {
+  button.addEventListener("click", () => {
+    const n = Number(button.dataset.target);
+    const input = document.getElementById(`answer${n}`);
+    const feedback = document.getElementById(`feedback${n}`);
+    const answer = answers[n];
+
+    if (input.value.trim() === "" ||
+        !Number.isFinite(Number(input.value))) {
+      feedback.textContent = "Masukkan jawaban numerik terlebih dahulu.";
+      feedback.classList.remove("correct", "incorrect");
+      feedback.classList.add("incorrect");
+      return;
+    }
+
+    const value = Number(input.value);
+
+    if (Math.abs(value - answer.value) <= answer.tolerance) {
+      feedback.textContent = `Benar! ${answer.explanation}`;
+      feedback.classList.remove("incorrect");
+      feedback.classList.add("correct");
+      solved.add(n);
+    } else {
+      feedback.textContent =
+        `Belum tepat. Periksa kembali perhitunganmu. ${answer.explanation}`;
+      feedback.classList.remove("correct");
+      feedback.classList.add("incorrect");
+    }
+
+    updateScore();
+  });
+});
+
+document.getElementById("resetChallenges").addEventListener("click", () => {
+  solved.clear();
+
+  for (let n = 1; n <= 4; n++) {
+    document.getElementById(`answer${n}`).value = "";
+
+    const feedback = document.getElementById(`feedback${n}`);
+    feedback.classList.remove("correct", "incorrect");
+
+    const messages = {
+      1: "Hitung gaya berat beban terlebih dahulu.",
+      2: "Hubungkan gaya pegas dengan gaya berat beban.",
+      3: "Gunakan perbandingan antara gaya tarik dan pertambahan panjang.",
+      4: "Gunakan F = mg dan F = kΔx untuk menentukan pertambahan panjang."
+    };
+
+    feedback.textContent = messages[n];
+  }
+
+  updateScore();
+});
+
+updateScore();
+
+</script>
+</body>
+</html>

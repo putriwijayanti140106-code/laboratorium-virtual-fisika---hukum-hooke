@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b2e"><title>HookeLab | LKPD Digital</title>
+<link rel="stylesheet" href="style.css"><script src="js/common.js" defer></script></head><body>
+<div class="app-shell"><aside class="sidebar" id="sidebar">
+<a class="brand" href="index.html"><span class="brand-mark">〰</span><span><strong>Hooke<span>Lab</span></strong><small>LABORATORIUM VIRTUAL FISIKA</small></span></a>
+<div class="side-label">MENU PEMBELAJARAN</div><nav class="main-nav">
+<a class="nav-link " href="index.html"><span>⌂</span>Beranda</a>
+<a class="nav-link " href="petunjuk.html"><span>ⓘ</span>Petunjuk Praktikum</a>
+<a class="nav-link " href="modul.html"><span>▤</span>Modul Eksperimen</a>
+<a class="nav-link active" href="lkpd.html"><span>☷</span>LKPD Digital</a>
+<a class="nav-link " href="evaluasi.html"><span>✓</span>Evaluasi</a></nav><div class="sidebar-bottom"><div class="sidebar-tip"><b>✦</b><div><strong>Ruang eksplorasi</strong><p>Belajar fisika lewat eksperimen.</p></div></div><small class="status"><i></i> Sistem pembelajaran aktif</small></div></aside>
+<div class="page-area"><header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
+<div class="breadcrumb">HookeLab <span>/</span> <b>LKPD Digital</b></div><div class="top-actions"><div class="search"><span>⌕</span><input id="siteSearch" placeholder="Cari modul atau materi..." aria-label="Cari modul atau materi"></div><div class="profile"><span class="avatar">PW</span><div><b>Praktikan</b><small>Peserta praktikum</small></div></div></div></header>
+<main class="content"><div class="page-title"><label>LEMBAR KERJA PESERTA DIDIK</label><h1>LKPD Digital</h1><p>Tempat mengorganisasi hasil pengamatan dan refleksi praktikum.</p></div><section class="page-hero"><label>HOOKELAB</label><h2>Dari pengamatan menjadi pemahaman</h2><p>LKPD Digital akan menjadi ruang untuk menghubungkan data eksperimen dengan analisis dan kesimpulan. Bagian ini akan dikembangkan setelah struktur utama selesai.</p></section>
+   
+<section class="lab-panel">
+  <h2>Hasil Pengamatan — Mode 1</h2>
+  <p style="font-size:12px;color:var(--muted);line-height:1.7">
+    Data ini diambil dari pengamatan yang telah dicatat pada
+    simulasi Praktikum Gantung Beban.
+  </p>
+
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Massa (g)</th>
+          <th>Gaya (N)</th>
+          <th>Pertambahan Panjang (m)</th>
+        </tr>
+      </thead>
+      <tbody id="lkpdMode1Rows">
+        <tr>
+          <td colspan="4">Memuat data pengamatan...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p id="lkpdMode1Status"
+     style="font-size:11px;color:var(--muted);margin-top:12px">
+    Data pengamatan akan ditampilkan di sini.
+  </p>
+
+  <div style="margin-top:16px">
+    <a class="btn dark" href="mode1.html">
+      Buka Simulasi Mode 1 →
+    </a>
+  </div>
+</section>
+
+<script>
+(() => {
+  const STORAGE_KEY = "hookelab_mode1_records";
+  const rows = document.getElementById("lkpdMode1Rows");
+  const status = document.getElementById("lkpdMode1Status");
+
+  const records = JSON.parse(
+    localStorage.getItem(STORAGE_KEY) || "[]"
+  );
+
+  if (records.length === 0) {
+    rows.innerHTML = `
+      <tr>
+        <td colspan="4">Belum ada data pengamatan.</td>
+      </tr>
+    `;
+    status.textContent =
+      "Buka Mode 1 dan catat pengamatan terlebih dahulu.";
+    return;
+  }
+
+  rows.innerHTML = records.map((record, index) => `
+    <tr>
+      <td>${index + 1}</td>
+      <td>${record.mass}</td>
+      <td>${Number(record.force).toFixed(2).replace(".", ",")}</td>
+      <td>${Number(record.dx).toFixed(4).replace(".", ",")}</td>
+    </tr>
+  `).join("");
+
+  status.textContent =
+    `${records.length} data pengamatan berhasil dimuat dari Mode 1.`;
+})();
+</script>
+
+</body>
+</html>

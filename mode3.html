@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mode 3 | Susunan Pegas - HookeLab</title>
+<style>
+:root{--navy:#17324d;--teal:#159b82;--teal-dark:#087f68;--bg:#f3f6fa;--line:#dce5ed;--muted:#64748b;--text:#24364b;--white:#fff;--orange:#f59e0b;--red:#c2413b;--green:#087f68}
+*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--text);background:var(--bg)}a{color:inherit;text-decoration:none}.topbar{background:#fff;padding:16px 5%;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:42px;height:42px;border-radius:12px;background:#e1f5ef;color:var(--teal-dark);display:grid;place-items:center;font-weight:800;font-size:19px}.brand h1{font-size:18px;color:var(--navy);margin:0}.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}.mode-label{background:#e5f6f1;color:var(--teal-dark);font-size:12px;font-weight:700;padding:8px 12px;border-radius:999px}.container{max-width:1200px;margin:0 auto;padding:26px 22px 36px}.page-heading{margin-bottom:20px}.eyebrow{text-transform:uppercase;letter-spacing:1.2px;color:var(--teal-dark);font-size:11px;font-weight:800}.page-heading h2{margin:7px 0 6px;color:var(--navy);font-size:clamp(24px,3vw,32px)}.page-heading p{margin:0;color:var(--muted);line-height:1.6;max-width:760px}.layout{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:20px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 18px rgba(23,50,77,.04)}.panel h3{font-size:17px;color:var(--navy);margin:0 0 6px}.subtext{font-size:13px;line-height:1.5;color:var(--muted);margin:0 0 18px}.field{margin:16px 0}.field label{display:flex;justify-content:space-between;gap:8px;font-weight:700;font-size:13px;margin-bottom:8px}.field label span{color:var(--teal-dark);font-weight:800}.field select,.field input[type=number]{width:100%;padding:11px 12px;border:1px solid #cbd8e3;border-radius:9px;font:inherit;color:var(--text);background:white}.field input[type=range]{width:100%;accent-color:var(--teal)}.range-ends{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:3px}.hint{background:#f0f8f6;border:1px solid #d4eee6;border-radius:10px;padding:11px 12px;color:#315d55;font-size:12px;line-height:1.55}.button{border:0;border-radius:10px;padding:12px 14px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .12s,background .12s}.button:active{transform:scale(.99)}.button-primary{background:var(--teal);color:white}.button-primary:hover{background:var(--teal-dark)}.button-secondary{background:#edf2f7;color:var(--navy)}.button-row{display:flex;gap:9px;margin-top:18px}.button-row button{flex:1}.stage{min-height:390px}.stage-head{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap}.stage-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.stage-badge{font-size:11px;font-weight:800;color:#52677b;background:#f0f4f8;padding:7px 10px;border-radius:999px}.visual-area{margin-top:18px;min-height:270px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(#fbfdff,#f5f9fc);display:flex;justify-content:center;align-items:center;padding:20px;overflow:hidden}.spring-visual{width:100%;max-width:620px;height:250px}.visual-note{margin:12px 0 0;text-align:center;font-size:12px;color:var(--muted)}.prediction-panel{margin-top:20px}.prediction-panel .subtext{margin-bottom:12px}.prediction-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end}.prediction-form .field{margin:0}.prediction-form input{width:100%;padding:12px;border:1px solid #cbd8e3;border-radius:9px;font:inherit}.unit{font-size:12px;color:var(--muted);margin-top:6px}.result{display:none;margin-top:18px;border:1px solid #cde8df;background:#f2fbf7;border-radius:12px;padding:16px}.result.show{display:block}.result-top{display:flex;align-items:start;justify-content:space-between;gap:10px;flex-wrap:wrap}.result h4{margin:0 0 5px;color:var(--navy);font-size:15px}.result p{margin:5px 0;font-size:13px;line-height:1.55}.status{display:inline-block;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800;background:#dcfce7;color:#166534}.status.off{background:#fff1d6;color:#92400e}.result-value{font-size:28px;color:var(--teal-dark);font-weight:800;margin:7px 0}.formula{font-family:Consolas,monospace;background:#fff;border:1px solid #d9e8e2;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:13px;overflow-wrap:anywhere}.concept{margin-top:20px}.formula-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.formula-card{background:#f7fafc;border:1px solid var(--line);border-radius:10px;padding:13px}.formula-card strong{display:block;color:var(--navy);font-size:13px;margin-bottom:7px}.formula-card .math{font-family:Consolas,monospace;font-size:18px;font-weight:800;color:var(--teal-dark)}.formula-card p{font-size:12px;color:var(--muted);line-height:1.5;margin:7px 0 0}.nav-modes{margin-top:24px;background:white;border:1px solid var(--line);border-radius:14px;padding:17px}.nav-modes h3{margin:0 0 12px;color:var(--navy);font-size:14px}.mode-links{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}.mode-link{border:1px solid var(--line);border-radius:10px;padding:11px 9px;font-size:12px;color:#52677b;line-height:1.4}.mode-link strong{display:block;color:var(--navy);margin-bottom:4px}.mode-link.current{border-color:#79cdb9;background:#effaf6}.mode-link.current strong{color:var(--teal-dark)}.footer{margin-top:20px;border-top:1px solid var(--line);padding:14px 4px 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:11px;line-height:1.5}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.mode-links{grid-template-columns:repeat(2,minmax(0,1fr))}.mode-link:last-child{grid-column:span 2}.stage{min-height:0}}
+@media(max-width:520px){.container{padding:20px 13px 28px}.panel{padding:16px}.prediction-form{grid-template-columns:1fr}.formula-grid{grid-template-columns:1fr}.visual-area{padding:8px;min-height:230px}.spring-visual{height:220px}.button-row{flex-direction:column}.mode-links{grid-template-columns:1fr 1fr}.mode-link:last-child{grid-column:auto}}
+
+/* Perbaikan posisi tombol prediksi */
+.prediction-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+}
+
+.prediction-form .field {
+  margin: 0;
+}
+
+.prediction-form .button-primary {
+  align-self: start;
+  margin-top: 0;
+  height: 44px;
+  padding: 0 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .prediction-form {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .prediction-form .button-primary {
+    width: auto;
+    height: 44px;
+    margin-top: 0;
+  }
+}
+
+/* Navigasi eksperimen mengikuti Mode 1 dan Mode 2 */
+.experiment-navigation {
+  margin-top: 22px;
+  padding: 18px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
+.experiment-navigation h2 {
+  margin: 0 0 12px;
+  color: var(--navy);
+  font-size: 16px;
+}
+
+.navigation-description {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.experiment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.experiment-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 66px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: white;
+  color: var(--navy);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+a.experiment-row:hover {
+  border-color: var(--teal);
+  background: #f8fcfb;
+}
+
+.experiment-number {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: #e8f1f7;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.experiment-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.experiment-info strong {
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.experiment-info span {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.experiment-arrow {
+  color: var(--teal-dark);
+  font-size: 16px;
+}
+
+.experiment-row.current {
+  border-color: #79cdb9;
+  background: #effaf6;
+}
+
+.experiment-status {
+  color: var(--teal-dark);
+  font-size: 10px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.navigation-back {
+  margin-top: 16px;
+}
+
+.navigation-back a {
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+@media (max-width: 520px) {
+  .experiment-row {
+    padding: 12px;
+    gap: 9px;
+  }
+
+  .experiment-status {
+    white-space: normal;
+    text-align: right;
+  }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="breadcrumb">
+    <a href="index.html">HookeLab</a>
+    &nbsp;/&nbsp;
+    <a href="modul.html">Modul Eksperimen</a>
+    &nbsp;/&nbsp;
+    <strong>Mode 3 · Susunan Pegas</strong>
+  </div>
+</header>
+<main class="container">
+<section class="page-heading"><div class="eyebrow">Mode 3</div><h2>Susunan Pegas: Seri dan Paralel</h2><p>Bandingkan konstanta pegas efektif pada susunan seri dan paralel. Tentukan nilai prediksimu terlebih dahulu, lalu periksa hasil perhitungan untuk mengetahui apakah prediksimu sesuai.</p></section>
+<div class="layout">
+<aside class="panel"><h3>Pengaturan Eksperimen</h3><p class="subtext">Atur susunan dan konstanta setiap pegas sebelum membuat prediksi.</p>
+<div class="field"><label for="arrangement">Susunan pegas</label><select id="arrangement"><option value="series">Seri</option><option value="parallel">Paralel</option></select></div>
+<div class="field"><label for="k1">Konstanta pegas 1 <span id="k1Label">100 N/m</span></label><input id="k1" type="range" min="50" max="500" step="10" value="100"><div class="range-ends"><span>50 N/m</span><span>500 N/m</span></div></div>
+<div class="field"><label for="k2">Konstanta pegas 2 <span id="k2Label">150 N/m</span></label><input id="k2" type="range" min="50" max="500" step="10" value="150"><div class="range-ends"><span>50 N/m</span><span>500 N/m</span></div></div>
+<div class="hint" id="arrangementHint">Pada susunan seri, pegas dipasang berurutan. Konstanta efektifnya lebih kecil daripada konstanta masing-masing pegas.</div>
+<div class="button-row"><button class="button button-secondary" id="resetButton" type="button">Atur Ulang</button></div>
+</aside>
+<section>
+<div class="panel stage"><div class="stage-head"><div><h3>Visualisasi Susunan</h3><p>Diagram akan berubah mengikuti pilihan susunan pegas.</p></div><span class="stage-badge" id="visualBadge">SUSUNAN SERI</span></div>
+<div class="visual-area"><svg class="spring-visual" id="springVisual" viewBox="0 0 600 270" role="img" aria-label="Visualisasi dua pegas tersusun seri"></svg></div><p class="visual-note">Ilustrasi skematis susunan pegas, bukan skala ukuran sebenarnya.</p>
+</div>
+<div class="panel prediction-panel"><h3>Prediksi Konstanta Pegas Efektif</h3><p class="subtext">Masukkan perkiraan konstanta pegas efektif sebelum menampilkan hasil perhitungan.</p>
+<form id="predictionForm"><div class="prediction-form"><div class="field"><input id="prediction" type="number" min="0.01" step="any" placeholder="Contoh: 60" required><div class="unit">Satuan: N/m</div></div><button class="button button-primary" type="submit">Periksa Prediksi</button></div></form>
+<div id="result" class="result" aria-live="polite"><div class="result-top"><div><h4>Hasil Perhitungan</h4><p id="predictionSummary"></p></div><span id="status" class="status">Prediksi sesuai</span></div><div class="result-value" id="effectiveValue">— N/m</div><p id="differenceText"></p><div class="formula" id="formulaText"></div></div>
+</div>
+</section>
+</div>
+<section class="panel concept"><h3>Konsep Dasar</h3><p class="subtext" style="margin-bottom:0">Konstanta pegas efektif menggambarkan kekakuan gabungan beberapa pegas yang disusun bersama.</p><div class="formula-grid"><div class="formula-card"><strong>Susunan Seri</strong><div class="math">1/k<sub>ef</sub> = 1/k₁ + 1/k₂</div><p>Untuk dua pegas: k<sub>ef</sub> = (k₁ × k₂) / (k₁ + k₂).</p></div><div class="formula-card"><strong>Susunan Paralel</strong><div class="math">k<sub>ef</sub> = k₁ + k₂</div><p>Konstanta efektif merupakan jumlah konstanta kedua pegas.</p></div></div></section>
+<section class="experiment-navigation">
+  <h2>Eksperimen Lainnya</h2>
+
+  <p class="navigation-description">
+    Pilih eksperimen lain untuk mempelajari konsep pegas
+    dari sudut pandang berbeda.
+  </p>
+
+  <div class="experiment-list">
+    <a class="experiment-row" href="mode1.html">
+      <span class="experiment-number">01</span>
+      <span class="experiment-info">
+        <strong>Praktikum Gantung Beban</strong>
+        <span>Hubungan gaya berat dan pertambahan panjang</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+
+    <a class="experiment-row" href="mode2.html">
+      <span class="experiment-number">02</span>
+      <span class="experiment-info">
+        <strong>Tarik Gaya Langsung</strong>
+        <span>Pengaruh gaya terhadap pertambahan panjang</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+
+    <div class="experiment-row current">
+      <span class="experiment-number">03</span>
+      <span class="experiment-info">
+        <strong>Susunan Pegas</strong>
+        <span>Eksplorasi susunan seri dan paralel</span>
+      </span>
+      <span class="experiment-status">Sedang dibuka</span>
+    </div>
+
+    <a class="experiment-row" href="mode4.html">
+      <span class="experiment-number">04</span>
+      <span class="experiment-info">
+        <strong>Energi Potensial Pegas</strong>
+        <span>Hubungan energi elastis dan pertambahan panjang</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+
+    <a class="experiment-row" href="mode5.html">
+      <span class="experiment-number">05</span>
+      <span class="experiment-info">
+        <strong>Tantangan Pegas Misteri</strong>
+        <span>Menggunakan konsep Hukum Hooke untuk memecahkan masalah</span>
+      </span>
+      <span class="experiment-arrow">⟶</span>
+    </a>
+  </div>
+
+  <div class="navigation-back">
+    <a href="modul.html">
+      ← Kembali ke seluruh modul eksperimen
+    </a>
+  </div>
+</section>
+<footer class="footer"><span>HookeLab · Laboratorium Virtual Fisika</span></footer>
+</main>
+<script>
+const arrangement = document.getElementById('arrangement');
+const k1Input = document.getElementById('k1');
+const k2Input = document.getElementById('k2');
+const k1Label = document.getElementById('k1Label');
+const k2Label = document.getElementById('k2Label');
+const visual = document.getElementById('springVisual');
+const visualBadge = document.getElementById('visualBadge');
+const hint = document.getElementById('arrangementHint');
+const result = document.getElementById('result');
+const predictionInput = document.getElementById('prediction');
+const predictionSummary = document.getElementById('predictionSummary');
+const effectiveValue = document.getElementById('effectiveValue');
+const differenceText = document.getElementById('differenceText');
+const formulaText = document.getElementById('formulaText');
+const status = document.getElementById('status');
+const initial = { arrangement:'series', k1:100, k2:150 };
+function springPath(x1,y1,x2,y2,coils=9,amplitude=12){
+ const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy),ux=dx/len,uy=dy/len,px=-uy,py=ux;
+ let d=`M ${x1} ${y1}`;
+ for(let i=1;i<coils*2;i++){const t=i/(coils*2);const side=i%2===0?-amplitude:amplitude;d+=` L ${x1+dx*t+px*side} ${y1+dy*t+py*side}`;}
+ return d+` L ${x2} ${y2}`;
+}
+
+function renderVisual() {
+  const mode = arrangement.value;
+  const k1 = Number(k1Input.value);
+  const k2 = Number(k2Input.value);
+
+  k1Label.textContent = `${k1} N/m`;
+  k2Label.textContent = `${k2} N/m`;
+
+  // Pegas lebih lunak divisualisasikan lebih terbuka,
+  // sedangkan pegas lebih kaku divisualisasikan lebih rapat.
+  const amplitude1 = 7 + ((500 - k1) / 450) * 11;
+  const amplitude2 = 7 + ((500 - k2) / 450) * 11;
+
+  const metal = `
+    <defs>
+      <linearGradient id="metal" x1="0" x2="1">
+        <stop offset="0" stop-color="#8da1b2"/>
+        <stop offset=".5" stop-color="#d9e3eb"/>
+        <stop offset="1" stop-color="#7c91a3"/>
+      </linearGradient>
+    </defs>`;
+
+  if (mode === 'series') {
+    visual.setAttribute(
+      'aria-label',
+      'Visualisasi dua pegas tersusun seri'
+    );
+
+    visualBadge.textContent = 'SUSUNAN SERI';
+
+    hint.textContent =
+      'Pada susunan seri, pegas dipasang berurutan. ' +
+      'Pegas dengan konstanta lebih kecil mendapat bagian ' +
+      'pertambahan panjang lebih besar jika gaya yang sama bekerja.';
+
+    // Pembagian panjang visual berdasarkan kelunakan relatif.
+    const top = 42;
+    const bottom = 208;
+    const middle = top +
+      (bottom - top) * (k2 / (k1 + k2));
+
+    const label1 = (top + middle) / 2;
+    const label2 = (middle + bottom) / 2;
+
+    visual.innerHTML = `
+      ${metal}
+
+      <rect x="245" y="10" width="110" height="8"
+        rx="3" fill="#17324d"/>
+
+      <line x1="300" y1="18" x2="300" y2="${top}"
+        stroke="#64748b" stroke-width="4"/>
+
+      <path d="${springPath(
+        300, top, 300, middle - 5, 8, amplitude1
+      )}"
+        fill="none" stroke="url(#metal)" stroke-width="5"
+        stroke-linejoin="round"/>
+
+      <circle cx="300" cy="${middle}" r="5"
+        fill="#159b82"/>
+
+      <path d="${springPath(
+        300, middle + 5, 300, bottom, 8, amplitude2
+      )}"
+        fill="none" stroke="url(#metal)" stroke-width="5"
+        stroke-linejoin="round"/>
+
+      <rect x="269" y="208" width="62" height="30"
+        rx="6" fill="#dff5ef" stroke="#159b82" stroke-width="2"/>
+
+      <text x="300" y="227" font-size="12"
+        text-anchor="middle" fill="#087f68"
+        font-weight="700">Beban</text>
+
+      <text x="325" y="${label1}" font-size="13"
+        fill="#17324d" font-weight="700">Pegas 1</text>
+
+      <text x="325" y="${label2}" font-size="13"
+        fill="#17324d" font-weight="700">Pegas 2</text>
+
+      <text x="300" y="258" font-size="12"
+        text-anchor="middle" fill="#64748b">
+        Dua pegas terhubung berurutan
+      </text>`;
+  } else {
+    visual.setAttribute(
+      'aria-label',
+      'Visualisasi dua pegas tersusun paralel'
+    );
+
+    visualBadge.textContent = 'SUSUNAN PARALEL';
+
+    hint.textContent =
+      'Pada susunan paralel, kedua pegas menopang beban bersama. ' +
+      'Konstanta efektifnya merupakan jumlah konstanta kedua pegas. ' +
+      'Bentuk lilitan berubah untuk membedakan tingkat kekakuan.';
+
+    visual.innerHTML = `
+      ${metal}
+
+      <rect x="145" y="14" width="310" height="9"
+        rx="3" fill="#17324d"/>
+
+      <path d="${springPath(
+        230, 23, 230, 151, 12, amplitude1
+      )}"
+        fill="none" stroke="url(#metal)" stroke-width="5"
+        stroke-linejoin="round"/>
+
+      <path d="${springPath(
+        370, 23, 370, 151, 12, amplitude2
+      )}"
+        fill="none" stroke="url(#metal)" stroke-width="5"
+        stroke-linejoin="round"/>
+
+      <line x1="230" y1="151" x2="230" y2="167"
+        stroke="#64748b" stroke-width="3"/>
+
+      <line x1="370" y1="151" x2="370" y2="167"
+        stroke="#64748b" stroke-width="3"/>
+
+      <rect x="210" y="164" width="180" height="16"
+        rx="4" fill="#dce5ed" stroke="#64748b" stroke-width="1.5"/>
+
+      <line x1="300" y1="180" x2="300" y2="195"
+        stroke="#64748b" stroke-width="3"/>
+
+      <rect x="267" y="194" width="66" height="32"
+        rx="6" fill="#dff5ef" stroke="#159b82" stroke-width="2"/>
+
+      <text x="300" y="214" font-size="12"
+        text-anchor="middle" fill="#087f68"
+        font-weight="700">Beban</text>
+
+      <text x="230" y="83" font-size="13"
+        text-anchor="middle" fill="#17324d"
+        font-weight="700">Pegas 1</text>
+
+      <text x="370" y="83" font-size="13"
+        text-anchor="middle" fill="#17324d"
+        font-weight="700">Pegas 2</text>
+
+      <text x="300" y="253" font-size="12"
+        text-anchor="middle" fill="#64748b">
+        Dua pegas menopang beban bersama
+      </text>`;
+  }
+}
+
+function calculateEffective(){const a=Number(k1Input.value),b=Number(k2Input.value);return arrangement.value==='series'?(a*b)/(a+b):a+b;}
+function hideResult(){result.classList.remove('show');}
+arrangement.addEventListener('change',()=>{hideResult();renderVisual();});
+k1Input.addEventListener('input',()=>{hideResult();renderVisual();});
+k2Input.addEventListener('input',()=>{hideResult();renderVisual();});
+document.getElementById('predictionForm').addEventListener('submit',event=>{
+ event.preventDefault();const prediction=Number(predictionInput.value);if(!Number.isFinite(prediction)||prediction<=0){predictionInput.setCustomValidity('Masukkan nilai prediksi lebih besar dari 0.');predictionInput.reportValidity();return;}predictionInput.setCustomValidity('');
+ const actual=calculateEffective(),difference=Math.abs(prediction-actual),percent=(difference/actual)*100,matched=percent<=5,mode=arrangement.value,k1=Number(k1Input.value),k2=Number(k2Input.value);
+ predictionSummary.textContent=`Prediksimu: ${prediction.toLocaleString('id-ID',{maximumFractionDigits:2})} N/m.`;
+ effectiveValue.textContent=`${actual.toLocaleString('id-ID',{maximumFractionDigits:2})} N/m`;
+ status.textContent=matched?'Prediksi sesuai':'Perlu ditinjau';status.className=matched?'status':'status off';
+ differenceText.textContent=`Selisih absolut prediksimu dengan hasil perhitungan adalah ${difference.toLocaleString('id-ID',{maximumFractionDigits:2})} N/m (${percent.toLocaleString('id-ID',{maximumFractionDigits:1})}%). ${matched?'Prediksimu mendekati hasil perhitungan (selisih tidak lebih dari 5%).':'Bandingkan kembali prediksimu dengan hubungan matematis konstanta pegas efektif.'}`;
+ formulaText.textContent=mode==='series'?`Seri: kₑf = (k₁ × k₂) / (k₁ + k₂) = (${k1} × ${k2}) / (${k1} + ${k2}) = ${actual.toLocaleString('id-ID',{maximumFractionDigits:2})} N/m`:`Paralel: kₑf = k₁ + k₂ = ${k1} + ${k2} = ${actual.toLocaleString('id-ID',{maximumFractionDigits:2})} N/m`;
+ result.classList.add('show');
+});
+document.getElementById('resetButton').addEventListener('click',()=>{arrangement.value=initial.arrangement;k1Input.value=initial.k1;k2Input.value=initial.k2;predictionInput.value='';predictionInput.setCustomValidity('');hideResult();renderVisual();});
+renderVisual();
+</script>
+</body>
+</html>
