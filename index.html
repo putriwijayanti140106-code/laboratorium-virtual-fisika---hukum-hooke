@@ -1,13 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#101b2e">
+  <meta name="theme-color" content="#164E63">
   <title>HookeLab | Beranda</title>
   <link rel="stylesheet" href="style.css">
   <script src="js/common.js" defer></script>
-  <script src="js/home.js" defer></script>
 </head>
 <body>
 <div class="app-shell">
@@ -22,24 +22,14 @@
 
     <div class="side-label">MENU PEMBELAJARAN</div>
     <nav class="main-nav">
-      <a class="nav-link active" href="index.html"><span>⌂</span>Beranda</a>
-      <a class="nav-link" href="identitas.html"><span>♙</span>Identitas Kelompok</a>
+      <a class="nav-link active" href="index.html"><span>🏠︎</span>Beranda</a>
+      <a class="nav-link" href="identitas.html"><span>👤</span>Identitas Kelompok</a>
       <a class="nav-link" href="petunjuk.html"><span>ⓘ</span>Petunjuk Praktikum</a>
-      <a class="nav-link" href="modul.html"><span>▤</span>Eksperimen</a>
+      <a class="nav-link" href="modul.html"><span>📏</span>Eksperimen</a>
       <a class="nav-link" href="tantangan.html"><span>⚑</span>Tantangan</a>
-      <a class="nav-link" href="lkpd.html"><span>☷</span>LKPD Digital</a>
+      <a class="nav-link" href="lkpd.html"><span>🕮</span>LKPD Digital</a>
     </nav>
 
-    <div class="sidebar-bottom">
-      <div class="sidebar-tip">
-        <b>✦</b>
-        <div>
-          <strong>Ruang eksplorasi</strong>
-          <p>Belajar fisika lewat eksperimen.</p>
-        </div>
-      </div>
-      <small class="status"><i></i> Sistem pembelajaran aktif</small>
-    </div>
   </aside>
 
   <div class="page-area">
@@ -47,10 +37,15 @@
       <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
       <div class="breadcrumb">HookeLab <span>/</span> <b>Beranda</b></div>
       <div class="top-actions">
-        <div class="search">
-          <span>⌕</span>
-          <input id="siteSearch" placeholder="Cari modul atau materi..." aria-label="Cari modul atau materi">
-        </div>
+       <div class="home-search">
+  <span class="home-search-icon">⌕</span>
+  <input
+  type="search"
+  id="siteSearch"
+  placeholder="Cari materi, modul, atau eksperimen..."
+  autocomplete="off"
+>
+</div>
         <div class="profile">
           <span class="avatar">PW</span>
           <div><b>Praktikan</b><small>Peserta praktikum</small></div>
@@ -59,6 +54,8 @@
     </header>
 
     <main class="content">
+
+      <!-- IDENTITAS INSTITUSI -->
       <div class="institution-strip">
         <div class="institution-logo">
           <img src="assets/logo-unsri.png" alt="Logo Universitas Sriwijaya">
@@ -74,15 +71,22 @@
         </div>
       </div>
 
+      <!-- HERO BERANDA -->
       <section class="hero">
         <div class="dots"></div>
         <div class="hero-copy">
           <label>VIRTUAL PHYSICS LABORATORY</label>
-          <h1>Memahami Hukum Hooke<br><em>melalui Eksperimen dan Analisis Fisika</em></h1>
-          <p>Jelajahi Hukum Hooke melalui eksperimen, pengamatan, dan analisis data secara interaktif.</p>
+          <h1>Memahami Hukum Hooke
+            <br><em>melalui Eksperimen dan Analisis Fisika</em>
+          </h1>
+          <p>
+            Pelajari hubungan antara gaya dan perubahan panjang pegas,
+            pahami prinsip elastisitas, dan terapkan konsepnya melalui
+            laboratorium virtual.
+          </p>
           <div class="actions">
-            <a class="btn mint" href="modul.html">Jelajahi modul ↗</a>
-            <a class="text-link" href="petunjuk.html">Mulai dari petunjuk →</a>
+            <a class="btn mint" href="#materi-hooke">Pelajari Materi ↓</a>
+            <a class="text-link" href="petunjuk.html">Petunjuk Praktikum →</a>
           </div>
         </div>
 
@@ -92,135 +96,275 @@
             <img src="assets/pegas.png" alt="Ilustrasi eksperimen pegas dan beban">
           </div>
         </div>
-        <span class="hero-index">01 <small>/ 05</small></span>
+        <span class="hero-index">01 <small>/ 02</small></span>
       </section>
 
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <label>RINGKASAN BELAJAR</label>
-            <h2>Selamat datang di laboratorium Virtual</h2>
-            <p>Semua yang kamu perlukan untuk memulai praktikum.</p>
-          </div>
-          <a class="text-link" href="modul.html">Lihat semua eksperimen →</a>
+      <!-- MATERI HUKUM HOOKE -->
+      <section class="hm-section" id="materi-hooke">
+        <div class="hm-heading">
+          <h2>Konsep dan Materi Hukum Hooke</h2>
+          <p>
+            Pelajari konsep dasar elastisitas, persamaan Hukum Hooke,
+            karakteristik pegas, hingga penerapannya dalam kehidupan sehari-hari.
+          </p>
         </div>
 
-        <div class="stats">
-          <article class="stat">
-            <span class="stat-icon mint-bg">▤</span>
+        <!-- Konsep dasar -->
+        <article class="hm-card">
+          <span class="hm-number">01 · KONSEP DASAR</span>
+          <p>
+            Hukum Hooke menjelaskan bahwa dalam batas elastisnya,
+            pertambahan panjang pegas berbanding lurus dengan besar gaya
+            yang diberikan. Semakin besar gaya yang bekerja pada pegas,
+            semakin besar pula perubahan panjangnya, selama pegas belum
+            melewati batas elastis.
+          </p>
+          <p>
+            Ketika gaya dihilangkan, pegas ideal akan kembali ke panjang
+            awalnya selama tidak mengalami perubahan permanen.
+            Sifat ini disebut <strong>elastisitas</strong>.
+          </p>
+        </article>
+
+        <!-- Rumus -->
+        <article class="hm-card hm-formula-card">
+          <span class="hm-number">02 · PERSAMAAN FISIKA</span>
+          <div class="hm-formula">F = k Δx</div>
+          <p class="hm-formula-note">
+            Besar gaya yang diperlukan untuk meregangkan atau menekan
+            pegas sebanding dengan perubahan panjangnya.
+          </p>
+
+          <div class="hm-symbols">
             <div>
-              <small>Eksperimen tersedia</small>
-              <strong>04</strong>
-              <p>Eksperimen terstruktur</p>
+              <strong>F</strong>
+              <span>Gaya (newton, N)</span>
             </div>
-          </article>
-          <article class="stat">
-            <span class="stat-icon blue-bg">◉</span>
             <div>
-              <small>Progres belajar</small>
-              <strong>0<sup>%</sup></strong>
-              <p>Perjalanan praktikummu</p>
-              <div class="progress"><i></i></div>
+              <strong>k</strong>
+              <span>Konstanta pegas (N/m)</span>
             </div>
-          </article>
-          <article class="stat">
-            <span class="stat-icon amber-bg">◎</span>
             <div>
-              <small>Konsep utama</small>
-              <strong class="concept-stat">Hukum Hooke</strong>
-              <p>Elastisitas dan gaya pegas</p>
+              <strong>Δx</strong>
+              <span>Perubahan panjang (m)</span>
             </div>
-          </article>
-        </div>
+          </div>
+
+          <div class="hm-note">
+            <strong>Catatan penting</strong>
+            <p>
+              Persamaan di atas menyatakan besar gaya. Dalam bentuk
+              vektor, gaya pemulih pegas ditulis F = −k x karena arahnya
+              berlawanan dengan perpindahan dari posisi setimbang.
+            </p>
+          </div>
+        </article>
+
+        <!-- Konstanta pegas -->
+        <article class="hm-card">
+          <span class="hm-number">03 · KONSTANTA PEGAS</span>
+          <p>
+            Konstanta pegas (<em>k</em>) menunjukkan tingkat kekakuan
+            pegas. Nilai ini menyatakan besarnya gaya yang diperlukan
+            untuk menghasilkan perubahan panjang satu meter.
+          </p>
+          <div class="hm-two-columns">
+            <div class="hm-mini-card">
+              <h4>Pegas lebih kaku</h4>
+              <p>
+                Memiliki konstanta pegas lebih besar sehingga membutuhkan
+                gaya lebih besar untuk menghasilkan perubahan panjang yang sama.
+              </p>
+            </div>
+            <div class="hm-mini-card">
+              <h4>Pegas lebih lunak</h4>
+              <p>
+                Memiliki konstanta pegas lebih kecil sehingga lebih mudah
+                mengalami perubahan panjang untuk gaya yang sama.
+              </p>
+            </div>
+          </div>
+          <div class="hm-note">
+            <strong>Hubungan yang perlu diingat</strong>
+            <p>
+              Untuk gaya yang sama, pegas dengan konstanta lebih besar
+              mengalami perubahan panjang yang lebih kecil.
+            </p>
+          </div>
+        </article>
+
+        <!-- Grafik -->
+        <article class="hm-card">
+          <span class="hm-number">04 · HUBUNGAN GAYA DAN PERUBAHAN PANJANG PEGAS</span>
+          <p>
+            Pada pegas ideal yang masih berada dalam batas elastis,
+            grafik besar gaya terhadap perubahan panjang berbentuk
+            garis lurus melalui titik asal. Kemiringan garis menunjukkan
+            nilai konstanta pegas.
+          </p>
+
+          <div class="hm-graph-wrap">
+            <svg viewBox="0 0 360 245" role="img"
+                 aria-label="Grafik gaya terhadap perubahan panjang berupa garis lurus melalui titik asal">
+              <defs>
+                <marker id="hmArrow" markerWidth="7" markerHeight="7"
+                        refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#164E63"/>
+                </marker>
+              </defs>
+              <g stroke="#dbe7ee" stroke-width="1">
+                <line x1="55" y1="185" x2="310" y2="185"/>
+                <line x1="55" y1="145" x2="310" y2="145"/>
+                <line x1="55" y1="105" x2="310" y2="105"/>
+                <line x1="55" y1="65" x2="310" y2="65"/>
+                <line x1="105" y1="225" x2="105" y2="25"/>
+                <line x1="155" y1="225" x2="155" y2="25"/>
+                <line x1="205" y1="225" x2="205" y2="25"/>
+                <line x1="255" y1="225" x2="255" y2="25"/>
+              </g>
+              <g stroke="#164E63" stroke-width="2" fill="none"
+                 marker-end="url(#hmArrow)">
+                <line x1="55" y1="225" x2="55" y2="20"/>
+                <line x1="55" y1="225" x2="330" y2="225"/>
+              </g>
+              <line x1="55" y1="225" x2="285" y2="45"
+                    stroke="#0e7490" stroke-width="3"
+                    stroke-linecap="round"/>
+              <circle cx="205" cy="108" r="4" fill="#0e7490"/>
+              <g fill="#164E63" font-size="11" font-family="Arial, sans-serif">
+                <text x="16" y="25">F (N)</text>
+                <text x="230" y="242">Δx (m)</text>
+                <text x="64" y="217">0</text>
+                <text x="215" y="94">F = kΔx</text>
+              </g>
+            </svg>
+          </div>
+          <p class="hm-caption">
+            Ilustrasi hubungan linear gaya terhadap perubahan panjang
+            untuk pegas ideal dalam batas elastis.
+          </p>
+          <div class="hm-note">
+            <strong>Menentukan konstanta pegas</strong>
+            <p>
+              Nilai konstanta pegas dapat ditentukan dari perbandingan
+              F/Δx atau dari gradien grafik gaya terhadap perubahan panjang.
+            </p>
+          </div>
+        </article>
+
+        <!-- Energi potensial -->
+        <article class="hm-card">
+          <span class="hm-number">05 · ENERGI POTENSIAL ELASTIS</span>
+          <p>
+            Pegas yang diregangkan atau ditekan menyimpan energi potensial
+            elastis. Pada pegas ideal, energi tersebut bergantung pada
+            konstanta pegas dan kuadrat perubahan panjangnya.
+          </p>
+          <div class="hm-formula">Eₚ = ½ k (Δx)²</div>
+          <div class="hm-symbols">
+            <div>
+              <strong>Eₚ</strong>
+              <span>Energi potensial elastis (J)</span>
+            </div>
+            <div>
+              <strong>k</strong>
+              <span>Konstanta pegas (N/m)</span>
+            </div>
+            <div>
+              <strong>Δx</strong>
+              <span>Perubahan panjang (m)</span>
+            </div>
+          </div>
+          <p>
+            Untuk konstanta pegas yang sama, semakin besar perubahan panjang,
+            semakin besar energi potensial elastis yang tersimpan.
+          </p>
+        </article>
+
+        <!-- Contoh soal -->
+        <article class="hm-card">
+          <span class="hm-number">06 · CONTOH SOAL</span>
+          <div class="hm-question">
+            <strong>Soal</strong>
+            <p>
+              Sebuah pegas bertambah panjang 0,05 m ketika diberi gaya
+              sebesar 10 N. Berapakah konstanta pegas tersebut?
+            </p>
+          </div>
+          <div class="hm-solution">
+            <strong>Penyelesaian</strong>
+            <p>Diketahui:</p>
+            <ul>
+              <li>F = 10 N</li>
+              <li>Δx = 0,05 m</li>
+            </ul>
+            <p>Gunakan persamaan Hukum Hooke:</p>
+            <div class="hm-formula">k = F / Δx</div>
+            <div class="hm-formula">k = 10 / 0,05 = 200 N/m</div>
+            <p>
+              Jadi, konstanta pegas tersebut adalah <strong>200 N/m</strong>.
+            </p>
+          </div>
+        </article>
+
+        <!-- Penerapan -->
+        <article class="hm-card">
+          <span class="hm-number">07 · PENERAPAN HUKUM HOOKE DALAM KEHIDUPAN SEHARI-HARI</span>
+          <div class="hm-applications">
+            <div>
+              <span class="hm-app-icon">↕</span>
+              <h4>Sistem suspensi kendaraan</h4>
+              <p>Pegas membantu meredam guncangan ketika kendaraan melewati permukaan jalan yang tidak rata.</p>
+            </div>
+            <div>
+              <span class="hm-app-icon">⚖</span>
+              <h4>Neraca pegas</h4>
+              <p>Perubahan panjang pegas digunakan untuk mengukur gaya atau berat benda.</p>
+            </div>
+            <div>
+              <span class="hm-app-icon">⌁</span>
+              <h4>Kasur dan alat mekanis</h4>
+              <p>Elemen elastis mengalami perubahan bentuk ketika menerima beban dan dapat kembali mendekati bentuk awalnya.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Batas elastis -->
+        <article class="hm-card">
+          <span class="hm-number">08 · BATAS BERLAKUNYA HUKUM HOOKE</span>
+          <p>
+            Hukum Hooke berlaku pada rentang deformasi ketika hubungan
+            gaya dan perubahan panjang masih linear. Jika pegas diberi
+            gaya terlalu besar, hubungan tersebut dapat menyimpang dari
+            linearitas dan pegas dapat mengalami perubahan bentuk permanen.
+          </p>
+          <p>
+            Oleh karena itu, pada eksperimen virtual HookeLab, pengamatan
+            perlu dilakukan dalam rentang yang sesuai agar hubungan antara
+            gaya dan perubahan panjang dapat dipelajari dengan tepat.
+          </p>
+        </article>
       </section>
 
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <label>MULAI PERJALANANMU</label>
-            <h2>Modul pembelajaran</h2>
-            <p>Pilih eksperimen sesuai tahapan praktikum.</p>
-          </div>
-          <a class="text-link" href="modul.html">Jelajahi eksperimen →</a>
+      <!-- NAVIGASI KE PETUNJUK PRAKTIKUM -->
+      <section class="hm-next">
+        <div class="hm-next-copy">
+          <span class="hm-eyebrow">LANGKAH BERIKUTNYA</span>
+          <h2>Siap melakukan praktikum?</h2>
+          <p>
+            Setelah mempelajari konsep Hukum Hooke, baca petunjuk praktikum
+            untuk memahami tujuan, prosedur, dan cara melakukan pengamatan
+            di laboratorium virtual.
+          </p>
         </div>
-
-        <div class="preview-grid">
-          <a class="module-card" href="modul.html">
-            <div class="card-top"><b class="number">01</b><span class="tag">DASAR</span></div>
-            <div class="art"><img src="assets/pegas-beban.png" alt="Eksperimen Beban dan Pegas"></div>
-            <h3>Eksperimen Beban dan Pegas</h3>
-            <p>Amati perubahan panjang pegas ketika massa beban divariasikan. Kumpulkan data untuk menentukan konstanta pegas.</p>
-            <div class="card-bottom">Buka eksperimen <span>↗</span></div>
-          </a>
-
-          <a class="module-card" href="modul.html">
-            <div class="card-top"><b class="number blue-number">02</b><span class="tag">KONSEP</span></div>
-            <div class="art"><img src="assets/gaya-pegas.png" alt="Gaya pada Pegas"></div>
-            <h3>Gaya pada Pegas</h3>
-            <p>Pelajari arah gaya dan hubungan antara gaya tarik dengan perpindahan pegas.</p>
-            <div class="card-bottom">Buka simulasi <span>↗</span></div>
-          </a>
-
-          <a class="module-card" href="modul.html">
-            <div class="card-top"><b class="number blue-number">03</b><span class="tag">EKSPLORASI</span></div>
-            <div class="art"><img src="assets/susunan-pegas.png" alt="Susunan Pegas"></div>
-            <h3>Susunan Pegas</h3>
-            <p>Bandingkan susunan seri dan paralel serta prediksi konstanta pegas pengganti.</p>
-            <div class="card-bottom">Buka eksperimen <span>↗</span></div>
-          </a>
-
-          <a class="module-card" href="modul.html">
-            <div class="card-top"><b class="number amber-number">04</b><span class="tag">ANALISIS</span></div>
-            <div class="art"><img src="assets/energi-pegas.png" alt="Energi pada Sistem Pegas"></div>
-            <h3>Energi pada Sistem Pegas</h3>
-            <p>Hubungkan pertambahan panjang dengan energi potensial elastis.</p>
-            <div class="card-bottom">Buka eksperimen <span>↗</span></div>
-          </a>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <label>UJI PEMAHAMAN</label>
-            <h2>Tantangan Pegas Misteri</h2>
-            <p>Terapkan konsep Hukum Hooke untuk memecahkan tantangan interaktif.</p>
-          </div>
-          <a class="text-link" href="tantangan.html">Mulai tantangan →</a>
-        </div>
-
-        <a class="module-card" href="tantangan.html">
-          <div class="card-top"><b class="number amber-number">01</b><span class="tag">TANTANGAN</span></div>
-          <div class="art"><img src="assets/pegas-misteri.png" alt="Tebak Pegas Misteri"></div>
-          <h3>Tebak Pegas Misteri</h3>
-          <p>Gunakan pengamatan dan penalaran untuk memperkirakan massa atau konstanta pegas yang belum diketahui.</p>
-          <div class="card-bottom">Mulai tantangan <span>↗</span></div>
+        <a class="btn dark" href="petunjuk.html">
+          Buka Petunjuk Praktikum →
         </a>
       </section>
 
-      <section class="bottom-grid">
-        <article class="concept">
-          <div>
-            <label>KONSEP FISIKA</label>
-            <h2>Hukum Hooke</h2>
-            <p>Dalam batas elastis, gaya pada pegas sebanding dengan pertambahan panjangnya.</p>
-            <a class="text-link" href="petunjuk.html">Pelajari konsep →</a>
-          </div>
-          <div class="equation">
-            <small>Gaya dan pertambahan panjang</small>
-            <strong>F = kΔx</strong>
-            <small>F (N) · k (N/m) · Δx (m)</small>
-          </div>
-        </article>
-        <article class="next">
-          <label>LANGKAH BERIKUTNYA</label>
-          <h3>Siap memulai praktikum?</h3>
-          <p>Baca petunjuk terlebih dahulu agar kegiatan eksperimen berjalan terarah.</p>
-          <a class="btn dark" href="petunjuk.html">Buka petunjuk →</a>
-        </article>
-      </section>
-
-      <footer class="footer"><span>HookeLab · Laboratorium Virtual Fisika</span></footer>
+      <footer class="footer">
+        <span>HookeLab · Laboratorium Virtual Fisika</span>
+      </footer>
     </main>
   </div>
 </div>

@@ -27,72 +27,50 @@
   // PENCARIAN HOOKELAB
   // =========================
   const search = document.getElementById("siteSearch");
-  const searchBox = search?.closest(".search");
+  const searchBox = search?.closest(".search, .home-search");
 
   if (!search || !searchBox) return;
 
-  const pages = [
-    {
-      title: "Beranda",
-      description: "Halaman utama HookeLab",
-      url: "index.html",
-      keywords: "home dashboard utama"
-    },
-    {
-      title: "Petunjuk Praktikum",
-      description: "Petunjuk penggunaan laboratorium virtual",
-      url: "petunjuk.html",
-      keywords: "panduan cara penggunaan langkah praktikum"
-    },
-    {
-      title: "Modul Eksperimen",
-      description: "Daftar modul pembelajaran Hukum Hooke",
-      url: "modul.html",
-      keywords: "modul materi pembelajaran eksperimen"
-    },
-    {
-      title: "LKPD Digital",
-      description: "Lembar kerja peserta didik",
-      url: "lkpd.html",
-      keywords: "lembar kerja tugas pengamatan tabel data"
-    },
-    {
-      title: "Evaluasi",
-      description: "Latihan dan evaluasi pemahaman",
-      url: "evaluasi.html",
-      keywords: "kuis soal tes latihan penilaian"
-    },
-    {
-      title: "Eksperimen Beban dan Pegas",
-      description: "Mengamati massa, gaya berat, dan pertambahan panjang",
-      url: "mode1.html",
-      keywords: "beban massa gantung gravitasi gaya berat konstanta pegas"
-    },
-    {
-      title: "Gaya pada Pegas",
-      description: "Mempelajari gaya tarik dan pertambahan panjang",
-      url: "mode2.html",
-      keywords: "gaya tarik horizontal perpindahan elastisitas"
-    },
-    {
-      title: "Susunan Pegas",
-      description: "Membandingkan susunan seri dan paralel",
-      url: "mode3.html",
-      keywords: "seri paralel konstanta pengganti"
-    },
-    {
-      title: "Energi pada Sistem Pegas",
-      description: "Mempelajari energi potensial elastis",
-      url: "mode4.html",
-      keywords: "energi potensial elastis energi pegas"
-    },
-    {
-      title: "Tebak Pegas Misteri",
-      description: "Tantangan menentukan besaran yang belum diketahui",
-      url: "mode5.html",
-      keywords: "tantangan misteri tebak massa konstanta gaya"
-    }
-  ];
+  
+const pages = [
+  {
+    title: "Beranda",
+    description: "Halaman utama HookeLab",
+    url: "index.html",
+    keywords: "home dashboard utama"
+  },
+  {
+    title: "Identitas",
+    description: "Identitas laboratorium virtual dan penyusun",
+    url: "identitas.html",
+    keywords: "identitas profil penyusun tim pengembang"
+  },
+  {
+    title: "Petunjuk Praktikum",
+    description: "Petunjuk penggunaan laboratorium virtual",
+    url: "petunjuk.html",
+    keywords: "panduan cara penggunaan langkah praktikum"
+  },
+  {
+    title: "Eksperimen",
+    description: "Eksperimen Hukum Hooke",
+    url: "modul.html",
+    keywords: "eksperimen"
+  },
+  {
+    title: "Tantangan Pegas",
+    description: "Tantangan untuk menguji pemahaman Hukum Hooke",
+    url: "tantangan.html",
+    keywords: "tantangan soal latihan pegas misteri gaya massa konstanta"
+  },
+  {
+    title: "LKPD Digital",
+    description: "Lembar kerja peserta didik untuk kegiatan eksperimen",
+    url: "lkpd.html",
+    keywords: "lembar kerja pengamatan tabel data grafik analisis kesimpulan"
+  }
+];
+
 
   // Membuat wadah hasil pencarian
   const resultsBox = document.createElement("div");

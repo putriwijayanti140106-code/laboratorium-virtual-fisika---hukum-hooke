@@ -10,22 +10,21 @@
   <script src="js/common.js" defer></script>
 
   <style>
+    /* Tata letak umum LKPD */
     .lkpd-section {
       margin-top: 22px;
       padding: 22px;
       background: var(--panel, #fff);
       border: 1px solid var(--line, #e2e8f0);
       border-radius: 16px;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .lkpd-section h2 {
       margin: 0 0 12px;
       font-size: 18px;
-    }
-
-    .lkpd-section h3 {
-      margin: 20px 0 8px;
-      font-size: 15px;
+      line-height: 1.5;
     }
 
     .lkpd-section p,
@@ -34,14 +33,11 @@
       line-height: 1.8;
     }
 
-    .lkpd-note {
-      padding: 14px;
-      background: #f0f5fb;
-      border-radius: 10px;
-      line-height: 1.8;
-      font-size: 13px;
+    .lkpd-section p {
+      margin-top: 0;
     }
 
+    /* Identitas kelompok */
     .identity-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -66,38 +62,36 @@
       font-size: 13px;
     }
 
-    .question {
-      margin-top: 18px;
+    /* Kotak tabel dan grafik berdampingan */
+    .data-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 22px;
     }
 
-    .question label {
-      display: block;
-      font-size: 13px;
-      line-height: 1.7;
-      font-weight: 600;
+    .data-card {
+      margin-top: 0;
+      padding: 18px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .data-card h2 {
+      font-size: 16px;
       margin-bottom: 8px;
     }
 
-    .question textarea {
-      width: 100%;
-      min-height: 90px;
-      padding: 12px;
-      border: 1px solid var(--line, #cbd5e1);
-      border-radius: 10px;
-      font: inherit;
-      font-size: 13px;
-      resize: vertical;
-      box-sizing: border-box;
-      background: #fff;
-      color: #172033;
-    }
-
-    .question textarea:focus {
-      outline: 2px solid #94b9e8;
-      outline-offset: 1px;
+    .data-description {
+      color: var(--muted, #64748b);
+      font-size: 12px !important;
+      line-height: 1.7 !important;
+      margin-bottom: 14px;
     }
 
     .table-wrap {
+      width: 100%;
       overflow-x: auto;
     }
 
@@ -109,14 +103,61 @@
 
     .data-table th,
     .data-table td {
-      padding: 11px 12px;
+      padding: 10px 9px;
       border-bottom: 1px solid var(--line, #e2e8f0);
       text-align: left;
       white-space: nowrap;
     }
 
     .data-table th {
-      background: #f0f5fb;
+      background: #e0f2fe;
+      color: #164e63;
+      font-weight: 700;
+    }
+
+    .data-table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    /* Grafik */
+    .graph-wrap {
+      width: 100%;
+      min-width: 0;
+      position: relative;
+    }
+
+    #experimentGraph {
+      display: block;
+      width: 100%;
+      height: 300px;
+    }
+
+    .graph-legend {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted, #64748b);
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #0891b2;
+      flex-shrink: 0;
+    }
+
+    .lkpd-note {
+      padding: 12px 14px;
+      background: #f0f9ff;
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+      line-height: 1.8;
+      font-size: 12px;
+      margin-top: 14px;
     }
 
     .lkpd-status {
@@ -126,26 +167,87 @@
       line-height: 1.7;
     }
 
+    /* Soal esai */
+    .question {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line, #e2e8f0);
+    }
+
+    .question:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .question label {
+      display: block;
+      font-size: 13px;
+      line-height: 1.8;
+      font-weight: 600;
+      margin-bottom: 9px;
+    }
+
+    .question textarea {
+      display: block;
+      width: 100%;
+      min-height: 110px;
+      padding: 12px;
+      border: 1px solid var(--line, #cbd5e1);
+      border-radius: 10px;
+      font: inherit;
+      font-size: 13px;
+      line-height: 1.7;
+      resize: vertical;
+      box-sizing: border-box;
+      background: #fff;
+      color: #172033;
+    }
+
+    .question textarea:focus,
+    .conclusion-textarea:focus {
+      outline: 2px solid #94b9e8;
+      outline-offset: 1px;
+    }
+
+    .question-hint {
+      margin: 0 0 10px;
+      color: var(--muted, #64748b);
+      font-size: 12px !important;
+    }
+
+    /* Kesimpulan */
+    .conclusion-textarea {
+      display: block;
+      width: 100%;
+      min-height: 150px;
+      padding: 13px;
+      border: 1px solid var(--line, #cbd5e1);
+      border-radius: 10px;
+      box-sizing: border-box;
+      background: #fff;
+      color: #172033;
+      font: inherit;
+      font-size: 13px;
+      line-height: 1.8;
+      resize: vertical;
+    }
+
+    /* Tombol */
     .lkpd-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 18px;
+      margin-top: 20px;
     }
 
     .lkpd-actions button {
       cursor: pointer;
     }
 
-    .formula {
-      padding: 16px;
-      margin: 12px 0;
-      background: #f0f5fb;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 23px;
-      font-weight: 700;
-      color: #173b68;
+    @media (max-width: 850px) {
+      .data-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 600px) {
@@ -155,6 +257,14 @@
 
       .lkpd-section {
         padding: 16px;
+      }
+
+      .data-card {
+        padding: 14px;
+      }
+
+      #experimentGraph {
+        height: 260px;
       }
     }
   </style>
@@ -175,24 +285,14 @@
     <div class="side-label">MENU PEMBELAJARAN</div>
 
     <nav class="main-nav">
-      <a class="nav-link" href="index.html"><span>⌂</span>Beranda</a>
-      <a class="nav-link" href="identitas.html"><span>♙</span>Identitas Kelompok</a>
+      <a class="nav-link" href="index.html"><span>🏠︎</span>Beranda</a>
+      <a class="nav-link" href="identitas.html"><span>👤</span>Identitas Kelompok</a>
       <a class="nav-link" href="petunjuk.html"><span>ⓘ</span>Petunjuk Praktikum</a>
-      <a class="nav-link" href="modul.html"><span>▤</span>Eksperimen</a>
+      <a class="nav-link" href="modul.html"><span>📏</span>Eksperimen</a>
       <a class="nav-link" href="tantangan.html"><span>⚑</span>Tantangan</a>
-      <a class="nav-link active" href="lkpd.html"><span>☷</span>LKPD Digital</a>
+      <a class="nav-link active" href="lkpd.html"><span>🕮</span>LKPD Digital</a>
     </nav>
 
-    <div class="sidebar-bottom">
-      <div class="sidebar-tip">
-        <b>✦</b>
-        <div>
-          <strong>Ruang eksplorasi</strong>
-          <p>Belajar fisika lewat eksperimen.</p>
-        </div>
-      </div>
-      <small class="status"><i></i> Sistem pembelajaran aktif</small>
-    </div>
   </aside>
 
   <div class="page-area">
@@ -223,22 +323,12 @@
 
     <main class="content">
 
-      <div class="page-title">
-        <label>LEMBAR KERJA PESERTA DIDIK</label>
-        <h1>LKPD Digital</h1>
-        <p>Analisis data eksperimen untuk memahami Hukum Hooke.</p>
-      </div>
-
-      <section class="page-hero">
-        <label>HOOKELAB · PRAKTIKUM FISIKA</label>
-        <h2>Dari data menuju pemahaman</h2>
-        <p>
-          Amati hasil eksperimen, gunakan konsep Hukum Hooke,
-          dan susun kesimpulan berdasarkan bukti yang diperoleh.
-        </p>
+      <section class="page-hero lkpd-heading">
+        <h2>Lembar Kerja Peserta Didik Digital</h2>
+        <p>Amati data dan grafik eksperimen, analisis hubungan gaya dengan pertambahan panjang pegas, lalu susun kesimpulan berdasarkan bukti.</p>
       </section>
 
-      <!-- A. IDENTITAS KELOMPOK -->
+      <!-- A. IDENTITAS KELOMPOK: DIPERTAHANKAN -->
       <section class="lkpd-section">
         <h2>A. Identitas Kelompok</h2>
         <p>
@@ -277,168 +367,155 @@
         <a class="btn dark" href="identitas.html">Periksa Identitas Kelompok →</a>
       </section>
 
-      <!-- B. TUJUAN -->
-      <section class="lkpd-section">
-        <h2>B. Tujuan Praktikum</h2>
-        <p>Setelah melakukan eksperimen, peserta didik diharapkan mampu:</p>
-        <ol>
-          <li>Menjelaskan hubungan antara gaya yang diberikan dan pertambahan panjang pegas.</li>
-          <li>Menggunakan data eksperimen untuk menghitung konstanta pegas.</li>
-          <li>Menganalisis kesesuaian hasil pengamatan dengan konsep Hukum Hooke.</li>
-          <li>Menyusun kesimpulan berdasarkan hasil eksperimen.</li>
-        </ol>
-      </section>
+      <!-- B. TABEL DAN GRAFIK DALAM DUA KOLOM -->
+      <div class="data-grid">
 
-      <!-- C. LANDASAN KONSEP -->
-      <section class="lkpd-section">
-        <h2>C. Landasan Konsep</h2>
+        <section class="lkpd-section data-card">
+          <h2>B. Tabel Data Eksperimen</h2>
+          <p class="data-description">
+            Data diambil dari pengamatan yang tersimpan pada simulasi.
+            Konstanta pegas dihitung dari gaya dibagi pertambahan panjang.
+          </p>
 
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Massa (g)</th>
+                  <th>Gaya (N)</th>
+                  <th>Δx (m)</th>
+                  <th>k (N/m)</th>
+                </tr>
+              </thead>
+              <tbody id="lkpdRows">
+                <tr><td colspan="5">Memuat data eksperimen...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p id="dataStatus" class="lkpd-status" aria-live="polite"></p>
+
+          <div class="lkpd-note">
+            <b>Petunjuk:</b> Periksa satuan dan nilai pengamatan.
+            Data dengan pertambahan panjang nol atau data yang tidak valid
+            tidak digunakan untuk menghitung konstanta pegas.
+          </div>
+        </section>
+
+        <section class="lkpd-section data-card">
+          <h2>C. Grafik Gaya terhadap Pertambahan Panjang</h2>
+          <p class="data-description">
+            Amati pola hubungan gaya (F) dan pertambahan panjang (Δx)
+            berdasarkan data eksperimen yang sama dengan tabel.
+          </p>
+
+          <div class="graph-wrap">
+            <canvas id="experimentGraph"
+              role="img"
+              aria-label="Grafik gaya terhadap pertambahan panjang pegas">
+              Grafik memerlukan dukungan canvas pada browser.
+            </canvas>
+          </div>
+
+          <div class="graph-legend">
+            <span class="legend-dot"></span>
+            <span>Data hasil eksperimen</span>
+          </div>
+
+          <p id="graphStatus" class="lkpd-status" aria-live="polite"></p>
+        </section>
+
+      </div>
+
+      <!-- D. LIMA SOAL ESAI HOTS -->
+      <section class="lkpd-section">
+        <h2>D. Soal Esai HOTS</h2>
         <p>
-          Hukum Hooke menjelaskan bahwa, selama pegas masih berada
-          dalam batas elastisnya, besar gaya yang diperlukan untuk
-          meregangkan pegas sebanding dengan pertambahan panjangnya.
+          Jawablah pertanyaan berikut berdasarkan konsep Hukum Hooke,
+          tabel data, dan grafik hasil eksperimen. Sertakan alasan atau
+          bukti yang mendukung jawabanmu.
         </p>
-
-        <div class="formula">F = k × Δx</div>
-
-        <ul>
-          <li><b>F</b> = besar gaya yang bekerja pada pegas (N).</li>
-          <li><b>k</b> = konstanta pegas (N/m).</li>
-          <li><b>Δx</b> = pertambahan panjang pegas (m).</li>
-        </ul>
-
-        <div class="lkpd-note">
-          <b>Ingat!</b> Pertambahan panjang dihitung dari panjang
-          akhir dikurangi panjang awal. Gunakan satuan meter ketika
-          menghitung konstanta pegas dalam N/m.
-        </div>
 
         <div class="question">
           <label for="q1">
-            1. Berdasarkan konsep Hukum Hooke, apa yang terjadi pada
-            pertambahan panjang pegas ketika gaya yang diberikan semakin besar,
-            selama batas elastisnya tidak terlampaui?
+            1. Menganalisis hubungan gaya dan pertambahan panjang.
+            Ketika gaya yang diberikan pada pegas diperbesar,
+            pertambahan panjang pegas juga meningkat. Jelaskan hubungan
+            kedua besaran tersebut berdasarkan Hukum Hooke. Bagaimana
+            cara membuktikan hubungan tersebut melalui data eksperimen?
           </label>
           <textarea id="q1" data-answer="q1"
-            placeholder="Tuliskan jawaban kelompok..."></textarea>
+            placeholder="Jelaskan hubungan kedua besaran dan bukti dari data..."></textarea>
         </div>
 
         <div class="question">
           <label for="q2">
-            2. Apa makna konstanta pegas (k)? Bagaimana karakteristik
-            pegas dengan konstanta pegas yang lebih besar?
+            2. Membandingkan konstanta pegas.
+            Dua pegas diberi gaya yang sama. Pegas A bertambah panjang
+            4 cm, sedangkan pegas B bertambah panjang 8 cm. Tentukan
+            pegas yang memiliki konstanta lebih besar dan jelaskan
+            alasanmu menggunakan persamaan Hukum Hooke.
           </label>
           <textarea id="q2" data-answer="q2"
-            placeholder="Tuliskan jawaban kelompok..."></textarea>
-        </div>
-      </section>
-
-      <!-- D. DATA EKSPERIMEN -->
-      <section class="lkpd-section">
-        <h2>D. Data Hasil Eksperimen</h2>
-        <p>
-          Tabel berikut membaca data yang telah dicatat dalam simulasi.
-          Nilai konstanta pegas dihitung menggunakan k = F/Δx.
-        </p>
-
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>Massa (g)</th>
-                <th>Gaya (N)</th>
-                <th>Pertambahan Panjang (m)</th>
-                <th>Konstanta Pegas (N/m)</th>
-              </tr>
-            </thead>
-            <tbody id="lkpdRows">
-              <tr><td colspan="5">Memuat data eksperimen...</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p id="dataStatus" class="lkpd-status" aria-live="polite"></p>
-
-        <div class="lkpd-note">
-          Nilai konstanta pegas dihitung untuk setiap baris data
-          dengan membagi gaya dengan pertambahan panjang. Data dengan
-          pertambahan panjang nol atau data yang tidak valid tidak
-          digunakan dalam perhitungan.
+            placeholder="Tuliskan analisis dan alasan berdasarkan Hukum Hooke..."></textarea>
         </div>
 
         <div class="question">
           <label for="q3">
-            3. Pilih salah satu baris pengamatan. Tuliskan langkah
-            perhitungan konstanta pegas menggunakan data gaya dan
-            pertambahan panjang dari baris tersebut.
+            3. Mengevaluasi hasil pengamatan.
+            Jika pertambahan gaya tidak selalu diikuti pertambahan
+            panjang yang sebanding, analisis kemungkinan penyebabnya.
+            Bagaimana kamu membedakan penyimpangan akibat kesalahan
+            pengukuran dengan kemungkinan pegas melampaui batas elastis?
           </label>
           <textarea id="q3" data-answer="q3"
-            placeholder="Diketahui, rumus, substitusi nilai, dan hasil perhitungan..."></textarea>
+            placeholder="Tuliskan kemungkinan penyebab dan cara mengevaluasinya..."></textarea>
         </div>
 
         <div class="question">
           <label for="q4">
-            4. Berdasarkan data yang tersedia, hitung atau tentukan
-            nilai rata-rata konstanta pegas. Jelaskan langkah yang digunakan.
+            4. Menginterpretasikan grafik.
+            Jika grafik gaya terhadap pertambahan panjang membentuk
+            garis lurus, jelaskan makna kemiringan grafik tersebut.
+            Bagaimana grafik dapat digunakan untuk menentukan
+            konstanta pegas dan membandingkan kekakuan dua pegas?
           </label>
           <textarea id="q4" data-answer="q4"
-            placeholder="Tuliskan perhitungan dan hasilnya..."></textarea>
+            placeholder="Jelaskan makna grafik dan cara menentukan konstanta pegas..."></textarea>
         </div>
-      </section>
-
-      <!-- E. ANALISIS -->
-      <section class="lkpd-section">
-        <h2>E. Analisis Hasil Eksperimen</h2>
 
         <div class="question">
           <label for="q5">
-            5. Apakah hasil perhitungan konstanta pegas pada setiap
-            pengamatan cenderung sama? Jelaskan berdasarkan tabel.
+            5. Menyusun argumen berdasarkan bukti.
+            Berdasarkan tabel dan grafik hasil eksperimen kelompokmu,
+            evaluasi apakah hasil percobaan mendukung Hukum Hooke.
+            Gunakan bukti berupa pola data atau grafik dan nilai
+            konstanta pegas. Jelaskan pula keterbatasan eksperimen
+            yang mungkin memengaruhi kesimpulanmu.
           </label>
           <textarea id="q5" data-answer="q5"
-            placeholder="Gunakan bukti dari data pengamatan..."></textarea>
-        </div>
-
-        <div class="question">
-          <label for="q6">
-            6. Apakah data eksperimen mendukung hubungan sebanding
-            antara gaya dan pertambahan panjang? Jelaskan alasanmu.
-          </label>
-          <textarea id="q6" data-answer="q6"
-            placeholder="Jelaskan hubungan yang kamu temukan..."></textarea>
-        </div>
-
-        <div class="question">
-          <label for="q7">
-            7. Sebutkan kemungkinan penyebab hasil pengamatan berbeda
-            dari hasil perhitungan ideal berdasarkan Hukum Hooke.
-          </label>
-          <textarea id="q7" data-answer="q7"
-            placeholder="Tuliskan penjelasan kelompok..."></textarea>
+            placeholder="Tuliskan argumen berdasarkan data, grafik, dan hasil perhitungan..."></textarea>
         </div>
       </section>
 
-      <!-- F. KESIMPULAN -->
+      <!-- E. KESIMPULAN -->
       <section class="lkpd-section">
-        <h2>F. Kesimpulan</h2>
+        <h2>E. Kesimpulan</h2>
         <p>
-          Susun kesimpulan dengan menjawab tujuan praktikum.
-          Gunakan data pengamatan dan hasil perhitungan sebagai bukti.
+          Susun kesimpulan berdasarkan tujuan praktikum. Jelaskan
+          hubungan gaya dengan pertambahan panjang pegas, nilai
+          konstanta pegas yang diperoleh, serta apakah hasil pengamatan
+          mendukung Hukum Hooke.
         </p>
 
-        <div class="question">
-          <label for="q8">
-            8. Apa kesimpulan kelompokmu mengenai hubungan gaya
-            dengan pertambahan panjang pegas dan nilai konstanta
-            pegas yang diperoleh?
-          </label>
-          <textarea id="q8" data-answer="q8"
-            placeholder="Tuliskan kesimpulan berdasarkan hasil eksperimen..."
-            style="min-height:140px"></textarea>
-        </div>
+        <textarea id="conclusion" data-answer="conclusion"
+          class="conclusion-textarea"
+          aria-label="Kesimpulan praktikum"
+          placeholder="Tuliskan kesimpulan kelompok berdasarkan data dan hasil analisis..."></textarea>
       </section>
 
+      <!-- TOMBOL SIMPAN DAN HAPUS: DIPERTAHANKAN -->
       <div class="lkpd-actions">
         <button type="button" class="btn dark" id="saveAnswers">
           Simpan Jawaban
@@ -463,13 +540,20 @@
   const ANSWERS_KEY = "hookelab_lkpd_answers";
 
   const byId = id => document.getElementById(id);
+  const answerFields = document.querySelectorAll("[data-answer]");
 
-  // Menampilkan teks sebagai teks biasa, bukan HTML.
   function setText(id, value) {
     byId(id).textContent = value || "Belum diisi";
   }
 
-  // A. Memuat identitas kelompok.
+  function formatNumber(value, digits = 2) {
+    return Number(value).toLocaleString("id-ID", {
+      minimumFractionDigits: digits,
+      maximumFractionDigits: digits
+    });
+  }
+
+  // A. Membaca identitas kelompok.
   try {
     const identity = JSON.parse(
       localStorage.getItem(IDENTITY_KEY) || "null"
@@ -517,86 +601,280 @@
     }
   } catch (error) {
     byId("identityStatus").textContent =
-      "Identitas tidak dapat dibaca. Periksa kembali data pada halaman Identitas Kelompok.";
+      "Identitas tidak dapat dibaca. Periksa data pada halaman Identitas Kelompok.";
   }
 
-  // B. Memuat data eksperimen dan menghitung k = F / Δx.
-  const tbody = byId("lkpdRows");
+
+  // B. Membaca data eksperimen.
   let validRecords = [];
 
-  function formatNumber(value, digits) {
-    return value.toLocaleString("id-ID", {
-      minimumFractionDigits: digits,
-      maximumFractionDigits: digits
-    });
-  }
+  function getRecords() {
+    try {
+      const records = JSON.parse(
+        localStorage.getItem(RECORDS_KEY) || "[]"
+      );
 
-  try {
-    const records = JSON.parse(
-      localStorage.getItem(RECORDS_KEY) || "[]"
-    );
+      if (!Array.isArray(records)) return [];
 
-    if (!Array.isArray(records) || records.length === 0) {
-      tbody.innerHTML =
-        '<tr><td colspan="5">Belum ada data eksperimen.</td></tr>';
-
-      byId("dataStatus").textContent =
-        "Lakukan dan catat pengamatan pada simulasi terlebih dahulu. " +
-        "Jika data tetap tidak muncul, periksa kunci penyimpanan pada kode eksperimen.";
-    } else {
-      validRecords = records.filter(record => {
-        const force = Number(record.force);
+      return records.filter(record => {
+        // Di modul.html, gaya disimpan sebagai record.F.
+        const force = Number(record.F);
         const dx = Number(record.dx);
+        const mass = Number(record.mass);
+        const k = Number(record.k);
 
         return Number.isFinite(force) &&
           Number.isFinite(dx) &&
-          dx > 0;
-      });
-
-      if (validRecords.length === 0) {
-        tbody.innerHTML =
-          '<tr><td colspan="5">Belum ada data dengan pertambahan panjang yang valid.</td></tr>';
-      } else {
-        tbody.innerHTML = "";
-
-        validRecords.forEach((record, index) => {
-          const force = Number(record.force);
-          const dx = Number(record.dx);
-          const k = force / dx;
-
-          const tr = document.createElement("tr");
-
-          [
-            index + 1,
-            record.mass ?? "-",
-            formatNumber(force, 2),
-            formatNumber(dx, 4),
-            formatNumber(k, 2)
-          ].forEach(value => {
-            const td = document.createElement("td");
-            td.textContent = String(value);
-            tr.appendChild(td);
-          });
-
-          tbody.appendChild(tr);
-        });
-      }
-
-      byId("dataStatus").textContent =
-        validRecords.length +
-        " data valid ditampilkan. Nilai k dihitung dari gaya dibagi pertambahan panjang.";
+          Number.isFinite(mass) &&
+          Number.isFinite(k) &&
+          dx > 0 &&
+          force >= 0;
+      }).map(record => ({
+        ...record,
+        force: Number(record.F),
+        dx: Number(record.dx),
+        mass: Number(record.mass),
+        k: Number(record.k)
+      }));
+    } catch (error) {
+      return [];
     }
-  } catch (error) {
-    tbody.innerHTML =
-      '<tr><td colspan="5">Data eksperimen tidak dapat dibaca.</td></tr>';
-
-    byId("dataStatus").textContent =
-      "Terjadi masalah saat membaca data. Periksa kembali penyimpanan simulasi.";
   }
 
-  // C. Memulihkan jawaban yang sebelumnya disimpan.
-  const answerFields = document.querySelectorAll("[data-answer]");
 
+  function renderTable() {
+    const tbody = byId("lkpdRows");
+    const records = getRecords();
+    validRecords = records;
+
+    tbody.replaceChildren();
+
+    if (records.length === 0) {
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      td.colSpan = 5;
+      td.textContent = "Belum ada data eksperimen yang valid.";
+      tr.appendChild(td);
+      tbody.appendChild(tr);
+
+      byId("dataStatus").textContent =
+        "Lakukan pengamatan dan simpan data pada simulasi terlebih dahulu.";
+      return;
+    }
+
+    records.forEach((record, index) => {
+      const force = Number(record.force);
+      const dx = Number(record.dx);
+      const k = force / dx;
+
+      const tr = document.createElement("tr");
+
+      const values = [
+        index + 1,
+        record.mass ?? "-",
+        formatNumber(force),
+        formatNumber(dx, 4),
+        formatNumber(k)
+      ];
+
+      values.forEach(value => {
+        const td = document.createElement("td");
+        td.textContent = String(value);
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    byId("dataStatus").textContent =
+      records.length +
+      " data valid ditampilkan. Nilai konstanta pegas dihitung menggunakan k = F/Δx.";
+  }
+
+  // C. Menggambar grafik F terhadap Δx dari data simulasi.
+  function drawGraph() {
+    const canvas = byId("experimentGraph");
+    const ctx = canvas.getContext("2d");
+    const records = validRecords;
+
+    if (!ctx) {
+      byId("graphStatus").textContent =
+        "Grafik tidak dapat ditampilkan pada browser ini.";
+      return;
+    }
+
+    const rect = canvas.getBoundingClientRect();
+    const cssWidth = Math.max(280, rect.width || 320);
+    const cssHeight = Math.max(240, rect.height || 300);
+    const pixelRatio = window.devicePixelRatio || 1;
+
+    canvas.width = Math.round(cssWidth * pixelRatio);
+    canvas.height = Math.round(cssHeight * pixelRatio);
+
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    ctx.clearRect(0, 0, cssWidth, cssHeight);
+
+    const margin = { left: 55, right: 18, top: 20, bottom: 52 };
+    const plotWidth = cssWidth - margin.left - margin.right;
+    const plotHeight = cssHeight - margin.top - margin.bottom;
+
+    if (records.length === 0) {
+      ctx.fillStyle = "#64748b";
+      ctx.font = "12px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        "Belum ada data untuk digrafikkan",
+        cssWidth / 2,
+        cssHeight / 2
+      );
+
+      byId("graphStatus").textContent =
+        "Grafik akan muncul setelah data eksperimen tersedia.";
+      return;
+    }
+
+    const points = records.map(record => ({
+      x: Number(record.dx),
+      y: Number(record.force)
+    })).filter(point =>
+      Number.isFinite(point.x) &&
+      Number.isFinite(point.y) &&
+      point.x > 0 &&
+      point.y >= 0
+    );
+
+    if (points.length === 0) {
+      byId("graphStatus").textContent =
+        "Tidak ada pasangan data gaya dan pertambahan panjang yang valid.";
+      return;
+    }
+
+    const maxX = Math.max(...points.map(point => point.x)) * 1.15 || 1;
+    const maxY = Math.max(...points.map(point => point.y)) * 1.15 || 1;
+
+    const xPos = x =>
+      margin.left + (x / maxX) * plotWidth;
+
+    const yPos = y =>
+      margin.top + plotHeight - (y / maxY) * plotHeight;
+
+    // Latar grafik.
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, cssWidth, cssHeight);
+
+    // Garis kisi dan angka sumbu.
+    ctx.strokeStyle = "#e2e8f0";
+    ctx.lineWidth = 1;
+    ctx.fillStyle = "#64748b";
+    ctx.font = "10px sans-serif";
+
+    for (let i = 0; i <= 4; i++) {
+      const x = margin.left + (plotWidth * i / 4);
+      const y = margin.top + (plotHeight * i / 4);
+
+      ctx.beginPath();
+      ctx.moveTo(x, margin.top);
+      ctx.lineTo(x, margin.top + plotHeight);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(margin.left, y);
+      ctx.lineTo(margin.left + plotWidth, y);
+      ctx.stroke();
+
+      ctx.textAlign = "center";
+      ctx.fillText(
+        formatNumber(maxX * i / 4, 3),
+        x,
+        margin.top + plotHeight + 17
+      );
+
+      ctx.textAlign = "right";
+      ctx.fillText(
+        formatNumber(maxY * (4 - i) / 4, 2),
+        margin.left - 8,
+        y + 3
+      );
+    }
+
+    // Sumbu grafik.
+    ctx.strokeStyle = "#334155";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(margin.left, margin.top);
+    ctx.lineTo(margin.left, margin.top + plotHeight);
+    ctx.lineTo(margin.left + plotWidth, margin.top + plotHeight);
+    ctx.stroke();
+
+    // Label sumbu X.
+    ctx.fillStyle = "#334155";
+    ctx.font = "11px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      "Pertambahan panjang Δx (m)",
+      margin.left + plotWidth / 2,
+      cssHeight - 10
+    );
+
+    // Label sumbu Y.
+    ctx.save();
+    ctx.translate(15, margin.top + plotHeight / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = "center";
+    ctx.fillText("Gaya F (N)", 0, 0);
+    ctx.restore();
+
+    // Titik data eksperimen.
+    ctx.fillStyle = "#0891b2";
+
+    points.forEach(point => {
+      ctx.beginPath();
+      ctx.arc(xPos(point.x), yPos(point.y), 4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Garis penghubung titik untuk membantu melihat pola data.
+    if (points.length > 1) {
+      const sorted = [...points].sort((a, b) => a.x - b.x);
+
+      ctx.strokeStyle = "#0891b2";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+
+      sorted.forEach((point, index) => {
+        if (index === 0) {
+          ctx.moveTo(xPos(point.x), yPos(point.y));
+        } else {
+          ctx.lineTo(xPos(point.x), yPos(point.y));
+        }
+      });
+
+      ctx.stroke();
+    }
+
+    byId("graphStatus").textContent =
+      "Grafik menampilkan " + points.length +
+      " pasangan data eksperimen. Sumbu X menunjukkan Δx (m), sedangkan sumbu Y menunjukkan F (N).";
+  }
+
+  renderTable();
+  drawGraph();
+
+  // Menggambar ulang grafik saat ukuran tampilan berubah.
+  let resizeFrame = null;
+
+  window.addEventListener("resize", () => {
+    if (resizeFrame !== null) {
+      cancelAnimationFrame(resizeFrame);
+    }
+
+    resizeFrame = requestAnimationFrame(() => {
+      drawGraph();
+      resizeFrame = null;
+    });
+  });
+
+  // D. Memulihkan jawaban sebelumnya.
   try {
     const answers = JSON.parse(
       localStorage.getItem(ANSWERS_KEY) || "{}"
@@ -604,6 +882,7 @@
 
     answerFields.forEach(field => {
       const key = field.dataset.answer;
+
       if (typeof answers[key] === "string") {
         field.value = answers[key];
       }
@@ -613,40 +892,42 @@
       "Jawaban sebelumnya tidak dapat dibaca.";
   }
 
-  // D. Menyimpan jawaban siswa pada browser.
+  // E. Menyimpan seluruh jawaban, termasuk kesimpulan.
   byId("saveAnswers").addEventListener("click", () => {
     const answers = {};
 
     answerFields.forEach(field => {
-      answers[field.dataset.answer] = field.value.trim();
+      answers[field.dataset.answer] = field.value;
     });
 
     try {
       localStorage.setItem(ANSWERS_KEY, JSON.stringify(answers));
+
       byId("answerStatus").textContent =
-        "Jawaban berhasil disimpan pada browser ini.";
+        "Jawaban dan kesimpulan berhasil disimpan pada browser ini.";
     } catch (error) {
       byId("answerStatus").textContent =
         "Jawaban gagal disimpan. Periksa ruang penyimpanan browser.";
     }
   });
 
-  // E. Menghapus jawaban setelah konfirmasi.
+  // F. Menghapus seluruh jawaban setelah konfirmasi.
   byId("clearAnswers").addEventListener("click", () => {
     const confirmed = confirm(
-      "Apakah kamu yakin ingin menghapus semua jawaban LKPD yang tersimpan di browser ini?"
+      "Apakah kamu yakin ingin menghapus seluruh jawaban dan kesimpulan LKPD yang tersimpan pada browser ini?"
     );
 
     if (!confirmed) return;
 
     try {
       localStorage.removeItem(ANSWERS_KEY);
+
       answerFields.forEach(field => {
         field.value = "";
       });
 
       byId("answerStatus").textContent =
-        "Jawaban LKPD yang tersimpan pada browser ini telah dihapus.";
+        "Seluruh jawaban dan kesimpulan LKPD yang tersimpan pada browser ini telah dihapus.";
     } catch (error) {
       byId("answerStatus").textContent =
         "Jawaban tidak dapat dihapus.";

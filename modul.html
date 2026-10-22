@@ -17,27 +17,38 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
+
 .hl-intro {
-  margin-bottom: 20px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 25px 30px;
+  background: #164E63;
+  border: none;
+  border-radius: 16px;
+  box-shadow: none;
+  box-sizing: border-box;
 }
 
 .hl-intro .hl-label {
-  color: #3979db;
-  font-size: 11px;
+  display: block;
+  margin-bottom: 8px;
+  color: #BAE6FD;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 1.5px;
 }
 
 .hl-intro h1 {
   margin: 7px 0;
-  font-size: 27px;
-  color: #172b4d;
+  font-size: 28px;
+  color: #FFFFFF;
 }
 
 .hl-intro p {
   margin: 0;
-  color: #64748b;
+  color: #E0F2FE;
   line-height: 1.7;
+  font-size: 12px;
 }
 
 .hl-tabs {
@@ -55,7 +66,7 @@
   padding: 10px 16px;
   background: #fff;
   color: #53657e;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: .2s;
@@ -404,6 +415,24 @@
     font-size: 16px;
   }
 }
+.challenge-navigation-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  background: #164E63;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.challenge-navigation-button:hover {
+  background: #0E7490;
+}
 </style>
 </head>
 
@@ -423,25 +452,14 @@
     <div class="side-label">MENU PEMBELAJARAN</div>
 
     <nav class="main-nav">
-      <a class="nav-link" href="index.html"><span>⌂</span>Beranda</a>
-      <a class="nav-link" href="identitas.html"><span>♙</span>Identitas Kelompok</a>
+      <a class="nav-link" href="index.html"><span>🏠︎</span>Beranda</a>
+      <a class="nav-link" href="identitas.html"><span>👤</span>Identitas Kelompok</a>
       <a class="nav-link" href="petunjuk.html"><span>ⓘ</span>Petunjuk Praktikum</a>
-      <a class="nav-link active" href="modul.html"><span>▤</span>Eksperimen</a>
+      <a class="nav-link active" href="modul.html"><span>📏</span>Eksperimen</a>
         <a class="nav-link" href="tantangan.html"><span>⚑</span>Tantangan</a>
-      <a class="nav-link" href="lkpd.html"><span>☷</span>LKPD Digital</a>
+      <a class="nav-link" href="lkpd.html"><span>🕮</span>LKPD Digital</a>
     
     </nav>
-
-    <div class="sidebar-bottom">
-      <div class="sidebar-tip">
-        <b>✦</b>
-        <div>
-          <strong>Ruang eksplorasi</strong>
-          <p>Belajar fisika lewat eksperimen.</p>
-        </div>
-      </div>
-      <small class="status"><i></i> Sistem pembelajaran aktif</small>
-    </div>
   </aside>
 
   <!-- AREA HALAMAN -->
@@ -469,7 +487,6 @@
     <main class="content hl-page">
 
       <div class="hl-intro">
-        <span class="hl-label">LABORATORIUM VIRTUAL</span>
         <h1>Eksperimen Hukum Hooke</h1>
         <p>
           Selidiki hubungan antara gaya dan pertambahan panjang pegas melalui
@@ -752,7 +769,9 @@
           </article>
         </div>
       </section>
-
+<a href="tantangan.html" class="challenge-navigation-button">
+  Lanjutkan ke Tantangan →
+</a>
       <footer class="footer">
         <span>HookeLab · Laboratorium Virtual Fisika</span>
       </footer>
@@ -775,8 +794,28 @@
     data: []
   };
 
-  const MAX_DATA = 30;
-  const ELASTIC_FORCE = 3;
+const MAX_DATA = 30;
+const ELASTIC_FORCE = 3;
+const STORAGE_KEY = "hookelab_mode1_records";
+
+// Memuat data pengamatan yang tersimpan sebelumnya.
+try {
+  const savedData = JSON.parse(
+    localStorage.getItem(STORAGE_KEY) || "[]"
+  );
+
+  state.data = Array.isArray(savedData) ? savedData : [];
+} catch (error) {
+  state.data = [];
+}
+
+// Menyimpan data pengamatan ke localStorage.
+function saveRecords() {
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(state.data)
+  );
+}
 
 let hlAnimationFrame = null;
 let hlMotionRunning = false;
@@ -1060,6 +1099,7 @@ drawSimulation();
       dx: dx,
       over: isOverLimit(state.mass, state.g) && state.elasticLimit
     });
+    saveRecords();
 
     renderTable();
     renderGraph();
@@ -1103,7 +1143,7 @@ drawSimulation();
     tbody.querySelectorAll(".hl-delete").forEach(button => {
       button.addEventListener("click", function () {
         state.data.splice(Number(this.dataset.index), 1);
-        renderTable();
+        saveRecords();
         renderGraph();
         renderAnalysis();
       });
@@ -1115,6 +1155,7 @@ drawSimulation();
 
     if (confirm("Hapus seluruh data pengamatan?")) {
       state.data = [];
+      saveRecords();
       renderTable();
       renderGraph();
       renderAnalysis();
