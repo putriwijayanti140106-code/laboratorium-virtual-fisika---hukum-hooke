@@ -1,87 +1,1389 @@
+
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101b2e"><title>HookeLab | Modul Eksperimen</title>
-<link rel="stylesheet" href="style.css"><script src="js/common.js" defer></script></head><body>
-<div class="app-shell"><aside class="sidebar" id="sidebar">
-<a class="brand" href="index.html"><span class="brand-mark">〰</span><span><strong>Hooke<span>Lab</span></strong><small>LABORATORIUM VIRTUAL FISIKA</small></span></a>
-<div class="side-label">MENU PEMBELAJARAN</div><nav class="main-nav">
-<a class="nav-link " href="index.html"><span>⌂</span>Beranda</a>
-<a class="nav-link " href="petunjuk.html"><span>ⓘ</span>Petunjuk Praktikum</a>
-<a class="nav-link active" href="modul.html"><span>▤</span>Modul Eksperimen</a>
-<a class="nav-link " href="lkpd.html"><span>☷</span>LKPD Digital</a>
-<a class="nav-link " href="evaluasi.html"><span>✓</span>Evaluasi</a></nav><div class="sidebar-bottom"><div class="sidebar-tip"><b>✦</b><div><strong>Ruang eksplorasi</strong><p>Belajar fisika lewat eksperimen.</p></div></div><small class="status"><i></i> Sistem pembelajaran aktif</small></div></aside>
-<div class="page-area"><header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
-<div class="breadcrumb">HookeLab <span>/</span> <b>Modul Eksperimen</b></div><div class="top-actions"><div class="search"><span>⌕</span><input id="siteSearch" placeholder="Cari modul atau materi..." aria-label="Cari modul atau materi"></div><div class="profile"><span class="avatar">PW</span><div><b>Praktikan</b><small>Peserta praktikum</small></div></div></div></header>
-<main class="content modul-page"><div class="page-title"></div><section class="page-hero"><label>LABORATORIUM VIRTUAL</label><h2>Modul Eksperimen</h2><p>Setiap modul dirancang untuk membantumu mengamati fenomena, mengumpulkan data, dan menghubungkannya dengan konsep fisika. Simulasi akan dikembangkan secara bertahap.</p></section>
- 
-<div class="module-list-grid">
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101b2e">
+<title>HookeLab | Eksperimen Hukum Hooke</title>
 
-  <article class="module-list-card">
-    <div class="card-top">
-      <b class="number">01</b>
-      <span class="tag">DASAR</span>
-    </div>
-    <div class="art">
-      <img src="assets/pegas-beban.png" alt="Eksperimen Beban dan Pegas">
-    </div>
-    <h3>Eksperimen Beban dan Pegas</h3>
-    <p>Amati perubahan panjang pegas ketika massa beban divariasikan. Kumpulkan data untuk menentukan konstanta pegas.</p>
-    <a class="btn-praktikum" href="mode1.html">Mulai Praktikum</a>
-  </article>
+<link rel="stylesheet" href="style.css">
+<script src="js/common.js" defer></script>
 
-  <article class="module-list-card">
-    <div class="card-top">
-      <b class="number blue-number">02</b>
-      <span class="tag">GAYA</span>
-    </div>
-    <div class="art">
-      <img src="assets/gaya-pegas.png" alt="Gaya pada Pegas">
-    </div>
-    <h3>Gaya pada Pegas</h3>
-    <p>Pelajari arah gaya dan hubungan antara gaya tarik dengan perpindahan pegas.</p>
-    <a class="btn-praktikum" href="mode2.html">Buka Simulasi</a>
-  </article>
+<style>
+/* ===== GAYA KHUSUS HALAMAN EKSPERIMEN ===== */
+.hl-page {
+  color: #1e2a3b;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
 
-  <article class="module-list-card">
-    <div class="card-top">
-      <b class="number blue-number">03</b>
-      <span class="tag">SISTEM</span>
-    </div>
-    <div class="art">
-      <img src="assets/susunan-pegas.png" alt="Susunan Pegas">
-    </div>
-    <h3>Susunan Pegas</h3>
-    <p>Jelajahi bagaimana susunan seri dan paralel memengaruhi konstanta pegas.</p>
-    <a class="btn-praktikum" href="mode3.html">Buka Simulasi</a>
-  </article>
+.hl-intro {
+  margin-bottom: 20px;
+}
 
-  <article class="module-list-card">
-    <div class="card-top">
-      <b class="number amber-number">04</b>
-      <span class="tag">ENERGI</span>
-    </div>
-    <div class="art">
-      <img src="assets/energi-pegas.png" alt="Energi pada Sistem Pegas">
-    </div>
-    <h3>Energi pada Sistem Pegas</h3>
-    <p>Hubungkan energi potensial elastis dengan konstanta pegas dan pertambahan panjang.</p>
-    <a class="btn-praktikum" href="mode4.html">Buka Simulasi</a>
-  </article>
+.hl-intro .hl-label {
+  color: #3979db;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
 
-  <article class="module-list-card">
-    <div class="card-top">
-      <b class="number amber-number">05</b>
-      <span class="tag">TANTANGAN</span>
-    </div>
-    <div class="art">
-      <img src="assets/pegas-misteri.png" alt="Tebak Pegas Misteri">
-    </div>
-    <h3>Tebak Pegas Misteri</h3>
-    <p>Gunakan pengamatan dan penalaran untuk memperkirakan karakteristik pegas.</p>
-    <a class="btn-praktikum" href="mode5.html">Buka Tantangan</a>
-  </article>
+.hl-intro h1 {
+  margin: 7px 0;
+  font-size: 27px;
+  color: #172b4d;
+}
 
+.hl-intro p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.hl-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 22px 0;
+  padding-bottom: 13px;
+  border-bottom: 1px solid #dce6f5;
+}
+
+.hl-tab {
+  border: 1px solid #dce6f5;
+  border-radius: 10px;
+  padding: 10px 16px;
+  background: #fff;
+  color: #53657e;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.hl-tab:hover {
+  border-color: #3b82f6;
+  color: #2563eb;
+}
+
+.hl-tab.active {
+  color: #fff;
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.hl-section {
+  display: none;
+}
+
+.hl-section.active {
+  display: block;
+}
+
+.hl-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.hl-card {
+  min-width: 0;
+  padding: 20px;
+  margin-bottom: 18px;
+  background: #fff;
+  border: 1px solid #e1e9f5;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(35, 72, 120, .045);
+}
+
+.hl-card h2 {
+  margin: 0 0 7px;
+  color: #1e3355;
+  font-size: 17px;
+}
+
+.hl-card h3 {
+  margin: 20px 0 8px;
+  color: #28466d;
+  font-size: 14px;
+}
+
+.hl-muted {
+  color: #6b7c93;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.hl-sim-wrap {
+  padding: 12px;
+  margin: 15px 0;
+  background: linear-gradient(180deg, #edf5ff, #fff8ec);
+  border: 1px solid #e0eaf8;
+  border-radius: 13px;
+}
+
+#hlSim {
+  display: block;
+  width: 100%;
+  max-height: 440px;
+}
+
+.hl-control {
+  display: grid;
+  grid-template-columns: 125px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.hl-control label {
+  color: #53657e;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hl-control input[type="range"] {
+  width: 100%;
+  accent-color: #3478e5;
+}
+
+.hl-control input[type="number"],
+.hl-control select,
+.hl-input {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid #d7e2f1;
+  border-radius: 8px;
+  background: #fff;
+  color: #1e2a3b;
+  font: inherit;
+  font-size: 13px;
+}
+
+.hl-inline {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.hl-inline input[type="range"] {
+  flex: 1;
+  min-width: 0;
+}
+
+.hl-inline input[type="number"] {
+  width: 85px;
+}
+
+.hl-value {
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.hl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 17px;
+}
+
+.hl-btn {
+  padding: 10px 15px;
+  border: 1px solid #2563eb;
+  border-radius: 9px;
+  background: #2563eb;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hl-btn:hover {
+  background: #1d4ed8;
+}
+
+.hl-btn.secondary {
+  color: #3b526f;
+  border-color: #d7e2f1;
+  background: #fff;
+}
+
+.hl-btn.secondary:hover {
+  background: #f2f6fc;
+}
+
+.hl-status {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #eff6ff;
+  color: #355d94;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.hl-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 17px 0;
+}
+
+.hl-stat {
+  min-width: 0;
+  padding: 14px 8px;
+  border: 1px solid #e0eafa;
+  border-radius: 11px;
+  background: #f5f8ff;
+  text-align: center;
+}
+
+.hl-stat strong {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #2563eb;
+  font-size: 19px;
+}
+
+.hl-stat span {
+  display: block;
+  margin-top: 5px;
+  color: #6b7c93;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.hl-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 15px;
+}
+
+.hl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.hl-table th,
+.hl-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e6edf7;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.hl-table th {
+  background: #f5f8fd;
+  color: #5d708a;
+  font-size: 11px;
+}
+
+.hl-table td {
+  color: #334861;
+}
+
+.hl-delete {
+  padding: 5px 8px;
+  border: 1px solid #f0caca;
+  border-radius: 6px;
+  background: #fff;
+  color: #c24141;
+  cursor: pointer;
+}
+
+.hl-graph-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+#hlGraph {
+  display: block;
+  width: 100%;
+  min-width: 320px;
+  height: auto;
+}
+
+.hl-data-analysis-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.hl-data-analysis-grid > .hl-card {
+  min-width: 0;
+}
+
+@media(max-width:760px) {
+  .hl-data-analysis-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.hl-analysis-box {
+  padding: 15px;
+  border: 1px solid #dce8fa;
+  border-radius: 11px;
+  background: #f5f8ff;
+  color: #405773;
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.hl-question {
+  margin: 17px 0 8px;
+  color: #304966;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.hl-help {
+  margin-top: 10px;
+  color: #718096;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.hl-empty {
+  padding: 28px 12px;
+  color: #8493a8;
+  text-align: center;
+}
+
+.hl-check-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  color: #53657e;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.hl-check-label input {
+  margin-top: 3px;
+  accent-color: #2563eb;
+}
+
+@media(max-width:850px) {
+  .hl-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hl-intro h1 {
+    font-size: 23px;
+  }
+}
+
+@media(max-width:520px) {
+  .hl-card {
+    padding: 14px;
+  }
+
+  .hl-control {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .hl-tabs {
+    gap: 6px;
+  }
+
+  .hl-tab {
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+
+  .hl-stat strong {
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="app-shell">
+
+  <!-- SIDEBAR HOOKELAB -->
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">〰</span>
+      <span>
+        <strong>Hooke<span>Lab</span></strong>
+        <small>LABORATORIUM VIRTUAL FISIKA</small>
+      </span>
+    </a>
+
+    <div class="side-label">MENU PEMBELAJARAN</div>
+
+    <nav class="main-nav">
+      <a class="nav-link" href="index.html"><span>⌂</span>Beranda</a>
+      <a class="nav-link" href="identitas.html"><span>♙</span>Identitas Kelompok</a>
+      <a class="nav-link" href="petunjuk.html"><span>ⓘ</span>Petunjuk Praktikum</a>
+      <a class="nav-link active" href="modul.html"><span>▤</span>Eksperimen</a>
+        <a class="nav-link" href="tantangan.html"><span>⚑</span>Tantangan</a>
+      <a class="nav-link" href="lkpd.html"><span>☷</span>LKPD Digital</a>
+    
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-tip">
+        <b>✦</b>
+        <div>
+          <strong>Ruang eksplorasi</strong>
+          <p>Belajar fisika lewat eksperimen.</p>
+        </div>
+      </div>
+      <small class="status"><i></i> Sistem pembelajaran aktif</small>
+    </div>
+  </aside>
+
+  <!-- AREA HALAMAN -->
+  <div class="page-area">
+
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
+      <div class="breadcrumb">HookeLab <span>/</span> <b>Eksperimen</b></div>
+
+      <div class="top-actions">
+        <div class="search">
+          <span>⌕</span>
+          <input id="siteSearch" placeholder="Cari modul atau materi..." aria-label="Cari modul atau materi">
+        </div>
+        <div class="profile">
+          <span class="avatar">PW</span>
+          <div>
+            <b>Praktikan</b>
+            <small>Peserta praktikum</small>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content hl-page">
+
+      <div class="hl-intro">
+        <span class="hl-label">LABORATORIUM VIRTUAL</span>
+        <h1>Eksperimen Hukum Hooke</h1>
+        <p>
+          Selidiki hubungan antara gaya dan pertambahan panjang pegas melalui
+          simulasi, pengumpulan data, grafik, dan analisis hasil pengukuran.
+        </p>
+      </div>
+
+      <!-- NAVIGASI DUA BAGIAN -->
+      <div class="hl-tabs" role="tablist" aria-label="Bagian eksperimen">
+        <button class="hl-tab active" data-tab="praktikum" role="tab" aria-selected="true">Praktikum</button>
+        <button class="hl-tab" data-tab="data" role="tab" aria-selected="false">Tabel Data &amp; Analisis</button>
+      </div>
+
+      <!-- BAGIAN 1: PRAKTIKUM -->
+      <section class="hl-section active" id="hl-praktikum" role="tabpanel">
+        <div class="hl-grid">
+
+          <article class="hl-card">
+            <h2>Simulasi Pegas</h2>
+            <p class="hl-muted">
+              Atur massa beban dan konstanta pegas. Amati perubahan panjang
+              pegas setelah sistem mencapai keadaan setimbang.
+            </p>
+
+            <div class="hl-sim-wrap">
+              
+<svg id="hlSim" viewBox="0 0 320 390" role="img" aria-label="Simulasi pegas berpilin dengan beban">
+  <defs>
+    <linearGradient id="hlWeight" x1="0" x2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <linearGradient id="hlCoil" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7897c8"/>
+      <stop offset="45%" stop-color="#e2edff"/>
+      <stop offset="72%" stop-color="#6688bc"/>
+      <stop offset="100%" stop-color="#3e6095"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Penyangga -->
+  <rect x="92" y="16" width="136" height="12" rx="4" fill="#64748b"/>
+  <rect x="105" y="28" width="110" height="5" rx="2" fill="#94a3b8"/>
+
+  <!-- Penggaris -->
+  <g id="hlRuler"></g>
+
+  <!-- Posisi alami -->
+  <line x1="85" y1="90" x2="235" y2="90"
+    stroke="#94a3b8" stroke-dasharray="5 4"/>
+  <text x="88" y="82" font-size="10" fill="#64748b">Posisi alami</text>
+
+  <!-- Bayangan dan lilitan pegas -->
+  <path id="hlSpringShadow" d=""
+    fill="none" stroke="#253e63" stroke-width="7"
+    stroke-linecap="round" opacity=".17"/>
+
+  <path id="hlSpring" d=""
+    fill="none" stroke="url(#hlCoil)" stroke-width="5"
+    stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Pengait dan beban -->
+  <path id="hlHook" d=""
+    fill="none" stroke="#64748b" stroke-width="3"
+    stroke-linecap="round"/>
+
+  <rect id="hlMass" x="130" y="110" width="60" height="38"
+    rx="7" fill="url(#hlWeight)" stroke="#c56a17" stroke-width="1.5"/>
+
+  <text id="hlMassText" x="160" y="133"
+    text-anchor="middle" font-size="12"
+    font-weight="700" fill="#fff">100 g</text>
+
+  <!-- Penanda pertambahan panjang -->
+  <line id="hlExtensionLine" x1="245" y1="90" x2="245" y2="150"
+    stroke="#e87932" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+  <text id="hlExtensionText" x="250" y="120"
+    font-size="10" fill="#c56a17">Δx</text>
+
+  <text x="160" y="366" text-anchor="middle"
+    font-size="10" fill="#64748b">Ilustrasi pegas dan beban</text>
+</svg>
+
+            </div>
+
+            <div class="hl-control">
+              <label for="hlMassRange">Massa beban</label>
+              <div class="hl-inline">
+                <input id="hlMassRange" type="range" min="10" max="500" step="10" value="100">
+                <input id="hlMassNumber" type="number" min="10" max="500" step="10" value="100" aria-label="Massa dalam gram">
+                <span class="hl-value">g</span>
+              </div>
+            </div>
+
+            <div class="hl-control">
+              <label for="hlKRange">Konstanta pegas</label>
+              <div class="hl-inline">
+                <input id="hlKRange" type="range" min="10" max="100" step="5" value="40">
+                <span class="hl-value" id="hlKValue">40 N/m</span>
+              </div>
+            </div>
+
+            <div class="hl-control">
+              <label for="hlGravity">Gravitasi</label>
+              <select id="hlGravity">
+                <option value="9.8">Bumi (9,8 m/s²)</option>
+                <option value="3.7">Mars (3,7 m/s²)</option>
+                <option value="1.6">Bulan (1,6 m/s²)</option>
+              </select>
+            </div>
+
+            <label class="hl-check-label">
+              <input type="checkbox" id="hlLimit">
+              Aktifkan simulasi batas elastis. Di atas gaya 3 N, pegas tidak lagi mengikuti hubungan linear.
+            </label>
+
+            
+<div class="hl-actions">
+  <button type="button" class="hl-btn" id="hlStart">▶ Mulai Eksperimen</button>
+  <button type="button" class="hl-btn" id="hlTake">Ambil Data</button>
+  <button type="button" class="hl-btn secondary" id="hlReset">Atur Ulang</button>
 </div>
-  <footer class="footer"><span>HookeLab · Laboratorium Virtual Fisika</span>
-</footer>
-</body></html>
+<p class="hl-help" id="hlMotionStatus" aria-live="polite">
+  Tekan Mulai Eksperimen untuk mengamati gerakan pegas.
+</p>
+
+
+            <p class="hl-help">
+              Ambil sekurang-kurangnya lima data dengan massa berbeda.
+              Untuk memperoleh grafik yang konsisten, pertahankan nilai
+              konstanta pegas dan gravitasi selama satu rangkaian pengukuran.
+            </p>
+          </article>
+
+          <article class="hl-card">
+            <h2>Hasil Pengamatan</h2>
+            <p class="hl-muted">Besaran fisika yang berubah mengikuti pengaturan simulasi.</p>
+
+            <div class="hl-stat-grid">
+              <div class="hl-stat">
+                <strong id="hlForce">0,98</strong>
+                <span>Gaya berat (N)</span>
+              </div>
+              <div class="hl-stat">
+                <strong id="hlDx">2,45</strong>
+                <span>Pertambahan panjang (cm)</span>
+              </div>
+              <div class="hl-stat">
+                <strong id="hlRatio">40,00</strong>
+                <span>F/Δx (N/m)</span>
+              </div>
+            </div>
+
+            <div class="hl-analysis-box" id="hlLive">
+              Atur parameter simulasi untuk melihat hasil pengamatan.
+            </div>
+
+            <h3>Petunjuk pengambilan data</h3>
+            <ol class="hl-muted">
+              <li>Atur nilai konstanta pegas dan gravitasi.</li>
+              <li>Ubah massa beban menggunakan slider atau kolom angka.</li>
+              <li>Amati pertambahan panjang yang ditampilkan.</li>
+              <li>Tekan tombol <b>Ambil Data</b> untuk menyimpan pengukuran.</li>
+              <li>Buka bagian Tabel Data untuk memeriksa hasil pengukuran.</li>
+            </ol>
+
+            <div class="hl-status" id="hlDataCount">
+              Data tersimpan: 0 pengukuran.
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- BAGIAN 2: TABEL DATA, GRAFIK, DAN ANALISIS DALAM SATU HALAMAN -->
+      <section class="hl-section" id="hl-data" role="tabpanel">
+        <article class="hl-card">
+          <h2>Tabel Data Pengamatan</h2>
+          <p class="hl-muted">
+            Data diambil langsung dari simulasi. Kolom Δx ditampilkan dalam
+            sentimeter dan meter agar dapat digunakan untuk analisis grafik.
+          </p>
+
+          <div class="hl-stat-grid">
+            <div class="hl-stat">
+              <strong id="hlTotalData">0</strong>
+              <span>Jumlah data</span>
+            </div>
+            <div class="hl-stat">
+              <strong id="hlCurrentK">40</strong>
+              <span>k simulasi (N/m)</span>
+            </div>
+            <div class="hl-stat">
+              <strong id="hlCurrentG">9,8</strong>
+              <span>Gravitasi (m/s²)</span>
+            </div>
+          </div>
+
+          <div class="hl-table-wrap">
+            <table class="hl-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Massa (g)</th>
+                  <th>k (N/m)</th>
+                  <th>F (N)</th>
+                  <th>Δx (cm)</th>
+                  <th>Δx (m)</th>
+                  <th>F/Δx (N/m)</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="hlTableBody">
+                <tr>
+                  <td colspan="8" class="hl-empty">Belum ada data pengamatan.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="hl-actions">
+            <button type="button" class="hl-btn secondary" id="hlExport">Unduh CSV</button>
+            <button type="button" class="hl-btn secondary" id="hlClear">Hapus Semua Data</button>
+          </div>
+
+          <p class="hl-help">
+            Catatan: data dengan nilai k yang berbeda tidak digabungkan dalam
+            satu regresi. Grafik dan analisis menggunakan kelompok data dengan
+            nilai k yang sama seperti pengukuran terakhir.
+          </p>
+        </article>
+        <div class="hl-data-analysis-grid">
+          <article class="hl-card">
+          <h2>Grafik Hubungan Gaya dan Pertambahan Panjang</h2>
+          <p class="hl-muted">
+            Grafik menunjukkan hubungan gaya berat F dengan pertambahan panjang
+            pegas Δx. Gunakan Δx dalam meter untuk memperoleh gradien dalam N/m.
+          </p>
+
+          <label class="hl-check-label">
+            <input type="checkbox" id="hlPointLabels" checked>
+            Tampilkan nilai koordinat setiap titik data.
+          </label>
+
+          <div class="hl-graph-wrap">
+            <svg id="hlGraph" viewBox="0 0 600 390" role="img"
+              aria-label="Grafik gaya terhadap pertambahan panjang"></svg>
+          </div>
+
+          <div class="hl-status" id="hlGraphNote">
+            Ambil minimal dua data untuk menampilkan grafik dan garis regresi.
+          </div>
+        </article>
+          <article class="hl-card">
+            <h2>Analisis Grafik</h2>
+            <p class="hl-muted">
+              Gradien garis regresi pada grafik F terhadap Δx digunakan
+              untuk memperkirakan konstanta pegas.
+            </p>
+
+            <div class="hl-stat-grid">
+              <div class="hl-stat">
+                <strong id="hlSlope">–</strong>
+                <span>Gradien (N/m)</span>
+              </div>
+              <div class="hl-stat">
+                <strong id="hlR2">–</strong>
+                <span>Koefisien determinasi (R²)</span>
+              </div>
+              <div class="hl-stat">
+                <strong id="hlIntercept">–</strong>
+                <span>Intersep (N)</span>
+              </div>
+            </div>
+
+            <div class="hl-analysis-box" id="hlEquation">
+              Ambil minimal dua data dengan nilai k yang sama untuk menghitung regresi.
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>HookeLab · Laboratorium Virtual Fisika</span>
+      </footer>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  const state = {
+    mass: 100,
+    k: 40,
+    g: 9.8,
+    elasticLimit: false,
+    data: []
+  };
+
+  const MAX_DATA = 30;
+  const ELASTIC_FORCE = 3;
+
+let hlAnimationFrame = null;
+let hlMotionRunning = false;
+let hlMotionStart = 0;
+
+function hlAnimate(timestamp) {
+  if (!hlMotionRunning) return;
+
+  if (!hlMotionStart) hlMotionStart = timestamp;
+
+  const elapsed = (timestamp - hlMotionStart) / 1000;
+
+  // Gerakan naik-turun yang berulang.
+  const amplitude = 12;
+  const frequency = 1.7;
+  const oscillation =
+    amplitude * Math.cos(2 * Math.PI * frequency * elapsed);
+
+  drawSimulation(oscillation);
+
+  hlAnimationFrame = requestAnimationFrame(hlAnimate);
+}
+
+function hlStartMotion() {
+  if (hlMotionRunning) {
+    hlMotionRunning = false;
+    cancelAnimationFrame(hlAnimationFrame);
+    hlAnimationFrame = null;
+    hlMotionStart = 0;
+
+    $("hlStart").textContent = "▶ Mulai Eksperimen";
+    $("hlMotionStatus").textContent =
+      "Gerakan dihentikan. Kamu dapat mengatur beban atau mengambil data.";
+    drawSimulation();
+    return;
+  }
+
+  hlMotionRunning = true;
+  hlMotionStart = 0;
+
+  $("hlStart").textContent = "Ⅱ Hentikan Gerakan";
+  $("hlMotionStatus").textContent =
+    "Eksperimen berjalan. Amati gerakan beban dan pegas.";
+
+  hlAnimationFrame = requestAnimationFrame(hlAnimate);
+}
+
+$("hlStart").addEventListener("click", hlStartMotion);
+
+  function fmt(value, digits = 2) {
+    if (!Number.isFinite(value)) return "–";
+    return value.toFixed(digits).replace(".", ",");
+  }
+
+  function force() {
+    return state.mass / 1000 * state.g;
+  }
+
+  function extension() {
+    const F = force();
+
+    if (state.elasticLimit && F > ELASTIC_FORCE) {
+      return ELASTIC_FORCE / state.k +
+        (F - ELASTIC_FORCE) / (0.5 * state.k);
+    }
+
+    return F / state.k;
+  }
+
+  function isOverLimit(mass, gravity) {
+    return mass / 1000 * gravity > ELASTIC_FORCE;
+  }
+
+  /* ===== NAVIGASI EMPAT BAGIAN ===== */
+  const tabs = document.querySelectorAll(".hl-tab");
+
+  function openTab(name) {
+    tabs.forEach(button => {
+      const active = button.dataset.tab === name;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-selected", String(active));
+    });
+
+    document.querySelectorAll(".hl-section").forEach(section => {
+      section.classList.toggle("active", section.id === "hl-" + name);
+    });
+
+    if (name === "data") {
+      renderTable();
+      renderGraph();
+      renderAnalysis();
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  tabs.forEach(button => {
+    button.addEventListener("click", () => openTab(button.dataset.tab));
+  });
+
+
+  /* ===== SIMULASI PEGAS ===== */
+  function drawRuler() {
+    let svg = "";
+
+    for (let cm = 0; cm <= 25; cm += 1) {
+      const y = 90 + cm * 8;
+      const major = cm % 5 === 0;
+
+      svg += `<line x1="${major ? 73 : 79}" y1="${y}" x2="85" y2="${y}"
+        stroke="#64748b" stroke-width="1"/>`;
+
+      if (major) {
+        svg += `<text x="68" y="${y + 3}" text-anchor="end"
+          font-size="9" fill="#64748b">${cm}</text>`;
+      }
+    }
+
+    svg += `<text x="54" y="63" font-size="9" fill="#64748b">cm</text>`;
+    $("hlRuler").innerHTML = svg;
+  }
+
+
+function drawSimulation(oscillation = 0) {
+  const xCenter = 160;
+  const yNatural = 90;
+
+  // Skala ilustrasi: 8 piksel untuk setiap sentimeter.
+  const dx = extension();
+  const baseExtension = Math.min(dx * 100 * 8, 220);
+  const yEnd = yNatural + baseExtension + oscillation;
+
+  const springTop = 36;
+  const springBottom = yEnd - 8;
+  const turns = 10;
+  const pitch = Math.max(1, (springBottom - springTop) / turns);
+  const amplitude = 15;
+
+  // Membentuk lilitan dengan kurva Bézier yang halus,
+  // bukan rangkaian garis lurus berbentuk zig-zag.
+  let path = `M ${xCenter} ${springTop}`;
+
+  for (let i = 0; i < turns; i++) {
+    const y0 = springTop + i * pitch;
+    const y1 = springTop + (i + 1) * pitch;
+    const direction = i % 2 === 0 ? 1 : -1;
+    const side = xCenter + direction * amplitude;
+
+    path += ` C ${side} ${y0 + pitch * 0.18},
+      ${side} ${y0 + pitch * 0.82},
+      ${xCenter} ${y1}`;
+  }
+
+  $("hlSpring").setAttribute("d", path);
+  $("hlSpringShadow").setAttribute("d", path);
+
+  // Pengait mengikuti ujung pegas.
+  $("hlHook").setAttribute(
+    "d",
+    `M ${xCenter} ${yEnd - 8}
+     C ${xCenter} ${yEnd - 1},
+       ${xCenter + 8} ${yEnd - 1},
+       ${xCenter + 8} ${yEnd + 5}
+     C ${xCenter + 8} ${yEnd + 11},
+       ${xCenter - 8} ${yEnd + 11},
+       ${xCenter - 8} ${yEnd + 5}`
+  );
+
+  const massWidth = 45 + state.mass / 500 * 25;
+  const massTop = yEnd + 10;
+
+  $("hlMass").setAttribute("x", xCenter - massWidth / 2);
+  $("hlMass").setAttribute("y", massTop);
+  $("hlMass").setAttribute("width", massWidth);
+
+  $("hlMassText").setAttribute("x", xCenter);
+  $("hlMassText").setAttribute("y", massTop + 23);
+  $("hlMassText").textContent = state.mass + " g";
+
+  $("hlExtensionLine").setAttribute("y1", yNatural);
+  $("hlExtensionLine").setAttribute("y2", yEnd);
+
+  $("hlExtensionText").setAttribute(
+    "y",
+    Math.min(yEnd - 5, 345)
+  );
+  $("hlExtensionText").textContent =
+    "Δx " + fmt(dx * 100) + " cm";
+
+  // Besaran hasil pengukuran tetap menggunakan posisi setimbang,
+  // sehingga gerakan animasi tidak mengubah hasil perhitungan.
+  $("hlForce").textContent = fmt(force());
+  $("hlDx").textContent = fmt(dx * 100);
+  $("hlRatio").textContent = fmt(dx > 0 ? force() / dx : 0);
+
+  $("hlKValue").textContent = state.k + " N/m";
+  $("hlCurrentK").textContent = state.k;
+  $("hlCurrentG").textContent = fmt(state.g, 1);
+
+  const exceeded = state.elasticLimit && force() > ELASTIC_FORCE;
+
+  $("hlLive").innerHTML =
+    `<b>Gaya berat:</b> F = m × g = ${fmt(force())} N<br>` +
+    `<b>Pertambahan panjang:</b> Δx = ${fmt(dx, 4)} m ` +
+    `(${fmt(dx * 100)} cm)<br>` +
+    `<b>Konstanta pegas:</b> k = ${state.k} N/m` +
+    (exceeded
+      ? `<br><br><span style="color:#c24141;font-weight:700">
+         Perhatian: gaya telah melewati batas elastis simulasi.
+         </span>`
+      : "");
+}
+
+  function updateMass(value) {
+    const mass = Math.round(Number(value));
+
+    if (!Number.isFinite(mass)) return;
+
+    state.mass = Math.max(10, Math.min(500, mass));
+    $("hlMassRange").value = state.mass;
+    $("hlMassNumber").value = state.mass;
+
+    drawSimulation();
+  }
+
+  $("hlMassRange").addEventListener("input", function () {
+    updateMass(this.value);
+  });
+
+  $("hlMassNumber").addEventListener("change", function () {
+    updateMass(this.value);
+  });
+
+  $("hlKRange").addEventListener("input", function () {
+    state.k = Number(this.value);
+    drawSimulation();
+  });
+
+  $("hlGravity").addEventListener("change", function () {
+    state.g = Number(this.value);
+    drawSimulation();
+  });
+
+  $("hlLimit").addEventListener("change", function () {
+    state.elasticLimit = this.checked;
+    drawSimulation();
+  });
+
+  $("hlReset").addEventListener("click", function () {
+    if (hlMotionRunning) hlStartMotion();
+drawSimulation();
+    state.mass = 100;
+    state.k = 40;
+    state.g = 9.8;
+    state.elasticLimit = false;
+
+    $("hlMassRange").value = 100;
+    $("hlMassNumber").value = 100;
+    $("hlKRange").value = 40;
+    $("hlGravity").value = "9.8";
+    $("hlLimit").checked = false;
+
+    drawSimulation();
+  });
+
+  /* ===== PENGAMBILAN DAN TABEL DATA ===== */
+  $("hlTake").addEventListener("click", function () {
+    if (state.data.length >= MAX_DATA) {
+      alert("Maksimal " + MAX_DATA + " data. Hapus sebagian data jika ingin melanjutkan.");
+      return;
+    }
+
+    const F = force();
+    const dx = extension();
+
+    state.data.push({
+      mass: state.mass,
+      k: state.k,
+      g: state.g,
+      F: F,
+      dx: dx,
+      over: isOverLimit(state.mass, state.g) && state.elasticLimit
+    });
+
+    renderTable();
+    renderGraph();
+    renderAnalysis();
+    $("hlDataCount").textContent =
+      "Data tersimpan: " + state.data.length + " pengukuran.";
+
+    $("hlTake").textContent = "Data Berhasil Diambil";
+
+    setTimeout(() => {
+      $("hlTake").textContent = "Ambil Data";
+    }, 1000);
+  });
+
+  function renderTable() {
+    const tbody = $("hlTableBody");
+
+    $("hlTotalData").textContent = state.data.length;
+    $("hlDataCount").textContent =
+      "Data tersimpan: " + state.data.length + " pengukuran.";
+
+    if (!state.data.length) {
+      tbody.innerHTML =
+        `<tr><td colspan="8" class="hl-empty">Belum ada data pengamatan.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = state.data.map((d, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${d.mass}</td>
+        <td>${d.k}</td>
+        <td>${fmt(d.F, 3)}</td>
+        <td>${fmt(d.dx * 100, 2)}</td>
+        <td>${fmt(d.dx, 4)}</td>
+        <td>${d.dx > 0 ? fmt(d.F / d.dx, 2) : "–"}</td>
+        <td><button class="hl-delete" data-index="${i}" aria-label="Hapus data ${i + 1}">Hapus</button></td>
+      </tr>
+    `).join("");
+
+    tbody.querySelectorAll(".hl-delete").forEach(button => {
+      button.addEventListener("click", function () {
+        state.data.splice(Number(this.dataset.index), 1);
+        renderTable();
+        renderGraph();
+        renderAnalysis();
+      });
+    });
+  }
+
+  $("hlClear").addEventListener("click", function () {
+    if (!state.data.length) return;
+
+    if (confirm("Hapus seluruh data pengamatan?")) {
+      state.data = [];
+      renderTable();
+      renderGraph();
+      renderAnalysis();
+    }
+  });
+
+  $("hlExport").addEventListener("click", function () {
+    if (!state.data.length) {
+      alert("Belum ada data yang dapat diunduh.");
+      return;
+    }
+
+    const rows = [
+      ["No", "Massa (g)", "k (N/m)", "Gravitasi (m/s2)", "F (N)", "Delta x (cm)", "Delta x (m)", "F/Delta x (N/m)"],
+      ...state.data.map((d, i) => [
+        i + 1, d.mass, d.k, d.g, d.F, d.dx * 100, d.dx, d.dx > 0 ? d.F / d.dx : ""
+      ])
+    ];
+
+    const csv = rows.map(row =>
+      row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(",")
+    ).join("\r\n");
+
+    const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "data-eksperimen-hukum-hooke.csv";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  /* ===== REGRESI LINEAR ===== */
+  function getCurrentData() {
+    if (!state.data.length) return [];
+
+    const latestK = state.data[state.data.length - 1].k;
+
+    return state.data.filter(d => d.k === latestK);
+  }
+
+  function regression(points) {
+    const n = points.length;
+    if (n < 2) return null;
+
+    let sx = 0, sy = 0, sxx = 0, sxy = 0;
+
+    points.forEach(d => {
+      sx += d.dx;
+      sy += d.F;
+      sxx += d.dx * d.dx;
+      sxy += d.dx * d.F;
+    });
+
+    const denominator = n * sxx - sx * sx;
+    if (Math.abs(denominator) < 1e-12) return null;
+
+    const m = (n * sxy - sx * sy) / denominator;
+    const b = (sy - m * sx) / n;
+    const meanY = sy / n;
+
+    let sst = 0, sse = 0;
+
+    points.forEach(d => {
+      sst += Math.pow(d.F - meanY, 2);
+      sse += Math.pow(d.F - (m * d.dx + b), 2);
+    });
+
+    return {
+      m: m,
+      b: b,
+      r2: sst > 1e-12 ? 1 - sse / sst : 1
+    };
+  }
+
+  function niceStep(value) {
+    if (!Number.isFinite(value) || value <= 0) return 1;
+
+    const exponent = Math.pow(10, Math.floor(Math.log10(value)));
+    const fraction = value / exponent;
+
+    return (fraction <= 1 ? 1 :
+      fraction <= 2 ? 2 :
+      fraction <= 5 ? 5 : 10) * exponent;
+  }
+
+  function decimals(step) {
+    return Math.max(0, Math.min(6, -Math.floor(Math.log10(step) + 1e-9)));
+  }
+
+  /* ===== GRAFIK SVG ===== */
+  function renderGraph() {
+    const svg = $("hlGraph");
+    const points = getCurrentData();
+    const W = 600, H = 390;
+    const left = 75, right = 25, top = 25, bottom = 65;
+    const plotW = W - left - right;
+    const plotH = H - top - bottom;
+
+    let maxX = 0, maxY = 0;
+
+    points.forEach(d => {
+      maxX = Math.max(maxX, d.dx);
+      maxY = Math.max(maxY, d.F);
+    });
+
+    const stepX = niceStep((maxX || 0.02) * 1.1 / 5);
+    const stepY = niceStep((maxY || 0.2) * 1.1 / 5);
+    const maxAxisX = Math.max(stepX * 5, Math.ceil((maxX * 1.1) / stepX) * stepX);
+    const maxAxisY = Math.max(stepY * 5, Math.ceil((maxY * 1.1) / stepY) * stepY);
+
+    const X = x => left + (x / maxAxisX) * plotW;
+    const Y = y => top + plotH - (y / maxAxisY) * plotH;
+
+    let out = "";
+
+    for (let i = 0; i <= Math.round(maxAxisX / stepX); i++) {
+      const xVal = i * stepX;
+      const x = X(xVal);
+
+      out += `<line x1="${x}" y1="${top}" x2="${x}" y2="${top + plotH}"
+        stroke="#e5ebf4" stroke-width="1"/>`;
+
+      out += `<text x="${x}" y="${top + plotH + 21}" text-anchor="middle"
+        fill="#687b93" font-size="11">${fmt(xVal, decimals(stepX))}</text>`;
+    }
+
+    for (let i = 0; i <= Math.round(maxAxisY / stepY); i++) {
+      const yVal = i * stepY;
+      const y = Y(yVal);
+
+      out += `<line x1="${left}" y1="${y}" x2="${left + plotW}" y2="${y}"
+        stroke="#e5ebf4" stroke-width="1"/>`;
+
+      out += `<text x="${left - 10}" y="${y + 4}" text-anchor="end"
+        fill="#687b93" font-size="11">${fmt(yVal, decimals(stepY))}</text>`;
+    }
+
+    out += `<line x1="${left}" y1="${top}" x2="${left}" y2="${top + plotH}"
+      stroke="#53657e" stroke-width="1.5"/>`;
+
+    out += `<line x1="${left}" y1="${top + plotH}" x2="${left + plotW}" y2="${top + plotH}"
+      stroke="#53657e" stroke-width="1.5"/>`;
+
+    out += `<text x="${left + plotW / 2}" y="${H - 15}" text-anchor="middle"
+      fill="#334861" font-size="13" font-weight="600">Pertambahan panjang, Δx (m)</text>`;
+
+    out += `<text x="19" y="${top + plotH / 2}" text-anchor="middle"
+      transform="rotate(-90 19 ${top + plotH / 2})"
+      fill="#334861" font-size="13" font-weight="600">Gaya, F (N)</text>`;
+
+    const result = regression(points);
+
+    if (result) {
+      const x1 = 0;
+      const x2 = maxAxisX;
+      const y1 = result.m * x1 + result.b;
+      const y2 = result.m * x2 + result.b;
+
+      out += `<line x1="${X(x1)}" y1="${Y(y1)}" x2="${X(x2)}" y2="${Y(y2)}"
+        stroke="#f08b42" stroke-width="2.5"/>`;
+    }
+
+    const showLabels = $("hlPointLabels").checked;
+
+    points.forEach(d => {
+      const cx = X(d.dx);
+      const cy = Y(d.F);
+      const color = d.over ? "#dc4545" : "#3478e5";
+
+      out += `<circle cx="${cx}" cy="${cy}" r="5" fill="${color}"
+        stroke="#fff" stroke-width="1.5">
+        <title>Δx = ${fmt(d.dx, 4)} m; F = ${fmt(d.F, 3)} N</title>
+      </circle>`;
+
+      if (showLabels) {
+        out += `<text x="${cx + 7}" y="${cy - 8}" fill="#526781" font-size="9">
+          (${fmt(d.dx, 3)}; ${fmt(d.F, 2)})
+        </text>`;
+      }
+    });
+
+    if (!points.length) {
+      out += `<text x="${left + plotW / 2}" y="${top + plotH / 2}"
+        text-anchor="middle" fill="#8291a6" font-size="14">
+        Belum ada data pengamatan
+      </text>`;
+    }
+
+    svg.innerHTML = out;
+
+    if (points.length < 2) {
+      $("hlGraphNote").textContent =
+        "Ambil minimal dua data dengan nilai k yang sama untuk menampilkan garis regresi.";
+    } else if (result) {
+      $("hlGraphNote").textContent =
+        "Grafik menggunakan " + points.length +
+        " titik data dengan k = " + points[0].k +
+        " N/m. Garis oranye menunjukkan regresi linear.";
+    }
+  }
+
+  $("hlPointLabels").addEventListener("change", renderGraph);
+
+  /* ===== ANALISIS DAN PEMERIKSAAN ===== */
+  function renderAnalysis() {
+    const points = getCurrentData();
+    const result = regression(points);
+
+    if (!result) {
+      $("hlSlope").textContent = "–";
+      $("hlR2").textContent = "–";
+      $("hlIntercept").textContent = "–";
+      $("hlEquation").textContent =
+        "Ambil minimal dua data dengan nilai k yang sama untuk menghitung regresi.";
+      return;
+    }
+
+    $("hlSlope").textContent = fmt(result.m);
+    $("hlR2").textContent = fmt(result.r2, 4);
+    $("hlIntercept").textContent = fmt(result.b, 4);
+
+    $("hlEquation").innerHTML =
+      "Persamaan regresi: <b>F = " + fmt(result.m) + " Δx " +
+      (result.b >= 0 ? "+ " : "− ") + fmt(Math.abs(result.b), 4) +
+      "</b>, dengan Δx dalam meter.<br>" +
+      "Gradien garis merupakan perkiraan konstanta pegas, sehingga " +
+      "<b>k ≈ " + fmt(result.m) + " N/m</b>.<br>" +
+      "Nilai R² menunjukkan seberapa baik garis regresi menjelaskan variasi data.";
+  }
+
+  $("hlCheckK").addEventListener("click", function () {
+    const guess = Number($("hlGuessK").value);
+    const points = getCurrentData();
+    const result = regression(points);
+
+    if ($("hlGuessK").value.trim() === "" || !Number.isFinite(guess) || guess <= 0) {
+      $("hlGuessFeedback").textContent = "Masukkan perkiraan k yang lebih besar dari nol.";
+      return;
+    }
+
+    if (!result) {
+      $("hlGuessFeedback").textContent =
+        "Ambil minimal dua data dengan nilai k yang sama terlebih dahulu.";
+      return;
+    }
+
+    const actualK = points[0].k;
+    const error = Math.abs(guess - actualK) / actualK * 100;
+
+    $("hlGuessFeedback").innerHTML =
+      (error <= 5
+        ? '<span style="color:#15803d;font-weight:700">Jawaban mendekati nilai simulasi.</span> '
+        : '<span style="color:#b45309;font-weight:700">Jawaban belum mendekati nilai simulasi.</span> ') +
+      "Nilai k yang digunakan pada simulasi adalah " + actualK +
+      " N/m. Selisih relatif jawabanmu sebesar " + fmt(error, 1) + "%.";
+  });
+
+  /* ===== INISIALISASI ===== */
+  drawRuler();
+  drawSimulation();
+  renderTable();
+  renderGraph();
+  renderAnalysis();
+
+})();
+</script>
+</body>
+</html>

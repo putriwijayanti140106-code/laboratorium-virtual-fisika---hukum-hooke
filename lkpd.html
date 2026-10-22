@@ -1,88 +1,657 @@
+
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101b2e"><title>HookeLab | LKPD Digital</title>
-<link rel="stylesheet" href="style.css"><script src="js/common.js" defer></script></head><body>
-<div class="app-shell"><aside class="sidebar" id="sidebar">
-<a class="brand" href="index.html"><span class="brand-mark">〰</span><span><strong>Hooke<span>Lab</span></strong><small>LABORATORIUM VIRTUAL FISIKA</small></span></a>
-<div class="side-label">MENU PEMBELAJARAN</div><nav class="main-nav">
-<a class="nav-link " href="index.html"><span>⌂</span>Beranda</a>
-<a class="nav-link " href="petunjuk.html"><span>ⓘ</span>Petunjuk Praktikum</a>
-<a class="nav-link " href="modul.html"><span>▤</span>Modul Eksperimen</a>
-<a class="nav-link active" href="lkpd.html"><span>☷</span>LKPD Digital</a>
-<a class="nav-link " href="evaluasi.html"><span>✓</span>Evaluasi</a></nav><div class="sidebar-bottom"><div class="sidebar-tip"><b>✦</b><div><strong>Ruang eksplorasi</strong><p>Belajar fisika lewat eksperimen.</p></div></div><small class="status"><i></i> Sistem pembelajaran aktif</small></div></aside>
-<div class="page-area"><header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
-<div class="breadcrumb">HookeLab <span>/</span> <b>LKPD Digital</b></div><div class="top-actions"><div class="search"><span>⌕</span><input id="siteSearch" placeholder="Cari modul atau materi..." aria-label="Cari modul atau materi"></div><div class="profile"><span class="avatar">PW</span><div><b>Praktikan</b><small>Peserta praktikum</small></div></div></div></header>
-<main class="content"><div class="page-title"><label>LEMBAR KERJA PESERTA DIDIK</label><h1>LKPD Digital</h1><p>Tempat mengorganisasi hasil pengamatan dan refleksi praktikum.</p></div><section class="page-hero"><label>HOOKELAB</label><h2>Dari pengamatan menjadi pemahaman</h2><p>LKPD Digital akan menjadi ruang untuk menghubungkan data eksperimen dengan analisis dan kesimpulan. Bagian ini akan dikembangkan setelah struktur utama selesai.</p></section>
-   
-<section class="lab-panel">
-  <h2>Hasil Pengamatan — Mode 1</h2>
-  <p style="font-size:12px;color:var(--muted);line-height:1.7">
-    Data ini diambil dari pengamatan yang telah dicatat pada
-    simulasi Praktikum Gantung Beban.
-  </p>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b2e">
+  <title>HookeLab | LKPD Digital</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="js/common.js" defer></script>
 
-  <div class="table-wrap">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Massa (g)</th>
-          <th>Gaya (N)</th>
-          <th>Pertambahan Panjang (m)</th>
-        </tr>
-      </thead>
-      <tbody id="lkpdMode1Rows">
-        <tr>
-          <td colspan="4">Memuat data pengamatan...</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <style>
+    .lkpd-section {
+      margin-top: 22px;
+      padding: 22px;
+      background: var(--panel, #fff);
+      border: 1px solid var(--line, #e2e8f0);
+      border-radius: 16px;
+    }
 
-  <p id="lkpdMode1Status"
-     style="font-size:11px;color:var(--muted);margin-top:12px">
-    Data pengamatan akan ditampilkan di sini.
-  </p>
+    .lkpd-section h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
 
-  <div style="margin-top:16px">
-    <a class="btn dark" href="mode1.html">
-      Buka Simulasi Mode 1 →
+    .lkpd-section h3 {
+      margin: 20px 0 8px;
+      font-size: 15px;
+    }
+
+    .lkpd-section p,
+    .lkpd-section li {
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .lkpd-note {
+      padding: 14px;
+      background: #f0f5fb;
+      border-radius: 10px;
+      line-height: 1.8;
+      font-size: 13px;
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .identity-item {
+      padding: 12px;
+      border: 1px solid var(--line, #e2e8f0);
+      border-radius: 10px;
+      min-width: 0;
+    }
+
+    .identity-item small {
+      display: block;
+      color: var(--muted, #64748b);
+      margin-bottom: 5px;
+    }
+
+    .identity-item strong {
+      overflow-wrap: anywhere;
+      font-size: 13px;
+    }
+
+    .question {
+      margin-top: 18px;
+    }
+
+    .question label {
+      display: block;
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .question textarea {
+      width: 100%;
+      min-height: 90px;
+      padding: 12px;
+      border: 1px solid var(--line, #cbd5e1);
+      border-radius: 10px;
+      font: inherit;
+      font-size: 13px;
+      resize: vertical;
+      box-sizing: border-box;
+      background: #fff;
+      color: #172033;
+    }
+
+    .question textarea:focus {
+      outline: 2px solid #94b9e8;
+      outline-offset: 1px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line, #e2e8f0);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .data-table th {
+      background: #f0f5fb;
+    }
+
+    .lkpd-status {
+      margin-top: 12px;
+      color: var(--muted, #64748b);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .lkpd-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .lkpd-actions button {
+      cursor: pointer;
+    }
+
+    .formula {
+      padding: 16px;
+      margin: 12px 0;
+      background: #f0f5fb;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 23px;
+      font-weight: 700;
+      color: #173b68;
+    }
+
+    @media (max-width: 600px) {
+      .identity-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lkpd-section {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="app-shell">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">〰</span>
+      <span>
+        <strong>Hooke<span>Lab</span></strong>
+        <small>LABORATORIUM VIRTUAL FISIKA</small>
+      </span>
     </a>
+
+    <div class="side-label">MENU PEMBELAJARAN</div>
+
+    <nav class="main-nav">
+      <a class="nav-link" href="index.html"><span>⌂</span>Beranda</a>
+      <a class="nav-link" href="identitas.html"><span>♙</span>Identitas Kelompok</a>
+      <a class="nav-link" href="petunjuk.html"><span>ⓘ</span>Petunjuk Praktikum</a>
+      <a class="nav-link" href="modul.html"><span>▤</span>Eksperimen</a>
+      <a class="nav-link" href="tantangan.html"><span>⚑</span>Tantangan</a>
+      <a class="nav-link active" href="lkpd.html"><span>☷</span>LKPD Digital</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-tip">
+        <b>✦</b>
+        <div>
+          <strong>Ruang eksplorasi</strong>
+          <p>Belajar fisika lewat eksperimen.</p>
+        </div>
+      </div>
+      <small class="status"><i></i> Sistem pembelajaran aktif</small>
+    </div>
+  </aside>
+
+  <div class="page-area">
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Buka menu">☰</button>
+
+      <div class="breadcrumb">
+        HookeLab <span>/</span> <b>LKPD Digital</b>
+      </div>
+
+      <div class="top-actions">
+        <div class="search">
+          <span>⌕</span>
+          <input id="siteSearch"
+            placeholder="Cari modul atau materi..."
+            aria-label="Cari modul atau materi">
+        </div>
+        <div class="profile">
+          <span class="avatar">PW</span>
+          <div>
+            <b>Praktikan</b>
+            <small>Peserta praktikum</small>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <div class="page-title">
+        <label>LEMBAR KERJA PESERTA DIDIK</label>
+        <h1>LKPD Digital</h1>
+        <p>Analisis data eksperimen untuk memahami Hukum Hooke.</p>
+      </div>
+
+      <section class="page-hero">
+        <label>HOOKELAB · PRAKTIKUM FISIKA</label>
+        <h2>Dari data menuju pemahaman</h2>
+        <p>
+          Amati hasil eksperimen, gunakan konsep Hukum Hooke,
+          dan susun kesimpulan berdasarkan bukti yang diperoleh.
+        </p>
+      </section>
+
+      <!-- A. IDENTITAS KELOMPOK -->
+      <section class="lkpd-section">
+        <h2>A. Identitas Kelompok</h2>
+        <p>
+          Identitas berikut diambil dari halaman Identitas Kelompok
+          yang tersimpan pada browser ini.
+        </p>
+
+        <div class="identity-grid">
+          <div class="identity-item">
+            <small>Nama Kelompok</small>
+            <strong id="idGroup">Belum diisi</strong>
+          </div>
+          <div class="identity-item">
+            <small>Asal Sekolah</small>
+            <strong id="idSchool">Belum diisi</strong>
+          </div>
+          <div class="identity-item">
+            <small>Nama Guru</small>
+            <strong id="idTeacher">Belum diisi</strong>
+          </div>
+          <div class="identity-item">
+            <small>Kelas / Rombongan Belajar</small>
+            <strong id="idClass">Belum diisi</strong>
+          </div>
+          <div class="identity-item">
+            <small>Tanggal Praktikum</small>
+            <strong id="idDate">Belum diisi</strong>
+          </div>
+          <div class="identity-item">
+            <small>Nama Anggota</small>
+            <strong id="idMembers">Belum diisi</strong>
+          </div>
+        </div>
+
+        <p id="identityStatus" class="lkpd-status" aria-live="polite"></p>
+        <a class="btn dark" href="identitas.html">Periksa Identitas Kelompok →</a>
+      </section>
+
+      <!-- B. TUJUAN -->
+      <section class="lkpd-section">
+        <h2>B. Tujuan Praktikum</h2>
+        <p>Setelah melakukan eksperimen, peserta didik diharapkan mampu:</p>
+        <ol>
+          <li>Menjelaskan hubungan antara gaya yang diberikan dan pertambahan panjang pegas.</li>
+          <li>Menggunakan data eksperimen untuk menghitung konstanta pegas.</li>
+          <li>Menganalisis kesesuaian hasil pengamatan dengan konsep Hukum Hooke.</li>
+          <li>Menyusun kesimpulan berdasarkan hasil eksperimen.</li>
+        </ol>
+      </section>
+
+      <!-- C. LANDASAN KONSEP -->
+      <section class="lkpd-section">
+        <h2>C. Landasan Konsep</h2>
+
+        <p>
+          Hukum Hooke menjelaskan bahwa, selama pegas masih berada
+          dalam batas elastisnya, besar gaya yang diperlukan untuk
+          meregangkan pegas sebanding dengan pertambahan panjangnya.
+        </p>
+
+        <div class="formula">F = k × Δx</div>
+
+        <ul>
+          <li><b>F</b> = besar gaya yang bekerja pada pegas (N).</li>
+          <li><b>k</b> = konstanta pegas (N/m).</li>
+          <li><b>Δx</b> = pertambahan panjang pegas (m).</li>
+        </ul>
+
+        <div class="lkpd-note">
+          <b>Ingat!</b> Pertambahan panjang dihitung dari panjang
+          akhir dikurangi panjang awal. Gunakan satuan meter ketika
+          menghitung konstanta pegas dalam N/m.
+        </div>
+
+        <div class="question">
+          <label for="q1">
+            1. Berdasarkan konsep Hukum Hooke, apa yang terjadi pada
+            pertambahan panjang pegas ketika gaya yang diberikan semakin besar,
+            selama batas elastisnya tidak terlampaui?
+          </label>
+          <textarea id="q1" data-answer="q1"
+            placeholder="Tuliskan jawaban kelompok..."></textarea>
+        </div>
+
+        <div class="question">
+          <label for="q2">
+            2. Apa makna konstanta pegas (k)? Bagaimana karakteristik
+            pegas dengan konstanta pegas yang lebih besar?
+          </label>
+          <textarea id="q2" data-answer="q2"
+            placeholder="Tuliskan jawaban kelompok..."></textarea>
+        </div>
+      </section>
+
+      <!-- D. DATA EKSPERIMEN -->
+      <section class="lkpd-section">
+        <h2>D. Data Hasil Eksperimen</h2>
+        <p>
+          Tabel berikut membaca data yang telah dicatat dalam simulasi.
+          Nilai konstanta pegas dihitung menggunakan k = F/Δx.
+        </p>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Massa (g)</th>
+                <th>Gaya (N)</th>
+                <th>Pertambahan Panjang (m)</th>
+                <th>Konstanta Pegas (N/m)</th>
+              </tr>
+            </thead>
+            <tbody id="lkpdRows">
+              <tr><td colspan="5">Memuat data eksperimen...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p id="dataStatus" class="lkpd-status" aria-live="polite"></p>
+
+        <div class="lkpd-note">
+          Nilai konstanta pegas dihitung untuk setiap baris data
+          dengan membagi gaya dengan pertambahan panjang. Data dengan
+          pertambahan panjang nol atau data yang tidak valid tidak
+          digunakan dalam perhitungan.
+        </div>
+
+        <div class="question">
+          <label for="q3">
+            3. Pilih salah satu baris pengamatan. Tuliskan langkah
+            perhitungan konstanta pegas menggunakan data gaya dan
+            pertambahan panjang dari baris tersebut.
+          </label>
+          <textarea id="q3" data-answer="q3"
+            placeholder="Diketahui, rumus, substitusi nilai, dan hasil perhitungan..."></textarea>
+        </div>
+
+        <div class="question">
+          <label for="q4">
+            4. Berdasarkan data yang tersedia, hitung atau tentukan
+            nilai rata-rata konstanta pegas. Jelaskan langkah yang digunakan.
+          </label>
+          <textarea id="q4" data-answer="q4"
+            placeholder="Tuliskan perhitungan dan hasilnya..."></textarea>
+        </div>
+      </section>
+
+      <!-- E. ANALISIS -->
+      <section class="lkpd-section">
+        <h2>E. Analisis Hasil Eksperimen</h2>
+
+        <div class="question">
+          <label for="q5">
+            5. Apakah hasil perhitungan konstanta pegas pada setiap
+            pengamatan cenderung sama? Jelaskan berdasarkan tabel.
+          </label>
+          <textarea id="q5" data-answer="q5"
+            placeholder="Gunakan bukti dari data pengamatan..."></textarea>
+        </div>
+
+        <div class="question">
+          <label for="q6">
+            6. Apakah data eksperimen mendukung hubungan sebanding
+            antara gaya dan pertambahan panjang? Jelaskan alasanmu.
+          </label>
+          <textarea id="q6" data-answer="q6"
+            placeholder="Jelaskan hubungan yang kamu temukan..."></textarea>
+        </div>
+
+        <div class="question">
+          <label for="q7">
+            7. Sebutkan kemungkinan penyebab hasil pengamatan berbeda
+            dari hasil perhitungan ideal berdasarkan Hukum Hooke.
+          </label>
+          <textarea id="q7" data-answer="q7"
+            placeholder="Tuliskan penjelasan kelompok..."></textarea>
+        </div>
+      </section>
+
+      <!-- F. KESIMPULAN -->
+      <section class="lkpd-section">
+        <h2>F. Kesimpulan</h2>
+        <p>
+          Susun kesimpulan dengan menjawab tujuan praktikum.
+          Gunakan data pengamatan dan hasil perhitungan sebagai bukti.
+        </p>
+
+        <div class="question">
+          <label for="q8">
+            8. Apa kesimpulan kelompokmu mengenai hubungan gaya
+            dengan pertambahan panjang pegas dan nilai konstanta
+            pegas yang diperoleh?
+          </label>
+          <textarea id="q8" data-answer="q8"
+            placeholder="Tuliskan kesimpulan berdasarkan hasil eksperimen..."
+            style="min-height:140px"></textarea>
+        </div>
+      </section>
+
+      <div class="lkpd-actions">
+        <button type="button" class="btn dark" id="saveAnswers">
+          Simpan Jawaban
+        </button>
+        <button type="button" class="btn" id="clearAnswers">
+          Hapus Jawaban
+        </button>
+      </div>
+
+      <p id="answerStatus" class="lkpd-status" aria-live="polite">
+        Jawaban disimpan pada browser ini setelah tombol Simpan Jawaban ditekan.
+      </p>
+
+    </main>
   </div>
-</section>
+</div>
 
 <script>
 (() => {
-  const STORAGE_KEY = "hookelab_mode1_records";
-  const rows = document.getElementById("lkpdMode1Rows");
-  const status = document.getElementById("lkpdMode1Status");
+  const IDENTITY_KEY = "hookelabGroupIdentity";
+  const RECORDS_KEY = "hookelab_mode1_records";
+  const ANSWERS_KEY = "hookelab_lkpd_answers";
 
-  const records = JSON.parse(
-    localStorage.getItem(STORAGE_KEY) || "[]"
-  );
+  const byId = id => document.getElementById(id);
 
-  if (records.length === 0) {
-    rows.innerHTML = `
-      <tr>
-        <td colspan="4">Belum ada data pengamatan.</td>
-      </tr>
-    `;
-    status.textContent =
-      "Buka Mode 1 dan catat pengamatan terlebih dahulu.";
-    return;
+  // Menampilkan teks sebagai teks biasa, bukan HTML.
+  function setText(id, value) {
+    byId(id).textContent = value || "Belum diisi";
   }
 
-  rows.innerHTML = records.map((record, index) => `
-    <tr>
-      <td>${index + 1}</td>
-      <td>${record.mass}</td>
-      <td>${Number(record.force).toFixed(2).replace(".", ",")}</td>
-      <td>${Number(record.dx).toFixed(4).replace(".", ",")}</td>
-    </tr>
-  `).join("");
+  // A. Memuat identitas kelompok.
+  try {
+    const identity = JSON.parse(
+      localStorage.getItem(IDENTITY_KEY) || "null"
+    );
 
-  status.textContent =
-    `${records.length} data pengamatan berhasil dimuat dari Mode 1.`;
+    if (identity) {
+      setText("idGroup", identity.groupName);
+      setText("idSchool", identity.schoolName);
+      setText("idTeacher", identity.teacherName);
+
+      const classText = [
+        identity.className,
+        identity.classGroup
+      ].filter(Boolean).join(" - ");
+
+      setText("idClass", classText);
+
+      const date = identity.practiceDate
+        ? new Date(identity.practiceDate + "T00:00:00")
+        : null;
+
+      setText(
+        "idDate",
+        date && !Number.isNaN(date.getTime())
+          ? date.toLocaleDateString("id-ID", {
+              day: "numeric",
+              month: "long",
+              year: "numeric"
+            })
+          : identity.practiceDate
+      );
+
+      setText(
+        "idMembers",
+        Array.isArray(identity.members)
+          ? identity.members.join(", ")
+          : ""
+      );
+
+      byId("identityStatus").textContent =
+        "Identitas berhasil dibaca dari penyimpanan browser.";
+    } else {
+      byId("identityStatus").textContent =
+        "Identitas belum ditemukan. Isi dan simpan identitas kelompok terlebih dahulu.";
+    }
+  } catch (error) {
+    byId("identityStatus").textContent =
+      "Identitas tidak dapat dibaca. Periksa kembali data pada halaman Identitas Kelompok.";
+  }
+
+  // B. Memuat data eksperimen dan menghitung k = F / Δx.
+  const tbody = byId("lkpdRows");
+  let validRecords = [];
+
+  function formatNumber(value, digits) {
+    return value.toLocaleString("id-ID", {
+      minimumFractionDigits: digits,
+      maximumFractionDigits: digits
+    });
+  }
+
+  try {
+    const records = JSON.parse(
+      localStorage.getItem(RECORDS_KEY) || "[]"
+    );
+
+    if (!Array.isArray(records) || records.length === 0) {
+      tbody.innerHTML =
+        '<tr><td colspan="5">Belum ada data eksperimen.</td></tr>';
+
+      byId("dataStatus").textContent =
+        "Lakukan dan catat pengamatan pada simulasi terlebih dahulu. " +
+        "Jika data tetap tidak muncul, periksa kunci penyimpanan pada kode eksperimen.";
+    } else {
+      validRecords = records.filter(record => {
+        const force = Number(record.force);
+        const dx = Number(record.dx);
+
+        return Number.isFinite(force) &&
+          Number.isFinite(dx) &&
+          dx > 0;
+      });
+
+      if (validRecords.length === 0) {
+        tbody.innerHTML =
+          '<tr><td colspan="5">Belum ada data dengan pertambahan panjang yang valid.</td></tr>';
+      } else {
+        tbody.innerHTML = "";
+
+        validRecords.forEach((record, index) => {
+          const force = Number(record.force);
+          const dx = Number(record.dx);
+          const k = force / dx;
+
+          const tr = document.createElement("tr");
+
+          [
+            index + 1,
+            record.mass ?? "-",
+            formatNumber(force, 2),
+            formatNumber(dx, 4),
+            formatNumber(k, 2)
+          ].forEach(value => {
+            const td = document.createElement("td");
+            td.textContent = String(value);
+            tr.appendChild(td);
+          });
+
+          tbody.appendChild(tr);
+        });
+      }
+
+      byId("dataStatus").textContent =
+        validRecords.length +
+        " data valid ditampilkan. Nilai k dihitung dari gaya dibagi pertambahan panjang.";
+    }
+  } catch (error) {
+    tbody.innerHTML =
+      '<tr><td colspan="5">Data eksperimen tidak dapat dibaca.</td></tr>';
+
+    byId("dataStatus").textContent =
+      "Terjadi masalah saat membaca data. Periksa kembali penyimpanan simulasi.";
+  }
+
+  // C. Memulihkan jawaban yang sebelumnya disimpan.
+  const answerFields = document.querySelectorAll("[data-answer]");
+
+  try {
+    const answers = JSON.parse(
+      localStorage.getItem(ANSWERS_KEY) || "{}"
+    );
+
+    answerFields.forEach(field => {
+      const key = field.dataset.answer;
+      if (typeof answers[key] === "string") {
+        field.value = answers[key];
+      }
+    });
+  } catch (error) {
+    byId("answerStatus").textContent =
+      "Jawaban sebelumnya tidak dapat dibaca.";
+  }
+
+  // D. Menyimpan jawaban siswa pada browser.
+  byId("saveAnswers").addEventListener("click", () => {
+    const answers = {};
+
+    answerFields.forEach(field => {
+      answers[field.dataset.answer] = field.value.trim();
+    });
+
+    try {
+      localStorage.setItem(ANSWERS_KEY, JSON.stringify(answers));
+      byId("answerStatus").textContent =
+        "Jawaban berhasil disimpan pada browser ini.";
+    } catch (error) {
+      byId("answerStatus").textContent =
+        "Jawaban gagal disimpan. Periksa ruang penyimpanan browser.";
+    }
+  });
+
+  // E. Menghapus jawaban setelah konfirmasi.
+  byId("clearAnswers").addEventListener("click", () => {
+    const confirmed = confirm(
+      "Apakah kamu yakin ingin menghapus semua jawaban LKPD yang tersimpan di browser ini?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+      localStorage.removeItem(ANSWERS_KEY);
+      answerFields.forEach(field => {
+        field.value = "";
+      });
+
+      byId("answerStatus").textContent =
+        "Jawaban LKPD yang tersimpan pada browser ini telah dihapus.";
+    } catch (error) {
+      byId("answerStatus").textContent =
+        "Jawaban tidak dapat dihapus.";
+    }
+  });
 })();
 </script>
 

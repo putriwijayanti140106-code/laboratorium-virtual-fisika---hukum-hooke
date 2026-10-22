@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mode 5 | Tantangan Pegas Misteri - HookeLab</title>
+<title>Tantangan Pegas Misteri - HookeLab</title>
+<link rel="stylesheet" href="style.css">
+<script src="js/common.js" defer></script>
 
 <style>
 :root{--navy:#17324d;--teal:#159b82;--teal-dark:#087f68;--bg:#f3f6fa;--line:#dce5ed;--muted:#64748b;--text:#24364b;--white:#fff;--orange:#f59e0b;--red:#c2413b;--green:#087f68}
@@ -1301,20 +1303,87 @@ a.experiment-row:hover {
 
 </style>
 </head>
+
 <body>
-<header class="topbar">
-  <div class="breadcrumb">
-    <a href="index.html">HookeLab</a>
-    &nbsp;/&nbsp;
-    <a href="modul.html">Modul Eksperimen</a>
-    &nbsp;/&nbsp;
-    <strong>Mode 5 · Tantangan Pegas Misteri</strong>
-  </div>
-</header>
-<main class="container">
+<div class="app-shell">
+
+  <!-- SIDEBAR HOOKELAB -->
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">〰</span>
+      <span>
+        <strong>Hooke<span>Lab</span></strong>
+        <small>LABORATORIUM VIRTUAL FISIKA</small>
+      </span>
+    </a>
+
+    <div class="side-label">MENU PEMBELAJARAN</div>
+
+    <nav class="main-nav">
+      <a class="nav-link" href="index.html">
+        <span>⌂</span>Beranda
+      </a>
+      <a class="nav-link" href="identitas.html"><span>♙</span>Identitas Kelompok</a>
+      <a class="nav-link" href="petunjuk.html">
+        <span>ⓘ</span>Petunjuk Praktikum
+      </a>
+      <a class="nav-link" href="modul.html">
+        <span>▤</span>Eksperimen
+      </a>
+      <a class="nav-link active" href="tantangan.html">
+        <span>⚑</span>Tantangan
+      </a>
+      <a class="nav-link" href="lkpd.html">
+        <span>☷</span>LKPD Digital
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-tip">
+        <b>✦</b>
+        <div>
+          <strong>Ruang eksplorasi</strong>
+          <p>Belajar fisika lewat eksperimen.</p>
+        </div>
+      </div>
+      <small class="status">
+        <i></i> Sistem pembelajaran aktif
+      </small>
+    </div>
+  </aside>
+
+  <!-- AREA HALAMAN -->
+  <div class="page-area">
+
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Buka menu">☰</button>
+
+      <div class="breadcrumb">
+        HookeLab <span>/</span> <b>Tantangan</b>
+      </div>
+
+      <div class="top-actions">
+        <div class="search">
+          <span>⌕</span>
+          <input id="siteSearch"
+            placeholder="Cari modul atau materi..."
+            aria-label="Cari modul atau materi">
+        </div>
+
+        <div class="profile">
+          <span class="avatar">PW</span>
+          <div>
+            <b>Praktikan</b>
+            <small>Peserta praktikum</small>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content container">
 
 <section class="page-heading">
-  <div class="eyebrow">Mode 5</div>
   <h2>Tantangan Pegas Misteri</h2>
   <p>
   Empat tantangan berikut menyembunyikan nilai konstanta pegas, massa beban, atau pertambahan panjang. Gunakan data pengamatan dan konsep Hukum Hooke untuk menemukan jawabanmu.
@@ -1738,153 +1807,6 @@ a.experiment-row:hover {
     <p class="feedback" id="feedback3" aria-live="polite">Gunakan perbandingan antara gaya tarik dan pertambahan panjang.</p>
   </section>
 
-<section class="panel challenge-card" data-challenge="4">
-  
-<div class="challenge-number">TANTANGAN 04</div>
-<h3 class="challenge-subtitle">Prediksi pertambahan panjang</h3>
-<div class="challenge-question">
-  <h3>Seberapa jauh pegas bertambah panjang?</h3>
-  <p>
-    Sebuah pegas memiliki konstanta 49 N/m. Massa beban
-    ditingkatkan menjadi dua kali massa awal. Tentukan
-    pertambahan panjang pegas yang baru saat setimbang.
-  </p>
-</div>
-
-  
-<div class="mystery-diagram vertical-spring-challenge4">
-  <div class="spring4-constant">k = 49 N/m</div>
-
-  <svg class="spring4-svg" viewBox="0 0 320 300"
-       role="img"
-       aria-label="Pegas vertikal dengan konstanta 49 newton per meter dan beban 1 kilogram">
-
-    <defs>
-      <linearGradient id="spring4-metal" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="#526b7b"/>
-        <stop offset="22%" stop-color="#dce5eb"/>
-        <stop offset="48%" stop-color="#8298a7"/>
-        <stop offset="72%" stop-color="#f1f5f8"/>
-        <stop offset="100%" stop-color="#526b7b"/>
-      </linearGradient>
-
-      <linearGradient id="spring4-weight" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="#496579"/>
-        <stop offset="45%" stop-color="#aebfca"/>
-        <stop offset="100%" stop-color="#385468"/>
-      </linearGradient>
-
-      <marker id="spring4-arrow" markerWidth="7" markerHeight="7"
-              refX="3.5" refY="3.5" orient="auto-start-reverse">
-        <path d="M0 0 L7 3.5 L0 7 Z" fill="#159b82"/>
-      </marker>
-    </defs>
-
-    <!-- Penyangga atas -->
-    <rect x="76" y="16" width="168" height="15" rx="3"
-          fill="url(#spring4-metal)" stroke="#718797"
-          stroke-width="1.5"/>
-    <path d="M91 31 V39 M229 31 V39"
-          stroke="#718797" stroke-width="4"/>
-
-    <!-- Pengait atas -->
-    <path d="M160 31 V43 C160 49 149 49 149 56
-             C149 63 171 63 171 56 C171 50 160 49 160 43"
-          fill="none" stroke="url(#spring4-metal)"
-          stroke-width="5" stroke-linecap="round"/>
-
-    <!-- Pegas logam vertikal -->
-    <path d="
-      M160 58
-      C128 58 128 67 160 72
-      C192 77 192 86 160 91
-      C128 96 128 105 160 110
-      C192 115 192 124 160 129
-      C128 134 128 143 160 148
-      C192 153 192 162 160 167
-      C128 172 128 181 160 186
-      C192 191 192 200 160 205
-      C128 210 128 219 160 224"
-      fill="none" stroke="#506979" stroke-width="10"
-      stroke-linecap="round" stroke-linejoin="round"/>
-
-    <path d="
-      M160 58
-      C128 58 128 67 160 72
-      C192 77 192 86 160 91
-      C128 96 128 105 160 110
-      C192 115 192 124 160 129
-      C128 134 128 143 160 148
-      C192 153 192 162 160 167
-      C128 172 128 181 160 186
-      C192 191 192 200 160 205
-      C128 210 128 219 160 224"
-      fill="none" stroke="url(#spring4-metal)" stroke-width="5"
-      stroke-linecap="round" stroke-linejoin="round"/>
-
-    <!-- Pengait bawah -->
-    <path d="M160 224 V234 C160 241 149 241 149 248
-             C149 255 171 255 171 248 C171 242 160 241 160 234"
-          fill="none" stroke="url(#spring4-metal)"
-          stroke-width="5" stroke-linecap="round"/>
-
-    <!-- Beban 1 kg -->
-    <path d="M125 257 Q125 251 133 251 H187
-             Q195 251 195 257 V282
-             Q160 294 125 282 Z"
-          fill="url(#spring4-weight)"
-          stroke="#526b7b" stroke-width="1.5"/>
-
-    <path d="M133 255 H187"
-          stroke="#dce5eb" stroke-width="2" opacity="0.8"/>
-
-    <text x="160" y="275" text-anchor="middle"
-          fill="#ffffff" font-size="15" font-weight="700">1 kg</text>
-
-    <!-- Penanda pertambahan panjang -->
-    <path d="M211 72 H246 M211 224 H246"
-          fill="none" stroke="#159b82" stroke-width="2"
-          stroke-dasharray="5 4"/>
-
-    <line x1="232" y1="79" x2="232" y2="217"
-          stroke="#159b82" stroke-width="2"
-          stroke-dasharray="5 4"
-          marker-start="url(#spring4-arrow)"
-          marker-end="url(#spring4-arrow)"/>
-
-    <rect x="239" y="130" width="75" height="37" rx="8"
-          fill="#e1f7f0" stroke="#35b89e" stroke-width="1.5"/>
-
-    <text x="276.5" y="154" text-anchor="middle"
-          fill="#087f68" font-size="15" font-weight="700">Δx = ?</text>
-  </svg>
-
-  <div class="spring4-caption">
-    Pegas vertikal dengan beban pada keadaan setimbang
-  </div>
-</div>
-
-
-  <div class="data-list">
-    <div><span>Massa awal</span><strong>0,50 kg</strong></div>
-    <div><span>Massa baru</span><strong>1,00 kg</strong></div>
-    <div><span>Konstanta pegas</span><strong>49 N/m</strong></div>
-    <div><span>Gravitasi</span><strong>9,8 m/s²</strong></div>
-  </div>
-
-  <label for="answer4">Pertambahan panjang baru (m)</label>
-  <div class="answer-row">
-    <input id="answer4" type="number" min="0" step="any"
-      placeholder="Masukkan nilai Δx">
-    <button type="button" class="btn-praktikum check-answer"
-      data-target="4">Periksa</button>
-  </div>
-  <p class="feedback" id="feedback4" aria-live="polite">
-    Gunakan F = mg dan F = kΔx untuk menentukan pertambahan panjang.
-  </p>
-</section>
-
-
 <section class="panel challenge-summary">
 
   <div class="reflection-heading">
@@ -1898,7 +1820,7 @@ a.experiment-row:hover {
   <div class="score-card">
     <div class="score-info">
       <span class="score-label">SKOR TANTANGAN</span>
-      <h3 id="scoreDisplay">0 / 4</h3>
+      <h3 id="scoreDisplay">0 / 3</h3>
       <p id="scoreMessage">
         Selesaikan tantangan untuk melihat hasilmu.
       </p>
@@ -1935,65 +1857,6 @@ a.experiment-row:hover {
 
 </div>
 
-<section class="experiment-navigation">
-  <h2>Eksperimen Lainnya</h2>
-
-  <p class="navigation-description">
-    Pilih eksperimen lain untuk mempelajari konsep pegas dari sudut pandang berbeda.
-  </p>
-
-  <div class="experiment-list">
-    <a class="experiment-row" href="mode1.html">
-      <span class="experiment-number">01</span>
-      <span class="experiment-info">
-        <strong>Praktikum Gantung Beban</strong>
-        <span>Hubungan gaya berat dan pertambahan panjang</span>
-      </span>
-      <span class="experiment-arrow">⟶</span>
-    </a>
-
-    <a class="experiment-row" href="mode2.html">
-      <span class="experiment-number">02</span>
-      <span class="experiment-info">
-        <strong>Tarik Gaya Langsung</strong>
-        <span>Pengaruh gaya terhadap pertambahan panjang</span>
-      </span>
-      <span class="experiment-arrow">⟶</span>
-    </a>
-
-    <a class="experiment-row" href="mode3.html">
-      <span class="experiment-number">03</span>
-      <span class="experiment-info">
-        <strong>Susunan Pegas</strong>
-        <span>Eksplorasi susunan seri dan paralel</span>
-      </span>
-      <span class="experiment-arrow">⟶</span>
-    </a>
-
-    <a class="experiment-row" href="mode4.html">
-    <span class="experiment-number">04</span>
-    <span class="experiment-info">
-      <strong>Energi Potensial Pegas</strong>
-      <span>Hubungan energi elastis dan pertambahan panjang</span>
-    </span>
-    <span class="experiment-arrow">⟶</span>
-    </a>
-
-    <a class="experiment-row current" href="mode5.html">
-      <span class="experiment-number">05</span>
-      <span class="experiment-info">
-        <strong>Tantangan Pegas Misteri</strong>
-        <span>Menggunakan konsep Hukum Hooke untuk memecahkan masalah</span>
-      </span>
-      <span class="experiment-status">Sedang dibuka</span>
-    </a>
-  </div>
-
-  <div class="navigation-back">
-    <a href="modul.html">
-      ← Kembali ke seluruh modul eksperimen
-    </a>
-  </div>
 </section>
 <footer class="footer"><span>HookeLab · Laboratorium Virtual Fisika</span></footer>
 </main>
@@ -2014,11 +1877,6 @@ const answers = {
     value: 40,
     tolerance: 1,
     explanation: "k = F/Δx = 6/0,15 = 40 N/m."
-  },
-  4: {
-    value: 0.2,
-    tolerance: 0.01,
-    explanation: "Δx = mg/k = (1,00 × 9,8)/49 = 0,20 m."
   }
 };
 
@@ -2028,10 +1886,10 @@ function updateScore() {
   const score = solved.size;
 
   document.getElementById("scoreDisplay").textContent =
-    `${score} / 4`;
+    `${score} / 3`;
 
   document.getElementById("scoreProgress").style.width =
-    `${score / 4 * 100}%`;
+    `${score / 3 * 100}%`;
 
   const messages = [
     "Ayo mulai tantangannya dan uji pemahamanmu.",
@@ -2081,7 +1939,7 @@ document.querySelectorAll(".check-answer").forEach(button => {
 document.getElementById("resetChallenges").addEventListener("click", () => {
   solved.clear();
 
-  for (let n = 1; n <= 4; n++) {
+  for (let n = 1; n <= 3; n++) {
     document.getElementById(`answer${n}`).value = "";
 
     const feedback = document.getElementById(`feedback${n}`);
@@ -2090,8 +1948,7 @@ document.getElementById("resetChallenges").addEventListener("click", () => {
     const messages = {
       1: "Hitung gaya berat beban terlebih dahulu.",
       2: "Hubungkan gaya pegas dengan gaya berat beban.",
-      3: "Gunakan perbandingan antara gaya tarik dan pertambahan panjang.",
-      4: "Gunakan F = mg dan F = kΔx untuk menentukan pertambahan panjang."
+      3: "Gunakan perbandingan antara gaya tarik dan pertambahan panjang."
     };
 
     feedback.textContent = messages[n];
