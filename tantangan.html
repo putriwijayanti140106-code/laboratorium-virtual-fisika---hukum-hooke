@@ -1926,6 +1926,15 @@ a.experiment-row:hover {
         id="scoreProgress">
       </div>
     </div>
+  <button type="button" id="resetChallenges" class="check-answer">
+  Mulai Baru
+  </button>
+  
+<button type="button" id="submitChallengeResults" class="check-answer">
+  Kirim Hasil
+</button>
+<p id="submitStatus" role="status" aria-live="polite"></p>
+
   </div>
 
 </section>
@@ -1959,80 +1968,310 @@ const answers = {
   }
 };
 
+const STORAGE_KEY = "hookelab_tantangan_pegas_v1";
 const solved = new Set();
+
+const answerInputs = {
+  1: document.getElementById("answer1"),
+  2: document.getElementById("answer2"),
+  3: document.getElementById("answer3")
+};
+
+const feedbackElements = {
+  1: document.getElementById("feedback1"),
+  2: document.getElementById("feedback2"),
+  3: document.getElementById("feedback3")
+};
+
+const checkButtons = document.querySelectorAll(".check-answer");
+const resetButton = document.getElementById("resetChallenges");
+
+let restoringData = false;
+
 function updateScore() {
   const score = solved.size;
+  const scoreDisplay = document.getElementById("scoreDisplay");
+  const scoreMessage = document.getElementById("scoreMessage");
+  const scoreProgress = document.getElementById("scoreProgress");
 
-  document.getElementById("scoreDisplay").textContent =
-    `${score} / 3`;
+  if (scoreDisplay) {
+    scoreDisplay.textContent = `${score} / 3`;
+  }
 
-  document.getElementById("scoreProgress").style.width =
-    `${(score / 3) * 100}%`;
+  if (scoreMessage) {
+    const messages = [
+      "Ayo mulai pecahkan tantangan pegas!",
+      "Bagus! Satu tantangan berhasil diselesaikan.",
+      "Hebat! Dua tantangan berhasil diselesaikan.",
+      "Luar biasa! Semua tantangan berhasil diselesaikan."
+    ];
 
-  const messages = [
-    "Ayo mulai tantangannya dan uji pemahamanmu.",
-    "Satu tantangan berhasil! Lanjutkan.",
-    "Dua tantangan berhasil! Tinggal satu lagi.",
-    "Hebat! Semua tantangan berhasil diselesaikan."
-  ];
+    scoreMessage.textContent = messages[score];
+  }
 
-  document.getElementById("scoreMessage").textContent =
-    messages[score];
+  if (scoreProgress) {
+    scoreProgress.style.width = `${(score / 3) * 100}%`;
+  }
 }
 
-document.querySelectorAll(".check-answer").forEach(button => {
-  button.addEventListener("click", () => {
-    const n = Number(button.dataset.target);
-    const input = document.getElementById(`answer${n}`);
-    const feedback = document.getElementById(`feedback${n}`);
-    const answer = answers[n];
+function saveProgress() {
+  if (restoringData) return;
 
-    if (input.value.trim() === "" ||
-        !Number.isFinite(Number(input.value))) {
-      feedback.textContent = "Masukkan jawaban numerik terlebih dahulu.";
-      feedback.classList.remove("correct", "incorrect");
-      feedback.classList.add("incorrect");
+  const data = {
+    answers: {},
+    feedback: {},
+    solved: [...solved]
+  };
+
+  for (let n = 1; n <= 3; n++) {
+    const input = answerInputs[n];
+    const feedback = feedbackElements[n];
+
+    data.answers[n] = input ? input.value : "";
+
+    if (feedback) {
+      data.feedback[n] = {
+        html: feedback.innerHTML,
+        className: feedback.className
+      };
+    }
+  }
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (error) {
+    console.warn("Progres tantangan tidak dapat disimpan.", error);
+  }
+}
+
+const CHALLENGE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycby0UXpyeMryvF_4GRrI0XoQ5hyxjJBh_lW1VyykYaU2mYkH4pLnXaqJuQJG_W4ggYVyiQ/exec";
+
+const submitResultsButton = document.getElementById(
+  "submitChallengeResults"
+);
+const submitStatus = document.getElementById("submitStatus");
+
+if (submitResultsButton) {
+  submitResultsButton.addEventListener("click", async () => {
+    let identity;
+
+    try {
+      identity = JSON.parse(
+        localStorage.getItem("hookelabGroupIdentity") || "null"
+      );
+    } catch (error) {
+      identity = null;
+    }
+
+    if (!identity || !identity.groupId) {
+      submitStatus.textContent =
+        "Identitas kelompok belum memiliki ID. Buka menu Identitas Kelompok dan simpan identitas terlebih dahulu.";
+      submitStatus.className = "identity-status error";
       return;
     }
 
-    const value = Number(input.value);
+    const answerValues = {};
+    const statuses = {};
 
-    if (Math.abs(value - answer.value) <= answer.tolerance) {
-      feedback.textContent = `Benar! ${answer.explanation}`;
-      feedback.classList.remove("incorrect");
-      feedback.classList.add("correct");
-      solved.add(n);
-    } else {
-      feedback.textContent =
-        `Belum tepat. Periksa kembali perhitunganmu. ${answer.explanation}`;
-      feedback.classList.remove("correct");
-      feedback.classList.add("incorrect");
+    for (let n = 1; n <= 3; n++) {
+      const input = document.getElementById(`answer${n}`);
+      const value = input ? input.value.trim() : "";
+
+      if (!value) {
+        submitStatus.textContent =
+          `Jawaban tantangan ${n} belum diisi. Lengkapi ketiga jawaban sebelum mengirim.`;
+        submitStatus.className = "identity-status error";
+        return;
+      }
+
+      answerValues[n] = value;
+      statuses[n] = solved.has(n) ? "Benar" : "Salah";
     }
 
-    updateScore();
-  });
-});
-
-document.getElementById("resetChallenges").addEventListener("click", () => {
-  solved.clear();
-
-  for (let n = 1; n <= 3; n++) {
-    document.getElementById(`answer${n}`).value = "";
-
-    const feedback = document.getElementById(`feedback${n}`);
-    feedback.classList.remove("correct", "incorrect");
-
-    const messages = {
-      1: "Hitung gaya berat beban terlebih dahulu.",
-      2: "Hubungkan gaya pegas dengan gaya berat beban.",
-      3: "Gunakan perbandingan antara gaya tarik dan pertambahan panjang."
+    const payload = {
+      action: "submitChallenge",
+      groupId: identity.groupId,
+      answers: answerValues,
+      statuses: statuses
     };
 
-    feedback.textContent = messages[n];
+    submitResultsButton.disabled = true;
+    submitStatus.textContent = "Sedang mengirim hasil...";
+    submitStatus.className = "identity-status";
+
+    try {
+      await fetch(CHALLENGE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      submitStatus.textContent =
+        "Permintaan pengiriman telah dilakukan. Periksa tab Hasil_Tantangan di Google Sheets untuk memastikan data masuk.";
+      submitStatus.className = "identity-status success";
+
+    } catch (error) {
+      submitStatus.textContent =
+        "Pengiriman tidak dapat dilakukan. Periksa koneksi internet dan coba kembali.";
+      submitStatus.className = "identity-status error";
+
+      console.error("Pengiriman hasil tantangan gagal:", error);
+
+    } finally {
+      submitResultsButton.disabled = false;
+    }
+  });
+}
+
+function restoreProgress() {
+  let savedData;
+
+  try {
+    savedData = localStorage.getItem(STORAGE_KEY);
+  } catch (error) {
+    console.warn("Progres tantangan tidak dapat dibaca.", error);
+    return;
+  }
+
+  if (!savedData) return;
+
+  try {
+    const data = JSON.parse(savedData);
+    restoringData = true;
+
+    for (let n = 1; n <= 3; n++) {
+      if (answerInputs[n] && data.answers) {
+        answerInputs[n].value = data.answers[n] ?? "";
+      }
+
+      const feedback = feedbackElements[n];
+      const savedFeedback = data.feedback?.[n];
+
+      if (feedback && savedFeedback) {
+        feedback.innerHTML = savedFeedback.html;
+        feedback.className = savedFeedback.className;
+      }
+    }
+
+    solved.clear();
+
+    if (Array.isArray(data.solved)) {
+      data.solved.forEach(n => {
+        if (answers[n]) solved.add(n);
+      });
+    }
+
+    restoringData = false;
+    updateScore();
+  } catch (error) {
+    restoringData = false;
+    console.warn("Data progres tantangan tidak valid.", error);
+  }
+}
+
+function checkAnswer(n) {
+  const input = answerInputs[n];
+  const feedback = feedbackElements[n];
+
+  if (!input || !feedback) return;
+
+  const rawValue = input.value.trim().replace(",", ".");
+  const userAnswer = Number(rawValue);
+
+  if (rawValue === "" || !Number.isFinite(userAnswer)) {
+    solved.delete(n);
+    feedback.className = "feedback incorrect";
+    feedback.textContent = "Masukkan jawaban berupa angka terlebih dahulu.";
+    updateScore();
+    saveProgress();
+    return;
+  }
+
+  const correct =
+    Math.abs(userAnswer - answers[n].value) <= answers[n].tolerance;
+
+  if (correct) {
+    solved.add(n);
+    feedback.className = "feedback correct";
+    feedback.innerHTML =
+      `<strong>Jawaban benar!</strong> ${answers[n].explanation}`;
+  } else {
+    solved.delete(n);
+    feedback.className = "feedback incorrect";
+    feedback.textContent =
+      "Jawaban belum tepat. Periksa kembali data dan perhitunganmu.";
   }
 
   updateScore();
+  saveProgress();
+}
+
+// Autosave ketika peserta mengetik atau mengubah jawaban.
+for (let n = 1; n <= 3; n++) {
+  const input = answerInputs[n];
+
+  if (input) {
+    input.addEventListener("input", saveProgress);
+  }
+}
+
+// Setiap tombol periksa jawaban memeriksa kartu tantangan terkait.
+checkButtons.forEach(button => {
+  button.addEventListener("click", event => {
+    const card = event.currentTarget.closest(".challenge-card");
+    if (!card) return;
+
+    const cards = [...document.querySelectorAll(".challenge-card")];
+    const n = cards.indexOf(card) + 1;
+
+    if (n >= 1 && n <= 3) {
+      checkAnswer(n);
+    }
+  });
 });
+
+// Pulihkan progres saat halaman dibuka kembali.
+restoreProgress();
+
+// Mulai Baru hanya menghapus progres tantangan ini.
+if (resetButton) {
+  resetButton.addEventListener("click", () => {
+    const confirmed = confirm(
+      "Mulai ulang semua tantangan? Jawaban dan progres yang tersimpan akan dihapus."
+    );
+
+    if (!confirmed) return;
+
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (error) {
+      console.warn("Progres tantangan tidak dapat dihapus.", error);
+    }
+
+    restoringData = true;
+    solved.clear();
+
+    for (let n = 1; n <= 3; n++) {
+      if (answerInputs[n]) {
+        answerInputs[n].value = "";
+      }
+
+      const feedback = feedbackElements[n];
+
+      if (feedback) {
+        feedback.className = "feedback";
+        feedback.textContent = "Periksa jawabanmu setelah selesai menghitung.";
+      }
+    }
+
+    restoringData = false;
+    updateScore();
+  });
+}
 
 updateScore();
 

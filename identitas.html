@@ -491,45 +491,90 @@
     );
   }
 
-  identityForm.addEventListener("submit", (event) => {
-    event.preventDefault();
 
-    if (!identityForm.reportValidity()) return;
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby0UXpyeMryvF_4GRrI0XoQ5hyxjJBh_lW1VyykYaU2mYkH4pLnXaqJuQJG_W4ggYVyiQ/exec";
 
-    const formData = new FormData(identityForm);
-    const members = formData.getAll("member[]")
-      .map(name => name.trim())
-      .filter(Boolean);
+identityForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-    const data = {
-      groupName: formData.get("groupName").trim(),
-      schoolName: formData.get("schoolName").trim(),
-      teacherName: formData.get("teacherName").trim(),
-      className: formData.get("className"),
-      classGroup: formData.get("classGroup").trim(),
-      practiceDate: formData.get("practiceDate"),
-      members: members,
-      savedAt: new Date().toISOString()
-    };
+  if (!identityForm.reportValidity()) return;
 
-    if (!members.length) {
-      showStatus("Isi minimal satu nama anggota kelompok.", "error");
-      return;
-    }
+  const formData = new FormData(identityForm);
 
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(data));
-      showStatus(
-        "Identitas berhasil disimpan pada browser ini. Tahap berikutnya adalah menghubungkannya dengan halaman Tantangan dan Google Sheets.",
-        "success"
-      );
-    } catch (error) {
-      showStatus(
-        "Identitas belum dapat disimpan. Periksa pengaturan penyimpanan browser.",
-        "error"
-      );
-    }
-  });
+  const members = formData.getAll("member[]")
+    .map(name => String(name).trim())
+    .filter(Boolean);
+
+  if (!members.length) {
+    showStatus("Isi minimal satu nama anggota kelompok.", "error");
+    return;
+  }
+
+// Gunakan ID kelompok yang sudah tersimpan jika tersedia.
+// Jika belum ada, buat ID baru.
+let existingIdentity = {};
+
+try {
+  existingIdentity = JSON.parse(
+    localStorage.getItem(storageKey) || "{}"
+  );
+} catch (error) {
+  existingIdentity = {};
+}
+
+const data = {
+  groupId: existingIdentity.groupId || crypto.randomUUID(),
+  groupName: String(formData.get("groupName") || "").trim(),
+  schoolName: String(formData.get("schoolName") || "").trim(),
+  teacherName: String(formData.get("teacherName") || "").trim(),
+  className: String(formData.get("className") || "").trim(),
+  classGroup: String(formData.get("classGroup") || "").trim(),
+  practiceDate: String(formData.get("practiceDate") || "").trim(),
+  members: members,
+  savedAt: new Date().toISOString()
+};
+
+  const submitButton = identityForm.querySelector(
+    'button[type="submit"], input[type="submit"]'
+  );
+
+  if (submitButton) submitButton.disabled = true;
+
+  showStatus("Sedang mengirim identitas ke database...", "success");
+
+  try {
+    // Simpan salinan lokal sebagai cadangan.
+    localStorage.setItem(storageKey, JSON.stringify(data));
+
+    // Kirim JSON ke Google Apps Script.
+    // no-cors memungkinkan pengiriman lintas domain,
+    // tetapi browser tidak mengizinkan kita membaca responsnya.
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(data)
+    });
+
+    showStatus(
+      "Permintaan pengiriman telah dilakukan. Periksa spreadsheet untuk memastikan data berhasil tersimpan.",
+      "success"
+    );
+
+  } catch (error) {
+    showStatus(
+      "Pengiriman gagal dilakukan. Periksa koneksi internet dan coba kembali.",
+      "error"
+    );
+
+    console.error("Pengiriman identitas gagal:", error);
+
+  } finally {
+    if (submitButton) submitButton.disabled = false;
+  }
+});
 
   updateMemberNumbers();
 </script>
